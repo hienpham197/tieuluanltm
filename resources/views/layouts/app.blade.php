@@ -10,15 +10,24 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@1,500&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/common.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand fs26" href="{{ url('/') }}">
+                   LTM
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -35,13 +44,13 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
+                                <li class="nav-item fs20">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <li class="nav-item fs20">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
@@ -73,5 +82,22 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- JQuery -->
+    <script src="{{ asset('assets/js/jquery-3.7.0.js')}}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: ['Roboto:300,400,500,600,700,900']
+        }
+      });
+    </script>
+
 </body>
 </html>
