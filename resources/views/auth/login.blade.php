@@ -18,7 +18,8 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                        value="{{ old('email') }}" required autocomplete="email" autofocus
+                                        data-aos="fade-right">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -35,7 +36,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password">
+                                        required autocomplete="current-password" data-aos="fade-right">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -45,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row mb-3" data-aos="fade-right">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
