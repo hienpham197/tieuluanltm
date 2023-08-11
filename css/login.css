@@ -7,7 +7,7 @@ body {
     align-items: center;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
-    margin: 20rem auto;
+    margin: 20rem auto 0 auto;
 }
 
 #container .loginTtl {
@@ -243,4 +243,12 @@ input::placeholder {
     font-size: 1.2rem;
     font-weight: 700;
     color: red;
+}
+
+@media screen and (max-width:599px){
+    #container{
+        zoom: .5;
+        margin: 0 4rem;
+        margin: 40rem auto 0 auto;
+    }
 }
