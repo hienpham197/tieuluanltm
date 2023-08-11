@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+#emailInput input,
+#passWordInput input {
+    padding: .75rem .75rem;
+    font-size: 1.5rem;
+}
+
+#loginBtn button{
+    width: 50%;
+}
+
+#wellcome{
+	font-size: 50rem;
+	font-weight: 900;
+	color: #fff;
+}
+
+
+/* Animation */
+.btnFlash,
+.btnSave {
+	position: relative;
+	overflow: hidden;
+}
+
+.btnFlash::before {
+	position: absolute;
+	content: '';
+	display: inline-block;
+	top: 0;
+	left: 0;
+	width: 18rem;
+	height: 5.4rem;
+	background: url(../img/shiny.webp) no-repeat center top;
+	background-size: cover;
+	animation: shiny 1.8s ease-in-out infinite;
+	opacity: 0;
+}
+
+.animation_delay03::before {
+	animation-delay: 0.6s;
+}
+
+@-webkit-keyframes shiny {
+	0% {
+		transform: translateX(-18rem);
+		opacity: 0
+	}
+
+	40% {
+		opacity: 1
+	}
+
+	70% {
+		transform: translateX(30rem);
+		opacity: 0
+	}
+
+	100% {
+		transform: translateX(30rem);
+		opacity: 0
+	}
+}
