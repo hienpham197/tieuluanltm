@@ -30,11 +30,11 @@ hr {border:none; border-bottom: 0.1rem solid #199342; margin: 0;}
 .br15 {border-radius: 1.5rem;}
 
 /*---------- upper -----------*/
-/* #container {
-  max-width: 75rem;
+#container {
+  /* max-width: 75rem; */
   margin: 0 auto;
   overflow: hidden;
-} */
+}
 .box {
   position: relative;
   padding-left: 2rem;
