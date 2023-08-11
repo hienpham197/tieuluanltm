@@ -8,17 +8,54 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
-<body>
-    <h1>Hello</h1>
+<body class="d-flex flex-column h-100">
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <div class="loginTtl">Create Account</div>
+                <span>or use your email for registration</span>
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <input class="btnSubmit" type="submit" value="Register">
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form id="loginForm">
+                <div class="loginTtl">Sign in</div>
+                <input type="text" id="email" name="email" placeholder="Email" />
+                <input type="password" id="password" name="password" placeholder="Password" />
+                <div id="loginStatus"></div>
+                <a href="#">Forgot your password?</a>
+                <input class="btnSubmit" type="submit" value="Login">
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <div class="loginTtl">Welcome Back!</div>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="btnSubmit ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <div class="loginTtl">Hello, Friend!</div>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button class="btnSubmit ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/jquery-3.7.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-3.7.0.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/aos.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
     <script>
         WebFont.load({
