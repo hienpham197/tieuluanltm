@@ -8,7 +8,6 @@ $(document).ready(function () {
             email: email,
             password: password
         };
-        console.log(loginData);
         $.ajax({
             type: 'POST',
             url: loginEndpoint,
@@ -17,7 +16,20 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response, textStatus, xhr) {
                 if (xhr.status === 200) {
-                    console.log('Response:', xhr);
+                    let accessToken;
+                    if (response.access_token) {
+                        accessToken = response.access_token;
+                    } else if (response.data && response.data.access_token) {
+                        accessToken = response.data.access_token;
+                    } else {
+                        console.error('Access token not found in the response.');
+                        return;
+                    }
+                    console.log('Access Token:', accessToken);
+    
+                    localStorage.setItem('accessToken', accessToken);
+    
+                    // Redirect or perform other actions here
                 } else {
                     $('#loginStatus').text('Login failed. Please check your credentials.');
                     console.log('Login failed. Status code:', xhr.status);
@@ -33,7 +45,6 @@ $(document).ready(function () {
                     $('#loginStatus').hide();
                 }, 5000);
             }
-            
         });
     });
 });
