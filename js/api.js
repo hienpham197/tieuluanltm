@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var accessToken = localStorage.getItem('accessToken');
     $('#loginForm').submit(function (event) {
         event.preventDefault();
         const email = $('#email').val();
@@ -26,10 +27,8 @@ $(document).ready(function () {
                         return;
                     }
                     console.log('Access Token:', accessToken);
-    
                     localStorage.setItem('accessToken', accessToken);
-    
-                    // Redirect or perform other actions here
+                    window.location.href = 'user.html';
                 } else {
                     $('#loginStatus').text('Login failed. Please check your credentials.');
                     console.log('Login failed. Status code:', xhr.status);
@@ -46,5 +45,34 @@ $(document).ready(function () {
                 }, 5000);
             }
         });
+    });
+
+    $.ajax({
+        url: "https://api.tipslife.site/api/User/GetListUser",
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + accessToken
+        },
+        success: function(users) {
+            console.log("API response:", users);
+            var userTableBody = $("#user-table-body");
+            if (!userTableBody.length) {
+                console.error("#user-table-body element not found.");
+                return;
+            }
+            userTableBody.empty();
+            $.each(users, function(index, user) {
+                var row = $("<tr>");
+                row.append($("<th scope='row'>").text(user.userID));
+                row.append($("<td>").text(user.userName));
+                row.append($("<td>").text(user.firstName));
+                row.append($("<td>").text(user.lastName));
+                row.append($("<td>").text(user.email));
+                userTableBody.append(row);
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("API request failed:", textStatus, errorThrown);
+        }
     });
 });
