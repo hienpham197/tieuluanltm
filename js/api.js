@@ -68,8 +68,16 @@ $(document).ready(function () {
                 row.append($("<td>").text(user.firstName));
                 row.append($("<td>").text(user.lastName));
                 row.append($("<td>").text(user.email));
+                var plusButton = $("<button>").text("+");
+                plusButton.addClass("btn btn-success plus-button");
+                row.append($("<td>").append(plusButton));
+                var minusButton = $("<button>").text("-");
+                minusButton.addClass("btn btn-danger minus-button");
+                row.append($("<td>").append(minusButton));
+                
                 userTableBody.append(row);
             });
+            
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error("API request failed:", textStatus, errorThrown);

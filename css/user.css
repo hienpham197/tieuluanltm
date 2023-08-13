@@ -39,6 +39,9 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+th, td{
+    font-size: 1.4rem;
+}
 
 .logo {
     font-size: 27px;
@@ -161,7 +164,7 @@ header {
 }
 
 .nav {
-    min-height: 91vh;
+    min-height: 100vh;
     width: 250px;
     background-color: var(--background-color2);
     position: absolute;
@@ -285,7 +288,7 @@ header {
 
 .report-container {
     min-height: 300px;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 70px auto 0px auto;
     background-color: #ffffff;
     border-radius: 30px;

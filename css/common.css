@@ -14,7 +14,6 @@ body {
     overscroll-behavior-y: none;
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: unset;
-    padding-bottom: 16rem;
 }
 .dnone, .sp {display: none;}
 .db {display: block;}
@@ -350,6 +349,11 @@ mark:after {
   width: 20rem;
 }
 
+@keyframes shine {
+100% {
+  left: 125%;
+}
+}
 
 @media screen and (max-width:749px) {
   html {
