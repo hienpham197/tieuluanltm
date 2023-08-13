@@ -15,6 +15,11 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: unset;
 }
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #333;
+  color: #f0f0f0;
+}
 .dnone, .sp {display: none;}
 .db {display: block;}
 .dib {display: inline-block;}
@@ -349,11 +354,13 @@ mark:after {
   width: 20rem;
 }
 
-@keyframes shine {
-100% {
-  left: 125%;
+#uName{
+  text-transform: capitalize;
+  font-size: 2rem;
+  font-weight: 700;
+  cursor: context-menu;
 }
-}
+
 
 @media screen and (max-width:749px) {
   html {
