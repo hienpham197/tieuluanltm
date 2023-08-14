@@ -207,7 +207,7 @@ th, td{
 
 .nav-option:hover {
     border-left: 5px solid #a2a2a2;
-    background-color: #dadada;
+    /* background-color: #dadada; */
     cursor: pointer;
 }
 
@@ -223,15 +223,16 @@ th, td{
 }
 
 .option1 {
-    border-left: 5px solid #010058af;
-    background-color: var(--Border-color);
+    /* border-left: 5px solid #010058af;
+    background-color: var(--Border-color); */
+    color: #212529;
     color: white;
     cursor: pointer;
 }
 
 .option1:hover {
     border-left: 5px solid #010058af;
-    background-color: var(--Border-color);
+    /* background-color: var(--Border-color); */
 }
 
 .box {

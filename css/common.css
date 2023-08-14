@@ -361,6 +361,11 @@ mark:after {
   cursor: context-menu;
 }
 
+.main-container .nav .nav-option a{
+  text-decoration: none;
+  color: #212529;
+}
+
 
 @media screen and (max-width:749px) {
   html {
