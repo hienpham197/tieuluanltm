@@ -1,5 +1,37 @@
 $(document).ready(function () {
     var accessToken = localStorage.getItem('accessToken');
+    $("#regForm").submit(function(event) {
+        event.preventDefault();
+
+        const userName = $("input[name='userName']").val();
+        const email = $("input[name='email']").val();
+        const password = $("input[name='password']").val();
+
+        const formData = {
+            userName: userName,
+            email: email,
+            password: password
+        };
+
+        const formDataString = JSON.stringify(formData);
+        $.ajax({
+            type: "POST",
+            url: "https://api2.tipslife.site/api/User/Register",
+            data: formDataString,
+            contentType: "application/json",
+            success: function(response) {
+                console.log("Registration successful:", response);
+                $(".notice").text("Registration successful! You can now log in.");
+                $(".notice").addClass("success");
+            },
+            error: function(error) {
+                console.error("Registration failed:", error);
+                $(".notice").text("Registration failed. Please try again later.");
+                $(".notice").addClass("error");
+            }
+        });
+    });
+
     $('#loginForm').submit(function (event) {
         event.preventDefault();
         const email = $('#email').val();
@@ -48,62 +80,6 @@ $(document).ready(function () {
             }
         });
     });
-
-    // $.ajax({
-    //     url: "https://api.tipslife.site/api/User/GetListUser",
-    //     method: "GET",
-    //     headers: {
-    //         "Authorization": "Bearer " + accessToken
-    //     },
-    //     success: function (users) {
-    //         console.log("API response:", users);
-    //         if (users.length > 0) {
-    //             var firstUser = users[0];
-    //             var userName = firstUser.userName;
-    //             localStorage.setItem("userName", userName);
-    //         } else {
-    //             console.log("No users found in the response.");
-    //         }
-    //         var storedUserName = localStorage.getItem("userName");
-    //         var uNameElement = $("#uName");
-    //         if (uNameElement.length) {
-    //             if (storedUserName) {
-    //                 uNameElement.text(storedUserName);
-    //             } else {
-    //                 console.log("No stored userName found.");
-    //             }
-    //         } else {
-    //             console.error("#uName element not found.");
-    //         }
-
-    //         var userTableBody = $("#user-table-body");
-    //         if (!userTableBody.length) {
-    //             console.error("#user-table-body element not found.");
-    //             return;
-    //         }
-    //         userTableBody.empty();
-    //         $.each(users, function (index, user) {
-    //             var row = $("<tr>");
-    //             row.append($("<th scope='row'>").text(user.userID));
-    //             row.append($("<td>").text(user.userName));
-    //             row.append($("<td>").text(user.firstName));
-    //             row.append($("<td>").text(user.lastName));
-    //             row.append($("<td>").text(user.email));
-    //             var plusButton = $("<button>").text("+");
-    //             plusButton.addClass("btn btn-success plus-button");
-    //             row.append($("<td>").append(plusButton));
-    //             var minusButton = $("<button>").text("-");
-    //             minusButton.addClass("btn btn-danger minus-button");
-    //             row.append($("<td>").append(minusButton));
-    //             userTableBody.append(row);
-    //         });
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown) {
-    //         console.error("API request failed:", textStatus, errorThrown);
-    //     }
-    // });
-
-
 
     var currentPage = 0;
     var itemsPerPage = 10;
@@ -157,21 +133,21 @@ $(document).ready(function () {
     $(document).on("click", ".edit-button", function () {
         var userId = $(this).data("user-id");
         var row = $(this).closest("tr");
-        
+
         var userNameInput = $("<input>").val(row.find("td:eq(0)").text());
         var firstNameInput = $("<input>").val(row.find("td:eq(1)").text());
         var lastNameInput = $("<input>").val(row.find("td:eq(2)").text());
         var emailInput = $("<input>").val(row.find("td:eq(3)").text());
-        
+
         row.find("td:eq(0)").html(userNameInput);
         row.find("td:eq(1)").html(firstNameInput);
         row.find("td:eq(2)").html(lastNameInput);
         row.find("td:eq(3)").html(emailInput);
-        
+
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-button");
         row.find("td:eq(4)").html(saveButton);
-        
+
         var cancelButton = $("<button>").text("Cancel");
         cancelButton.addClass("btn btn-secondary cancel-button");
         row.find("td:eq(5)").html(cancelButton);
@@ -183,7 +159,7 @@ $(document).ready(function () {
         var firstName = $(this).closest("tr").find("input:eq(1)").val();
         var lastName = $(this).closest("tr").find("input:eq(2)").val();
         var email = $(this).closest("tr").find("input:eq(3)").val();
-        
+
         var userData = {
             userID: userId,
             userName: userName,
@@ -191,7 +167,7 @@ $(document).ready(function () {
             lastName: lastName,
             email: email
         };
-        
+
         $.ajax({
             url: "https://api2.tipslife.site/api/User/Update/" + userId,
             method: "PUT",
@@ -209,21 +185,21 @@ $(document).ready(function () {
         });
     });
 
-            $(document).on("click", ".cancel-button", function () {
-                fetchDataAndUpdateTable();
+    $(document).on("click", ".cancel-button", function () {
+        fetchDataAndUpdateTable();
     });
 
-            // Add user ///////////////////////////////////////
+    // Add user ///////////////////////////////////////
 
-        $("#add-user-button").on("click", function () {
+    $("#add-user-button").on("click", function () {
         var newUser = {
-            userID: null,
+            // userID: null,
             userName: "",
             firstName: "",
             lastName: "",
             email: ""
         };
-        
+
         var row = $("<tr>");
         row.append($("<th scope='row'>").text(""));
         row.append($("<td>").append($("<input>").val(newUser.userName).addClass("new-user-input")));
@@ -243,7 +219,7 @@ $(document).ready(function () {
     });
 
 
-       $(document).on("click", ".save-new-button", function () {
+    $(document).on("click", ".save-new-button", function () {
         var row = $(this).closest("tr");
         var userName = row.find(".new-user-input:eq(0)").val();
         var firstName = row.find(".new-user-input:eq(1)").val();
@@ -326,20 +302,19 @@ $(document).ready(function () {
         currentPage++;
         fetchDataAndUpdateTable();
     });
-    
+
     $("#previous-page").on("click", function () {
         currentPage--;
         fetchDataAndUpdateTable();
     });
-    
+
     $(document).on("click", ".page-button a", function () {
         console.log("Page button clicked");
         currentPage = parseInt($(this).text()) - 1;
         console.log("currentPage:", currentPage);
         fetchDataAndUpdateTable();
     });
-    
-    
+
 
     function fetchDataAndUpdateTable() {
         var apiUrl = "https://api2.tipslife.site/api/User/GetListUser";

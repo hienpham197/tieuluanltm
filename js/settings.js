@@ -31,13 +31,13 @@ $(document).ready(function () {
   }
   $('#toggleMode').on('click', toggleMode);
 
-  var storedUserName = localStorage.getItem("userName");
-  var uNameElement = $("#uName");
-  if (uNameElement.length) {
-    uNameElement.text(storedUserName);
-  } else {
-    console.error("#uName element not found.");
-  }
+  // var storedUserName = localStorage.getItem("userName");
+  // var uNameElement = $("#uName");
+  // if (uNameElement.length) {
+  //   uNameElement.text(storedUserName);
+  // } else {
+  //   console.error("#uName element not found.");
+  // }
 });
 
 
