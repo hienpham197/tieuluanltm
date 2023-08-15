@@ -21,6 +21,7 @@ $(document).ready(function () {
   $('#logoutButton').on('click', function () {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userName');
+    localStorage.setItem('isLogged',0);
     window.location.href = 'index.html';
   });
 
