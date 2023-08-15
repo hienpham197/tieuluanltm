@@ -1,5 +1,7 @@
 $(document).ready(function () {
     var accessToken = localStorage.getItem('accessToken');
+    var currentPage = 0;
+    var itemsPerPage = 10;
     $("#regForm").submit(function(event) {
         event.preventDefault();
 
@@ -81,34 +83,6 @@ $(document).ready(function () {
         });
     });
 
-    var currentPage = 0;
-    var itemsPerPage = 10;
-
-    function displayUsersOnPage(users) {
-        var userTableBody = $("#user-table-body");
-        userTableBody.empty();
-        $.each(users, function (index, user) {
-            var row = $("<tr>");
-            row.append($("<th scope='row'>").text(user.userID));
-            row.append($("<td>").text(user.userName));
-            row.append($("<td>").text(user.firstName));
-            row.append($("<td>").text(user.lastName));
-            row.append($("<td>").text(user.email));
-
-            var editButton = $("<button>").text("+");
-            editButton.addClass("btn btn-primary edit-button");
-            editButton.data("user-id", user.userID);
-            row.append($("<td>").append(editButton));
-
-            var deleteButton = $("<button>").text("-");
-            deleteButton.addClass("btn btn-danger delete-button");
-            deleteButton.data("user-id", user.userID);
-            row.append($("<td>").append(deleteButton));
-
-            userTableBody.append(row);
-        });
-    }
-    //  Delete ///////////////////////////////////////////
     $(document).on("click", ".delete-button", function () {
         var userId = $(this).data("user-id");
         if (confirm("Are you sure you want to delete this user?")) {
@@ -127,8 +101,6 @@ $(document).ready(function () {
             });
         }
     });
-
-    // Edit //////////////////////////////////////////////////
 
     $(document).on("click", ".edit-button", function () {
         var userId = $(this).data("user-id");
@@ -189,8 +161,6 @@ $(document).ready(function () {
         fetchDataAndUpdateTable();
     });
 
-    // Add user ///////////////////////////////////////
-
     $("#add-user-button").on("click", function () {
         var newUser = {
             // userID: null,
@@ -217,7 +187,6 @@ $(document).ready(function () {
 
         $("#user-table-body").prepend(row);
     });
-
 
     $(document).on("click", ".save-new-button", function () {
         var row = $(this).closest("tr");
@@ -254,6 +223,30 @@ $(document).ready(function () {
         $(this).closest("tr").remove();
     });
 
+    function displayUsersOnPage(users) {
+        var userTableBody = $("#user-table-body");
+        userTableBody.empty();
+        $.each(users, function (index, user) {
+            var row = $("<tr>");
+            row.append($("<th scope='row'>").text(user.userID));
+            row.append($("<td>").text(user.userName));
+            row.append($("<td>").text(user.firstName));
+            row.append($("<td>").text(user.lastName));
+            row.append($("<td>").text(user.email));
+
+            var editButton = $("<button>").text("+");
+            editButton.addClass("btn btn-primary edit-button");
+            editButton.data("user-id", user.userID);
+            row.append($("<td>").append(editButton));
+
+            var deleteButton = $("<button>").text("-");
+            deleteButton.addClass("btn btn-danger delete-button");
+            deleteButton.data("user-id", user.userID);
+            row.append($("<td>").append(deleteButton));
+
+            userTableBody.append(row);
+        });
+    }
 
     function updatePaginationButtons(totalPages) {
         var paginationContainer = $("#pagination-container");
@@ -300,11 +293,13 @@ $(document).ready(function () {
     }
     $("#next-page").on("click", function () {
         currentPage++;
+        updatePageState();
         fetchDataAndUpdateTable();
     });
 
     $("#previous-page").on("click", function () {
         currentPage--;
+        updatePageState();
         fetchDataAndUpdateTable();
     });
 
@@ -315,6 +310,9 @@ $(document).ready(function () {
         fetchDataAndUpdateTable();
     });
 
+    function updatePageState() {
+        history.pushState(null, null, "?page=" + (currentPage + 1));
+    }
 
     function fetchDataAndUpdateTable() {
         var apiUrl = "https://api2.tipslife.site/api/User/GetListUser";

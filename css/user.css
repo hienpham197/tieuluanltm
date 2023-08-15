@@ -366,6 +366,21 @@ th, td{
     border-radius: 4px;
 }
 
+#add-user-button{
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.7rem 1.6rem;
+    opacity: .9;
+}
+
+#add-user-button:hover{
+    opacity: 1;
+}
+
+.new-user-input{
+    width: 90%;
+}
+
 /* Responsive CSS Here */
 @media screen and (max-width: 950px) {
     .nav-img {
