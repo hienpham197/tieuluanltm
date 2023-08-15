@@ -131,10 +131,10 @@ $(document).ready(function () {
     function updatePaginationButtons(totalPages) {
         var paginationContainer = $("#pagination-container");
         paginationContainer.empty();
-    
+
         var previousButton = $("<button>").text("Previous");
         previousButton.addClass("btn btn-secondary page-button");
-        if (currentPage === 1) {
+        if (currentPage === 0) { // Adjusted comparison for first page
             previousButton.addClass("disabled");
         } else {
             previousButton.on("click", function () {
@@ -142,25 +142,25 @@ $(document).ready(function () {
                 fetchDataAndUpdateTable();
             });
         }
-    
+
         paginationContainer.append(previousButton);
-    
+
         for (var i = 1; i <= totalPages; i++) {
             var pageButton = $("<button>").text(i);
             pageButton.addClass("btn btn-secondary page-button");
-            if (i === currentPage) {
+            if (i === currentPage + 1) { // Adjusted comparison with offset
                 pageButton.addClass("active");
             }
             pageButton.on("click", function () {
-                currentPage = parseInt($(this).text());
+                currentPage = parseInt($(this).text()) - 1; // Adjusted page assignment
                 fetchDataAndUpdateTable();
             });
             paginationContainer.append(pageButton);
         }
-    
+
         var nextButton = $("<button>").text("Next");
         nextButton.addClass("btn btn-secondary page-button");
-        if (currentPage === totalPages) {
+        if (currentPage === totalPages - 1) { // Adjusted comparison for last page
             nextButton.addClass("disabled");
         } else {
             nextButton.on("click", function () {
@@ -168,17 +168,27 @@ $(document).ready(function () {
                 fetchDataAndUpdateTable();
             });
         }
-    
+
         paginationContainer.append(nextButton);
     }
+    $("#next-page").on("click", function () {
+        currentPage++;
+        fetchDataAndUpdateTable();
+    });
     
-    $(document).on("click", ".page-button", function () {
+    $("#previous-page").on("click", function () {
+        currentPage--;
+        fetchDataAndUpdateTable();
+    });
+    
+    $(document).on("click", ".page-button a", function () {
         console.log("Page button clicked");
-        currentPage = parseInt($(this).text());
+        currentPage = parseInt($(this).text()) - 1;
         console.log("currentPage:", currentPage);
         fetchDataAndUpdateTable();
     });
     
+
     function fetchDataAndUpdateTable() {
         var apiUrl = "https://api2.tipslife.site/api/User/GetListUser";
         var pageNumber = currentPage;
@@ -200,7 +210,6 @@ $(document).ready(function () {
             }
         });
     }
-    $(document).ready(function () {
-        fetchDataAndUpdateTable();
-    });
+    fetchDataAndUpdateTable();
+
 });
