@@ -38,7 +38,6 @@ $(document).ready(function () {
   } else {
     console.error("#uName element not found.");
   }
-
 });
 
 

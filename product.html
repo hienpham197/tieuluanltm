@@ -67,9 +67,9 @@
             </nav>
         </div>
         <div class="main">
-            <!-- <div class="report-container">
+            <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">Products</h1>
+                    <h1 class="recent-Articles">User</h1>
                 </div>
 
                 <div class="table-responsive">
@@ -85,12 +85,22 @@
                                 <th class="fs16" scope="col">Del</th>
                             </tr>
                         </thead>
+                        <tbody id="product-table-body">
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-lg justify-content-center">
+                            <li class="page-item" id="previous-page">
+                                <a class="page-link" href="#" tabindex="-1">1</a>
+                            </li>
+                            <li class="page-item" id="next-page">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                        </ul>
+                    </nav>                 
                 </div>
 
-            </div> -->
-            <div id="result"></div>
+            </div>
         </div>
     </div>
 
@@ -112,11 +122,6 @@
     <script>
         AOS.init();
     </script>
-        <script>
-fetch('https://dummyjson.com/products')
-.then(res => res.json())
-.then(console.log);
-        </script>
 </body>
 
 </html>

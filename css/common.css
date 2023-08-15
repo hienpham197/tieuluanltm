@@ -366,6 +366,10 @@ mark:after {
   color: #212529;
 }
 
+.page-link{
+  color: #5500cb !important;
+  font-weight: 700;
+}
 
 @media screen and (max-width:749px) {
   html {
