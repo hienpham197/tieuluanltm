@@ -66,6 +66,10 @@
     </script>
     <script>
         AOS.init();
+        var isLogged = localStorage.getItem('isLogged');
+        if(isLogged == 1){
+            window.location.href = 'user.html';
+        }
     </script>
 </body>
 </html>
