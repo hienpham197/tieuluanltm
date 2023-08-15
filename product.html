@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width,
 				initial-scale=1.0">
     <title>Tieu luan lap trinh mang</title>
+    <link rel="stylesheet" href = "css/style-product.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/aos.css">
@@ -69,7 +70,10 @@
         <div class="main">
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">User</h1>
+                    <h1 class="recent-Articles">Products</h1>
+                    <div>
+                        <button id="add-product-button" class="btn btn-primary">Add Product</button>
+                    </div>                    
                 </div>
 
                 <div class="table-responsive">
@@ -77,10 +81,11 @@
                         <thead>
                             <tr>
                                 <th class="fs16" scope="col">#</th>
-                                <th class="fs16" scope="col">Username</th>
-                                <th class="fs16" scope="col">First Name</th>
-                                <th class="fs16" scope="col">Last Name</th>
-                                <th class="fs16" scope="col">Email</th>
+                                <th class="fs16" scope="col">Image</th>
+                                <th class="fs16" scope="col">Poduct Name</th>
+                                <th class="fs16" scope="col">Type Name</th>
+                                <th class="fs16" scope="col">User ID</th>
+                                <th class="fs16" scope="col">Created Day</th>
                                 <th class="fs16" scope="col">Edit</th>
                                 <th class="fs16" scope="col">Del</th>
                             </tr>
@@ -100,10 +105,14 @@
                     </nav>                 
                 </div>
 
+     
+
             </div>
         </div>
     </div>
 
+
+   
     <script src="js/jquery-3.7.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/settings.js"></script>
@@ -121,6 +130,18 @@
     </script>
     <script>
         AOS.init();
+    </script>
+    <script>
+        function openForm(){
+            document.getElementById("formcreateProduct").style.display="block";
+        }
+        function closeForm(){
+            document.getElementById("formcreateProduct").style.display="none";
+        }
+        function closeeditForm(){
+            document.getElementById("formeditProduct").style.display="none";
+        }
+        
     </script>
 </body>
 

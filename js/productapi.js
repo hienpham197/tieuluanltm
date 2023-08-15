@@ -3,6 +3,9 @@ $(document).ready(function () {
     var currentPage = 0;
     var itemsPerPage = 10;
     var totalPages = 3;
+    let id='';
+    
+    
 
     $.ajax({
         url: 'https://api2.tipslife.site/api/RoboModel/GetListModel',
@@ -20,104 +23,198 @@ $(document).ready(function () {
         }
     });
 
-    // function displayUsersOnPage(users) {
-    //     var userTableBody = $("#user-table-body");
-    //     userTableBody.empty();
-    //     $.each(users, function (index, user) {
-    //         var row = $("<tr>");
-    //         row.append($("<th scope='row'>").text(user.userID));
-    //         row.append($("<td>").text(user.userName));
-    //         row.append($("<td>").text(user.firstName));
-    //         row.append($("<td>").text(user.lastName));
-    //         row.append($("<td>").text(user.email));
-    //         var plusButton = $("<button>").text("+");
-    //         plusButton.addClass("btn btn-success plus-button");
-    //         row.append($("<td>").append(plusButton));
-    //         var minusButton = $("<button>").text("-");
-    //         minusButton.addClass("btn btn-danger minus-button");
-    //         row.append($("<td>").append(minusButton));
+    $(document).on("click",".delete-button", function(){
+        var productId = $(this).data("modelId");
+        if(confirm("Are you sure you ant to delete this product?")) {
+            $.ajax({
+                url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
+                method: "DELETE",
+                headers: {
+                    "Authorization": "Bearer " + accessToken
+                }
+            })
+        }
+    })
 
-    //         userTableBody.append(row);
-    //     });
-    // }
+    function displayProductsOnPage(products) {
+        var productTableBody = $("#product-table-body");
+        productTableBody.empty();
+        var t=1;
+         
+        $.each(products, function (index, product) {            
+            var row = `
+                    <tr data-id='${product.modelID}'>
+                        <td>${t} </td>
+                        <td><img src="${product.imgPath}"alt=""></td>
+                        <td>${product.name}</td>
+                        <td>${product.typeName}</td>
+                        <td>${product.userID}</td>
+                        <td>${product.createdDate}</td>                        
+                        <td><button id="editProduct" class = "btn btn-success plus-button" >+</button></td>
+                        <td><button id="deleteProduct" class = "btn btn-danger minus-button">-</button></td>
+                    </tr>
+                    `;
 
-    // function updatePaginationButtons(totalPages) {
-    //     var paginationContainer = $(".pagination");
-    //     paginationContainer.empty();
+            productTableBody.append(row);
+            t++;
+            
+            //open edit form
+            const btnEdit = document.querySelector(`[data-id = '${product.modelID}'] .plus-button`);
+            btnEdit.addEventListener('click', (e)=>{
+                e.preventDefault();
+                document.getElementById("formeditProduct").style.display="block";
+                let editProductForm = document.querySelector('#formeditProduct .form-editProduct');
+                editProductForm.productname.value=product.name;
+                editProductForm.linkimage.value=product.imgPath;
+                editProductForm.typename.value=product.typeName;
+                editProductForm.userid.value=product.userID;
+            })
 
-    //     var previousButton = $("<li class='page-item' id='previous-page'>")
-    //         .append($("<a class='page-link' href='#' tabindex='-1'>").text("Previous"));
+            //delete
+            const btnDelete = document.querySelector(`[data-id = '${product.modelID}'] .minus-button`);
+            btnDelete.addEventListener('click', (e)=>{
+                e.preventDefault();
+                fetch(`https://api2.tipslife.site/api/RoboModel/Delete"/${product.modelID}`,{
+                    method: 'DELETE',
+                    headers: {
+                        "Authorization": "Bearer " + accessToken
+                    }
+                })
+                .then (res=>res.json())
+                .then(()=>location.reload());
+            })
 
-    //     if (currentPage === 0) {
-    //         previousButton.addClass("disabled");
-    //     } else {
-    //         previousButton.on("click", function () {
-    //             currentPage--;
-    //             updatePageState();
-    //             fetchDataAndUpdateTable();
-    //         });
-    //     }
+            
+        });
+    }
 
-    //     paginationContainer.append(previousButton);
+    function updatePaginationButtons(totalPages) {
+        var paginationContainer = $(".pagination");
+        paginationContainer.empty();
 
-    //     for (var i = 1; i <= totalPages; i++) {
-    //         var pageButton = $("<li class='page-item'>")
-    //             .append($("<a class='page-link' href='#'>").text(i));
+        var previousButton = $("<li class='page-item' id='previous-page'>")
+            .append($("<a class='page-link' href='#' tabindex='-1'>").text("Previous"));
 
-    //         if (i === currentPage + 1) {
-    //             pageButton.addClass("active");
-    //         }
+        if (currentPage === 0) {
+            previousButton.addClass("disabled");
+        } else {
+            previousButton.on("click", function () {
+                currentPage--;
+                updatePageState();
+                fetchDataAndUpdateTable();
+            });
+        }
 
-    //         pageButton.on("click", function () {
-    //             currentPage = parseInt($(this).text()) - 1;
-    //             updatePageState();
-    //             fetchDataAndUpdateTable();
-    //         });
+        paginationContainer.append(previousButton);
 
-    //         paginationContainer.append(pageButton);
-    //     }
+        for (var i = 1; i <= totalPages; i++) {
+            var pageButton = $("<li class='page-item'>")
+                .append($("<a class='page-link' href='#'>").text(i));
 
-    //     var nextButton = $("<li class='page-item' id='next-page'>")
-    //         .append($("<a class='page-link' href='#'>").text("Next"));
+            if (i === currentPage + 1) {
+                pageButton.addClass("active");
+            }
 
-    //     if (currentPage === totalPages - 1) {
-    //         nextButton.addClass("disabled");
-    //     } else {
-    //         nextButton.on("click", function () {
-    //             currentPage++;
-    //             updatePageState();
-    //             fetchDataAndUpdateTable();
-    //         });
-    //     }
+            pageButton.on("click", function () {
+                currentPage = parseInt($(this).text()) - 1;
+                updatePageState();
+                fetchDataAndUpdateTable();
+            });
 
-    //     paginationContainer.append(nextButton);
-    // }
+            paginationContainer.append(pageButton);
+        }
 
-    // function updatePageState() {
-    //     history.pushState(null, null, "?page=" + (currentPage + 1));
-    // }
+        var nextButton = $("<li class='page-item' id='next-page'>")
+            .append($("<a class='page-link' href='#'>").text("Next"));
+
+        if (currentPage === totalPages - 1) {
+            nextButton.addClass("disabled");
+        } else {
+            nextButton.on("click", function () {
+                currentPage++;
+                updatePageState();
+                fetchDataAndUpdateTable();
+            });
+        }
+
+        paginationContainer.append(nextButton);
+    }
+
+    function updatePageState() {
+        history.pushState(null, null, "?page=" + (currentPage + 1));
+    }
     
-    // function fetchDataAndUpdateTable() {
-    //     var apiUrl = "https://api2.tipslife.site/api/User/GetListUser";
-    //     var pageNumber = currentPage;
-    //     var pageSize = itemsPerPage;
+    function fetchDataAndUpdateTable() {
+        var apiUrl = "https://api2.tipslife.site/api/RoboModel/GetListModel";
+        var pageNumber = currentPage;
+        var pageSize = itemsPerPage;
 
-    //     $.ajax({
-    //         url: apiUrl + "?PageSize=" + pageSize + "&PageNumber=" + pageNumber,
-    //         method: "GET",
-    //         headers: {
-    //             "Authorization": "Bearer " + accessToken
-    //         },
-    //         success: function (response) {
-    //             var users = response;
-    //             displayUsersOnPage(users);
-    //             updatePaginationButtons(response.totalPages);
-    //         },
-    //         error: function (jqXHR, textStatus, errorThrown) {
-    //             console.error("API request failed:", textStatus, errorThrown);
-    //         }
-    //     });
-    // }
+        $.ajax({
+            url: apiUrl + "?PageSize=" + pageSize + "&PageNumber=" + pageNumber,
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + accessToken
+            },
+            success: function (response) {
+                var products = response;
+                displayProductsOnPage(products);
+                updatePaginationButtons(response.totalPages);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("API request failed:", textStatus, errorThrown);
+            }
+        });
+    }
 
-    // fetchDataAndUpdateTable();
+    fetchDataAndUpdateTable();
+
+    function addProduct(){
+        let addProductForm = document.querySelector('#formcreateProduct .form-addProduct');
+        let obj = {};
+        obj['name'] = addProductForm.productname.value;
+        obj['imgPath']= addProductForm.linkimage.value;
+        obj['typename'] = addProductForm.typename.value;
+      
+        fetch("https://api2.tipslife.site/api/RoboModel/AddModel",{
+            method: "POST",
+            headers:{
+                "Authorization": "Bearer " + accessToken
+            },
+            body: JSON.stringify(obj)
+        })
+        .then((res)=>res.json()).then((response)=>{
+            fetchDataAndUpdateTable();
+        })
+    }
+
+    editModalForm.addEventListener('submit', (e)=>{
+        e.preventDefault;
+        fetch(`${url}/${id}`,{
+            method: 'PATCH',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify ({
+                fullname:editModalForm.fullname.value,
+                username: editModalForm.username.value,
+                password: editModalForm.password.value,
+                email: editModalForm.email.value,
+                birthday: editModalForm.birthday.value
+            })
+        })
+        .then(res => res.json())
+        .then(() =>location.reload())
+    })
+
+    function openForm(){
+        document.getElementById("formcreateProduct").style.display="block";
+    }
+    function closeForm(){
+        document.getElementById("formcreateProduct").style.display="none";
+    }
+    
+    function closeeditForm(){
+        document.getElementById("formeditProduct").style.display="none";
+    }
+    
 });
