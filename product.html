@@ -67,7 +67,7 @@
             </nav>
         </div>
         <div class="main">
-            <div class="report-container">
+            <!-- <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Products</h1>
                 </div>
@@ -85,19 +85,19 @@
                                 <th class="fs16" scope="col">Del</th>
                             </tr>
                         </thead>
-                        <tbody id="user-table-body">
                         </tbody>
                     </table>
                 </div>
 
-            </div>
+            </div> -->
+            <div id="result"></div>
         </div>
     </div>
 
     <script src="js/jquery-3.7.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/settings.js"></script>
-    <script src="js/api.js"></script>
+    <script src="js/productapi.js"></script>
     <script src="js/aos.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
     <script>
@@ -112,6 +112,11 @@
     <script>
         AOS.init();
     </script>
+        <script>
+fetch('https://dummyjson.com/products')
+.then(res => res.json())
+.then(console.log);
+        </script>
 </body>
 
 </html>
