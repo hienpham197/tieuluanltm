@@ -178,7 +178,7 @@
 							<a class="dropdown-item" href="profile.html"
 								><i class="dw dw-user1"></i> Profile</a
 							>
-							<a class="dropdown-item" href="login.html"
+							<a class="dropdown-item" onclick="logOut()" href="#"
 								><i class="dw dw-logout"></i> Log Out</a
 							>
 						</div>
@@ -433,12 +433,25 @@
 		></noscript>
 		<!-- End Google Tag Manager (noscript) -->
 		<script type="module">		
-			import { getListModel } from './roboModel.js';
+			import { getListModel, getInfoUser } from './roboModel.js';
 			
 			getListModel();
-			
+			getInfoUser();
+
 		</script>
 		<script type="text/javascript">
+
+			var infoUser = localStorage.getItem('infoUser');
+			if(infoUser != null){		
+                var user =  JSON.parse(infoUser);
+				$(".user-name").text(user.userName);
+            }
+			
+			function logOut(){
+				localStorage.removeItem('accessToken');
+				localStorage.setItem('isLogged',0);
+				window.location.href = '../../index.html';
+			}
 		</script>
 	</body>
 </html>

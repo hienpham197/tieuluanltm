@@ -1,28 +1,27 @@
-import {URL_SERVER_LOCAL, PAGE_SIZE_DEFAULT} from '../../js/const.js';
+import {URL_SERVER_LOCAL, PAGE_SIZE_DEFAULT, PAGE_NUMBER_DEFAULT } from '../../js/const.js';
 export {
     getListModel,
-    getDetail
+    getDetail,
+    getInfoUser
 }
 var elListModel = $("#model-list");
 var accessToken = localStorage.getItem("accessToken");
-var ulTag = $(".pagination")
 var totalPages = 0;
-function getListModel(){ 
+var pageSize =PAGE_SIZE_DEFAULT;
+var pageNumber =PAGE_NUMBER_DEFAULT;
 
-    
+function getListModel(){ 
     $.ajax({
-        url: URL_SERVER_LOCAL +"/api/RoboModel/GetListModel?pageSize=1",
+        url: URL_SERVER_LOCAL +`/api/RoboModel/GetListModelByUser?pageSize=${pageSize}`,
         method: "GET",
         headers: {
             "Authorization": "Bearer "+ accessToken
         },
         success: function(response){
-            if(response.length > 0){
-                totalPages = Math.ceil(response.length / 1)
-                renderModel(response);
-
-                
-                renderNavigationPaging(totalPages,0)
+            if(response.data.length > 0){
+                totalPages = Math.ceil(response.totalRecord / pageSize);
+                renderModel(response.data);         
+                renderNavigationPaging(totalPages,pageNumber)
             }
 
         },
@@ -30,7 +29,7 @@ function getListModel(){
             if(httpObj.status==401)
                 //To do....
                 console.log("Access deny");
-                window.location.href = "../404.html"
+               // window.location.href = "../404.html"
         }
 
     });
@@ -42,7 +41,7 @@ function getDetail(id){
         url: URL_SERVER_LOCAL +"/api/RoboModel/Get",
         method: "GET",
         headers: {
-            "Authorization": "Bearer "+ "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0aWVwQGdtYWlsLmNvbSIsIklkIjoiMSIsImV4cCI6MTY5MjU1MjIwNSwiaXNzIjoiYWRtaW5AZ21haWwuY29tIiwiYXVkIjoiYWRtaW5AZ21haWwuY29tIn0.YelxFQ7NRTfKe9X-zTTDumJ2N91OhibbrTh-n0aGtho"
+            "Authorization": "Bearer "+ accessToken
         },
         success: function(response){
             console.log(response);
@@ -66,47 +65,45 @@ function getDetail(id){
 //Handle render navigation paging 
 function renderNavigationPaging(totalPages,page){
 
+    if(page ==0);
+
     var ulTag = $(".pagination")
     var liTag = '';
     var liActive ;
-    var beforePages = page - 1; //5 - 1 = 4 
+    var beforePages = page; //5 - 1 = 4 
     var afterPages = page + 1;//5 + 1 = 6
-
+  
     if(totalPages <= 5){
         for(let pageLength = 0; pageLength <= 5; pageLength++){
-            if(pageLength > totalPages){
+            if(pageLength > totalPages - 1){
                 continue;
             }
 
-            if(pageLength ==0){//If pageLength is equals to 0 then add + 1
-                pageLength+=1;
-            }
-            var currentPage = pageLength - 1;
-            if(page == currentPage){
+            if(page == pageLength){
                 liActive = 'btn btn-primary current';
             }else{
                 liActive = 'btn btn-outline-primary ';
             }
             
-            liTag +=` <span class="${liActive}" onclick="Pagination(${totalPages},${pageLength - 1})">
-                ${pageLength}
+            liTag +=` <span class="${liActive}" onclick="Pagination(${totalPages},${pageLength})">
+                ${pageLength + 1}
             </span>`;
         }
         
     }else{
         
-        if(page>1){//if page values if greater than 1 then add new li which is previous button
-            liTag += `<a class="${liActive}" onclick="Pagination(${totalPages},${page - 1})">
+        if(page>0){//if page values if greater than 1 then add new li which is previous button
+            liTag += `<a class="btn btn-outline-primary" onclick="Pagination(${totalPages},${page - 1})">
                 <i class=" fa fa-angle-double-left"></i>
         </a>`;
         }
 
-        if(page>2){//if page greater than 2 then add new li tag with 1 value
-            liTag +=` <a class="${liActive}" onclick="Pagination(${totalPages},1)">
+        if(page>1){//if page greater than 2 then add new li tag with 1 value
+            liTag +=` <a class="btn btn-outline-primary ${liActive}" onclick="Pagination(${totalPages},0)">
                 1
             </a>`;
-            if(page > 3){//if page greater than 3 then add new li tag with (...)
-                liTag +=`<a class="${liActive}">
+            if(page > 2){//if page greater than 3 then add new li tag with (...)
+                liTag +=`<a class="btn btn-outline-primary ${liActive}">
                     ...
                 </a>`; 
             }
@@ -119,19 +116,15 @@ function renderNavigationPaging(totalPages,page){
             beforePages = beforePages - 1;
         }
         //How many page or li show after the current li
-        if(page == 1){//if page value is equal to 1 the ad by +2 to after page value 
+        if(page == 0){//if page value is equal to 1 the ad by +2 to after page value 
+            afterPages = afterPages + 3;
+        }else if(page == 0){
             afterPages = afterPages + 2;
-        }else if(page == 2){
-            afterPages = afterPages + 1;
         }
         
         for(let pageLength = beforePages; pageLength <= afterPages; pageLength++){
-            if(pageLength > totalPages){
+            if(pageLength > totalPages - 1){
                 continue;
-            }
-
-            if(pageLength ==0){//If pageLength is equals to 0 then add + 1
-                pageLength+=1;
             }
 
             if(page == pageLength){
@@ -141,23 +134,23 @@ function renderNavigationPaging(totalPages,page){
             }
             
             liTag +=` <a class=" ${liActive}" onclick="Pagination(${totalPages},${pageLength})">
-                ${pageLength}
+                ${pageLength + 1}
             </a>`;
         }
 
         //If page value less than totalPages by - 1 then show the last li or page which is 20
-        if(page < totalPages - 1 ){      
-            if(page < totalPages - 2 ){//If page value less than totalPages by - 1 then show the last li or page which is 20
+        if(page < totalPages - 2 ){      
+            if(page < totalPages - 3 ){//If page value less than totalPages by - 1 then show the last li or page which is 20
                 liTag +=`<a class="${liActive}">
                 ...
                 </a>`; 
             }
-            liTag +=` <a class="${liActive}" onclick="Pagination(${totalPages},${totalPages})">
+            liTag +=` <a class="${liActive}" onclick="Pagination(${totalPages},${totalPages - 1})">
             ${totalPages}
             </a>`; 
         }       
 
-        if(page < totalPages){//if page values if less than totalPages then add new li which is next button
+        if(page < totalPages - 1){//if page values if less than totalPages then add new li which is next button
             liTag +=` <a class="${liActive}" onclick="Pagination(${totalPages}, ${page + 1})">
                 <i class="fa fa-angle-double-right"></i>
         </a>`;
@@ -168,14 +161,14 @@ function renderNavigationPaging(totalPages,page){
 
 window.Pagination = function (totalPages,page){
     $.ajax({
-        url: URL_SERVER_LOCAL +`/api/RoboModel/GetListModel?pageSize=1&pageNumber=${page}`,
+        url: URL_SERVER_LOCAL +`/api/RoboModel/GetListModelByUser?pageSize=${pageSize}&pageNumber=${page}`,
         method: "GET",
         headers: {
             "Authorization": "Bearer "+ accessToken
         },
         success: function(response){
-            if(response.length > 0){
-                renderModel(response)
+            if(response.data.length > 0){
+                renderModel(response.data)
                 renderNavigationPaging(totalPages,page);
             }
 
@@ -212,3 +205,23 @@ function renderModel(response){
         elListModel.html(html.join(''));
     }
 }
+
+function getInfoUser(){
+    $.ajax({
+        url: URL_SERVER_LOCAL +`/api/User/GetCurrentUser`,
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer "+ accessToken
+        },
+        success: function(response){
+            if(response != null){
+                localStorage.setItem("infoUser", JSON.stringify(response))
+            }
+
+        },
+        error: function(httpObj, textStatus) {       
+        }
+
+    });
+}
+

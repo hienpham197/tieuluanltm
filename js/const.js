@@ -11,5 +11,5 @@ const URL_CLIENT_LOCAL = "http://127.0.0.1:5500";
 const URL_SERVER_LOCAL = "https://api.tipslife.site";
 
 //Product
-const PAGE_NUMBER_DEFAULT = 1;
-const PAGE_SIZE_DEFAULT = 5;
+const PAGE_NUMBER_DEFAULT = 0;
+const PAGE_SIZE_DEFAULT = 3;
