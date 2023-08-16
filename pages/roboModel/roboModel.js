@@ -29,7 +29,7 @@ function getListModel(){
             if(httpObj.status==401)
                 //To do....
                 console.log("Access deny");
-               // window.location.href = "../404.html"
+                window.location.href = "../404.html"
         }
 
     });
@@ -195,7 +195,7 @@ function renderModel(response){
                     </div>
                     <div class="product-caption">
                         <h4><a href="#">${data.name}</a></h4>
-                        <a href="/RoboModel/roboModel-detail.html?id=${data.modelID}"class="btn btn-outline-primary">Details Model</a>
+                        <a href="../../pages/RoboModel/roboModel-detail.html?id=${data.modelID}"class="btn btn-outline-primary">Details Model</a>
                     </div>
                 </div>
             </li>

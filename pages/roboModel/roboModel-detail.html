@@ -3,8 +3,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
-
+		<title>Tieu Luan Lap Trinh Mang</title>
 		<!-- Site favicon -->
 		<link
 			rel="apple-touch-icon"
@@ -178,7 +177,7 @@
 							<a class="dropdown-item" href="profile.html"
 								><i class="dw dw-user1"></i> Profile</a
 							>
-							<a class="dropdown-item" href="login.html"
+							<a class="dropdown-item" onclick="logOut()" href="#"
 								><i class="dw dw-logout"></i> Log Out</a
 							>
 						</div>
@@ -187,172 +186,30 @@
 			</div>
 		</div>
 
-		<div class="right-sidebar">
-			<div class="sidebar-title">
-				<h3 class="weight-600 font-16 text-blue">
-					Layout Settings
-					<span class="btn-block font-weight-400 font-12"
-						>User Interface Settings</span
-					>
-				</h3>
-				<div class="close-sidebar" data-toggle="right-sidebar-close">
-					<i class="icon-copy ion-close-round"></i>
+		<div class="left-side-bar">
+			<div class="brand-logo">
+				<a href="index.html">
+					<img src="../../vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
+					<img
+						src="../../vendors/images/deskapp-logo-white.svg"
+						alt=""
+						class="light-logo"
+					/>
+				</a>
+				<div class="close-sidebar" data-toggle="left-sidebar-close">
+					<i class="ion-close-round"></i>
 				</div>
 			</div>
-			<div class="right-sidebar-body customscroll">
-				<div class="right-sidebar-body-content">
-					<h4 class="weight-600 font-18 pb-10">Header Background</h4>
-					<div class="sidebar-btn-group pb-30 mb-10">
-						<a
-							href="javascript:void(0);"
-							class="btn btn-outline-primary header-white active"
-							>White</a
-						>
-						<a
-							href="javascript:void(0);"
-							class="btn btn-outline-primary header-dark"
-							>Dark</a
-						>
-					</div>
-
-					<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
-					<div class="sidebar-btn-group pb-30 mb-10">
-						<a
-							href="javascript:void(0);"
-							class="btn btn-outline-primary sidebar-light"
-							>White</a
-						>
-						<a
-							href="javascript:void(0);"
-							class="btn btn-outline-primary sidebar-dark active"
-							>Dark</a
-						>
-					</div>
-
-					<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
-					<div class="sidebar-radio-group pb-10 mb-10">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebaricon-1"
-								name="menu-dropdown-icon"
-								class="custom-control-input"
-								value="icon-style-1"
-								checked=""
-							/>
-							<label class="custom-control-label" for="sidebaricon-1"
-								><i class="fa fa-angle-down"></i
-							></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebaricon-2"
-								name="menu-dropdown-icon"
-								class="custom-control-input"
-								value="icon-style-2"
-							/>
-							<label class="custom-control-label" for="sidebaricon-2"
-								><i class="ion-plus-round"></i
-							></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebaricon-3"
-								name="menu-dropdown-icon"
-								class="custom-control-input"
-								value="icon-style-3"
-							/>
-							<label class="custom-control-label" for="sidebaricon-3"
-								><i class="fa fa-angle-double-right"></i
-							></label>
-						</div>
-					</div>
-
-					<h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
-					<div class="sidebar-radio-group pb-30 mb-10">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebariconlist-1"
-								name="menu-list-icon"
-								class="custom-control-input"
-								value="icon-list-style-1"
-								checked=""
-							/>
-							<label class="custom-control-label" for="sidebariconlist-1"
-								><i class="ion-minus-round"></i
-							></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebariconlist-2"
-								name="menu-list-icon"
-								class="custom-control-input"
-								value="icon-list-style-2"
-							/>
-							<label class="custom-control-label" for="sidebariconlist-2"
-								><i class="fa fa-circle-o" aria-hidden="true"></i
-							></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebariconlist-3"
-								name="menu-list-icon"
-								class="custom-control-input"
-								value="icon-list-style-3"
-							/>
-							<label class="custom-control-label" for="sidebariconlist-3"
-								><i class="dw dw-check"></i
-							></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebariconlist-4"
-								name="menu-list-icon"
-								class="custom-control-input"
-								value="icon-list-style-4"
-								checked=""
-							/>
-							<label class="custom-control-label" for="sidebariconlist-4"
-								><i class="icon-copy dw dw-next-2"></i
-							></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebariconlist-5"
-								name="menu-list-icon"
-								class="custom-control-input"
-								value="icon-list-style-5"
-							/>
-							<label class="custom-control-label" for="sidebariconlist-5"
-								><i class="dw dw-fast-forward-1"></i
-							></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input
-								type="radio"
-								id="sidebariconlist-6"
-								name="menu-list-icon"
-								class="custom-control-input"
-								value="icon-list-style-6"
-							/>
-							<label class="custom-control-label" for="sidebariconlist-6"
-								><i class="dw dw-next"></i
-							></label>
-						</div>
-					</div>
-
-					<div class="reset-options pt-30 text-center">
-						<button class="btn btn-danger" id="reset-settings">
-							Reset Settings
-						</button>
-					</div>
+			<div class="menu-block customscroll">
+				<div class="sidebar-menu">
+					<ul id="accordion-menu">
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">My Model</span>
+							</a>
+						</li>						
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -387,25 +244,6 @@
 							</a>
 						</li>
 							
-						<li>
-							<a href="sitemap.html" class="dropdown-toggle no-arrow">
-								<span class="micon bi bi-diagram-3"></span
-								><span class="mtext">Sitemap</span>
-							</a>
-						</li>
-						<li>
-							<a href="chat.html" class="dropdown-toggle no-arrow">
-								<span class="micon bi bi-chat-right-dots"></span
-								><span class="mtext">Chat</span>
-							</a>
-						</li>
-						<li>
-							<a href="invoice.html" class="dropdown-toggle no-arrow">
-								<span class="micon bi bi-receipt-cutoff"></span
-								><span class="mtext">Invoice</span>
-							</a>
-						</li>
-				
 					</ul>
 				</div>
 			</div>
@@ -435,25 +273,41 @@
 						</div>
 					</div>
 					<div class="product-wrap">
-						<div class="product-list">
-							<ul class="row" id="model-list">
-								
-							</ul>
-						</div>
-						<div class="blog-pagination mb-30">
-							<div class="btn-toolbar justify-content-center mb-15">
-								<div class="btn-group pagination">
-									<a href="#" class="btn btn-outline-primary prev"
-										><i class="fa fa-angle-double-left"></i
-									></a>
-									<a href="#" class="btn btn-outline-primary">1</a>
-									<a href="#" class="btn btn-outline-primary">2</a>
-									<span class="btn btn-primary current">3</span>
-									<a href="#" class="btn btn-outline-primary">4</a>
-									<a href="#" class="btn btn-outline-primary">5</a>
-									<a href="#" class="btn btn-outline-primary next"
-										><i class="fa fa-angle-double-right"></i
-									></a>
+						<div class="product-detail-wrap mb-30">
+							<div class="row">
+								<div class="col-lg-6 col-md-12 col-sm-12">
+									<div class="product-slider slider-arrow">
+										<div class="product-slide">
+											<img class="model-detail-image" src="https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg" alt="" />
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12 col-sm-12">
+									<div class="product-detail-desc pd-20 card-box height-100-p">
+										<h4 class="mb-20 pt-20 model-detail-name">Gufram Bounce Black</h4>
+										<p class="model-detail-typename">
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+											sed do eiusmod tempor incididunt ut labore et dolore magna
+											aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+											ullamco laboris nisi ut aliquip ex ea commodo consequat.
+											Duis aute irure dolor in reprehenderit in voluptate velit
+											esse cillum dolore eu fugiat nulla pariatur. Excepteur
+											sint occaecat cupidatat non proident, sunt in culpa qui
+											officia deserunt mollit anim id est laborum.
+										</p>
+										<div class="row">
+											<div class="col-md-6 col-6">
+												<a href="./" class="btn btn-outline-warning btn-block"
+													>Update</a
+												>
+											</div>
+											<div class="col-md-6 col-6">
+												<a href="#" class="btn btn-outline-danger btn-block"
+													>Delete</a
+												>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -478,12 +332,20 @@
 			></iframe
 		></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-		<script type="module">		
-			import { getListModel } from './roboModel.js';
-			
-			getListModel();
+		<script type="module" src="./model-detail.js"></script>
+		<script type="text/javascript">
 
+			var infoUser = localStorage.getItem('infoUser');
+			if(infoUser != null){		
+                var user =  JSON.parse(infoUser);
+				$(".user-name").text(user.userName);
+            }
 			
+			function logOut(){
+				localStorage.removeItem('accessToken');
+				localStorage.setItem('isLogged',0);
+				window.location.href = '../../index.html';
+			}
 		</script>
 	</body>
 </html>
