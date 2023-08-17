@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header class="header">
         <div class="logosec">
@@ -66,7 +68,22 @@
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">User</h1>
-                        <button id="add-user-button" class="btn btn-primary">Add User</button>
+                    <div class="d-flex">
+                        <div class="row pl20">
+                            <img id="sortAscButton" class="btn" src="../../img/sort-alpha-down.svg" alt="">
+                        </div>
+                        <div class="row pl20">
+                            <img id="sortDescButton" class="btn" src="../../img/sort-alpha-up-alt.svg" alt="">
+                        </div>
+                        <div class="row pl20">
+                            <div class="search-container">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Enter keyword">
+                            </div>
+                        </div>
+                        <div class="row pl20">
+                            <button id="add-user-button" class="btn btn-primary">Add User</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table">
@@ -96,7 +113,7 @@
                                 <a class="page-link" href="#">Next</a>
                             </li>
                         </ul>
-                    </nav>                 
+                    </nav>
                 </div>
 
             </div>
@@ -122,11 +139,12 @@
         AOS.init();
         var isLogged = localStorage.getItem('isLogged');
         var isAdmin = localStorage.getItem('isAdmin');
-        if(isLogged == 1){
-            if(isAdmin == 0){
+        if (isLogged == 1) {
+            if (isAdmin == 0) {
                 window.location.href = '../roboModel/roboModel.html';
             }
         }
     </script>
 </body>
+
 </html>

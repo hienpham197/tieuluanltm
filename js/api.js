@@ -3,6 +3,40 @@ $(document).ready(function () {
     var currentPage = 0;
     var itemsPerPage = 10;
 
+    $("#searchInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#user-table-body tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#searchInput").on("keyup", function() {
+        var searchValue = $(this).val().toLowerCase();
+        $("#user-table-body tr").filter(function() {
+            var rowText = $(this).text().toLowerCase();
+            $(this).toggle(rowText.indexOf(searchValue) > -1);
+        });
+    });
+
+    $("#sortAscButton").on("click", function() {
+        var rows = $("#user-table-body tr").get();
+        rows.sort(function(a, b) {
+            var aValue = $(a).text().toLowerCase();
+            var bValue = $(b).text().toLowerCase();
+            return aValue.localeCompare(bValue);
+        });
+        $("#user-table-body").empty().append(rows);
+    });
+
+    $("#sortDescButton").on("click", function() {
+        var rows = $("#user-table-body tr").get();
+        rows.sort(function(a, b) {
+            var aValue = $(a).text().toLowerCase();
+            var bValue = $(b).text().toLowerCase();
+            return bValue.localeCompare(aValue);
+        });
+        $("#user-table-body").empty().append(rows);
+    });
+
     $(document).on("click", ".delete-button", function () {
         var userId = $(this).data("userId");
         console.log("usid choice: ", userId);
@@ -199,12 +233,10 @@ $(document).ready(function () {
             row.append($("<td>").text(user.email));
             row.append($("<td>").text(user.password));
             row.append($("<td>").text(user.isDelete));
-
             var editButton = $("<button>").text("+");
             editButton.addClass("btn btn-primary edit-button");
             editButton.data("user-id", user.userID);
             row.append($("<td>").append(editButton));
-
             var deleteButton = $("<button>").text("-");
             deleteButton.addClass("btn btn-danger delete-button");
             deleteButton.data("user-id", user.userID);
@@ -293,7 +325,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 var users = response;
-                console.log("lst",users);
+                console.log("lst", users);
                 displayUsersOnPage(users);
                 updatePaginationButtons(response.totalPages);
             },
