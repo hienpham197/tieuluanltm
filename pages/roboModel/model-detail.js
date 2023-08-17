@@ -37,7 +37,6 @@ function getInfoModel(){
            
         },
         error: function(jqXHR, textStatus, errorTh){
-
         }
 
     })
