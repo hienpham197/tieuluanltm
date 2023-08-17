@@ -199,7 +199,7 @@ function renderModel(response){
                     </div>
                     <div class="product-caption">
                         <h4><a href="#">${data.name}</a></h4>
-                        <a href="../../pages/RoboModel/roboModel-detail.html?id=${data.modelID}"class="btn btn-outline-primary">Details Model</a>
+                        <a href="../../pages/roboModel/roboModel-detail.html?id=${data.modelID}"class="btn btn-outline-primary">Details Model</a>
                     </div>
                 </div>
             </li>
