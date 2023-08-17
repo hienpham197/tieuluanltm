@@ -26,13 +26,12 @@ function getInfoModel(){
         method: "GET",
         headers: {"Authorization" : "Bearer " + accessToken},
         success: function(data){
-            console.log(data);
             if(data != null){
                 $(".model-detail-name").text(data.name)
                 $(".model-detail-image").attr("src", data.pathImage)
                 $(".model-detail-typename").text(data.typeName)
                 if(data.modelID == 0){
-                    window.location.href = "../../pages/roboModel/RoboModel.html";
+                    window.location.href = "../../pages/roboModel/roboModel.html";
                 }
             }
            
@@ -57,7 +56,7 @@ btnDelete.click(function(e){
         success: function(data){
             if(data == 1){
                 alert("Delete Success")
-                //history.back();
+                window.location.reload(history.back());
             }
         },
         error: function(jqXHR, textStatus, errorTh){
