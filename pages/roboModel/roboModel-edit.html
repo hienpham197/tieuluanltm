@@ -43,7 +43,7 @@
 			href="../../vendors/styles/icon-font.min.css"
 		/>
 		<link rel="stylesheet" type="text/css" href="../../vendors/styles/style.css" />
-
+        <link rel="stylesheet" type="text/css" href="../../vendors/styles/dropzone.css" />
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script
 			async
@@ -291,49 +291,150 @@
 						<div class="row">
 							<div class="col-md-12 col-sm-12">
 								<div class="title">
-									<h4>Model</h4>
+									<h4>Edit Model</h4>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12 col-sm-12">
-								<a href="./roboModel-create.html" class="btn btn-info">Create new model</a>
-							</div>
-						</div>
 					</div>
-					<div class="product-wrap">
-						<div class="product-list">
-							<ul class="row" id="model-list">
-								
-							</ul>
-						</div>
-						<div class="blog-pagination mb-30">
-							<div class="btn-toolbar justify-content-center mb-15">
-								<ul class="pagination btn-group">
-								</ul>
+                    <div class="pd-20 card-box mb-30">
+
+						<form id="formEditModel" class="needs-validation" novalidate>
+                            <input name="modelID" type="text" class="model_edit-modelID" hidden>
+							<div class="form-group row">
+								<label class="col-sm-12 col-md-2 col-form-label">Name model</label>
+								<div class="col-sm-12 col-md-10">
+									<input
+                                        name="name"
+										class="form-control model_edit-name"
+										type="text"
+										placeholder="Model xxx"
+                                        required
+									/>
+                                    <div class="invalid-feedback">
+                                        Please enter value
+                                    </div>
+								</div>
+                               
 							</div>
-							
-						</div>
+							<div class="form-group row">
+								<label class="col-sm-12 col-md-2 col-form-label">Type Name</label>
+								<div class="col-sm-12 col-md-10">
+									<input
+                                        name="typeName"
+										class="form-control model_edit-typename"
+										placeholder="Model Type"
+										type="text"
+										required
+                                        
+									/>
+                                    <div class="invalid-feedback">
+                                        Please enter value
+                                    </div>
+								</div>
+							</div>
+                            <div class="form-group row">
+								<label class="col-sm-12 col-md-2 col-form-label">Image</label>
+								<div class="col-sm-12 col-md-10 border">
+									<img  class="model_edit-image" src="../../img/image-not-found.png"/>
+								</div>
+							</div>
+                            <div class="form-group row">
+								<label class="col-sm-12 col-md-2 col-form-label">Upload new image</label>
+								<div class="dropzone" action="#" id="my-awesome-dropzone">
+                                    <div class="fallback">
+                                        <input type="file" name="file"  required/>
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback invalid-file" >
+                                    Please upload a image
+                                </div>
+							</div>
+                            <button type="button" class="btn btn-primary mt-2" id="model_btn-update" >Update</button>
+                        </form>				    
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- js -->
-		<script src="../../js/jquery-3.7.0.js"></script>
 		<script src="../../vendors/scripts/core.js"></script>
 		<script src="../../vendors/scripts/script.min.js"></script>
 		<script src="../../vendors/scripts/process.js"></script>
 		<script src="../../vendors/scripts/layout-settings.js"></script>
-
-		<script type="module">		
-			import { getListModel, getInfoUser } from './roboModel.js';
-			
-			getListModel();
-			getInfoUser();
-
-		</script>
+		<script src="../../vendors/scripts/dropzone.js"></script>
+        <script type="module" src="./model-edit.js"></script>
 		<script type="text/javascript">
 
+            var URL_SERVER_LOCAL  = "https://api.tipslife.site"
+            var accessToken = localStorage.getItem("accessToken");
+
+            Dropzone.autoDiscover = false;
+            Dropzone.autoProcessQueue = false;
+
+			$(".dropzone").dropzone({
+                acceptedFiles: 'image/*',
+                maxFiles: 1,
+				addRemoveLinks: true,
+                autoProcessQueue:false,
+				removedfile: function (file) {
+					var name = file.name;
+					var _ref;
+					return (_ref = file.previewElement) != null
+						? _ref.parentNode.removeChild(file.previewElement)
+						: void 0;
+				},
+                init: function () {
+                    this.on("maxfilesexceeded", function(file){
+                        alert("No more files please!");
+                    });
+
+                    var submitButton = $("#model_btn-update");
+                    var form = $("#formEditModel");
+
+                    myDropzone = this;
+                    submitButton.click( function () {
+
+                        var formData = new FormData();
+                        //If update file
+                        if (myDropzone.files.length >= 1) { 
+                            myDropzone.processQueue();         
+                            
+                            var fileFromDropzone = myDropzone.files[0];
+
+                            // Create a Blob from the file's data
+                            var blob = new Blob([fileFromDropzone], { type: fileFromDropzone.type });
+
+                            // Create a new File object from the Blob
+                            var convertedFile = new File([blob], fileFromDropzone.name, { type: fileFromDropzone.type });
+
+                            // Append the converted File object to the FormData
+                            formData.append('File', fileFromDropzone);
+
+                           
+                        }
+
+                        if(!form[0].checkValidity()) {
+                            form[0].classList.add('was-validated')
+                        }
+                        else {
+
+                            var modelID = $('input[name="modelID"]').val();
+                            var name = $('input[name="name"]').val();
+                            var typeName = $('input[name="typeName"]').val();
+
+                            formData.append("ModelID",modelID);
+                            formData.append("Name",name);
+                            formData.append("TypeName",typeName);
+
+                            UpdateModel(formData);
+                            
+                        }  
+                        
+                    });
+                },
+                accept: function(file, done) { 
+                }
+			});
+         
 			var infoUser = localStorage.getItem('infoUser');
 			if(infoUser != null){		
                 var user =  JSON.parse(infoUser);
@@ -345,6 +446,30 @@
 				localStorage.setItem('isLogged',0);
 				window.location.href = '../../index.html';
 			}
+
+            //Update model
+            function UpdateModel(formData){
+                $.ajax({
+                        url: URL_SERVER_LOCAL + "/api/RoboModel/Update",
+                        method: "PUT",
+                        headers: { "Authorization": "Bearer " + accessToken },
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data){
+                            console.log(data);
+                            if(data == 1){
+                                alert('Update successfully');
+                                history.back();
+                                
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            console.log(errorThrown );
+                        }
+                    });
+            }
+
 		</script>
 	</body>
 </html>
