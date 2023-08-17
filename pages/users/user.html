@@ -121,6 +121,13 @@
     </script>
     <script>
         AOS.init();
+        var isLogged = localStorage.getItem('isLogged');
+        var isAdmin = localStorage.getItem('isAdmin');
+        if(isLogged == 1){
+            if(isAdmin == 0){
+                window.location.href = '../roboModel/roboModel.html';
+            }
+        }
     </script>
 </body>
 </html>

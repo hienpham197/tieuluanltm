@@ -2,94 +2,6 @@ $(document).ready(function () {
     var accessToken = localStorage.getItem('accessToken');
     var currentPage = 0;
     var itemsPerPage = 10;
-    $("#regForm").submit(function (event) {
-        event.preventDefault();
-
-        const userName = $("input[name='userName']").val();
-        const email = $("input[name='email']").val();
-        const password = $("input[name='password']").val();
-
-        const formData = {
-            userName: userName,
-            email: email,
-            password: password
-        };
-
-        const formDataString = JSON.stringify(formData);
-        $.ajax({
-            type: "POST",
-            url: "https://api2.tipslife.site/api/User/Register",
-            data: formDataString,
-            contentType: "application/json",
-            success: function (response) {
-                console.log("Registration successful:", response);
-                $(".notice").text("Registration successful! You can now log in.");
-                $(".notice").addClass("success");
-            },
-            error: function (error) {
-                console.error("Registration failed:", error);
-                $(".notice").text("Registration failed. Please try again later.");
-                $(".notice").addClass("error");
-            }
-        });
-    });
-
-    $('#loginForm').submit(function (event) {
-        event.preventDefault();
-        const email = $('#email').val();
-        const password = $('#password').val();
-        const loginEndpoint = 'https://api2.tipslife.site/api/User/Login';
-        const loginData = {
-            email: email,
-            password: password
-        };
-        $.ajax({
-            type: 'POST',
-            url: loginEndpoint,
-            data: JSON.stringify(loginData),
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (response, textStatus, xhr) {
-                if (xhr.status === 200) {
-                    let accessToken;
-                    if (response.access_token) {
-                        accessToken = response.access_token;
-                    } else if (response.data && response.data.access_token) {
-                        accessToken = response.data.access_token;
-                    } else {
-                        console.error('Access token not found in the response.');
-                        return;
-                    }
-                    console.log('Access Token:', accessToken);
-                    localStorage.setItem('accessToken', accessToken);
-                    localStorage.setItem("isLogged", 1);
-                    window.location.href = '/tieuluanltm/pages/users/user.html';
-                    //Handle redirect after successful login
-                    handleRedirect(response);
-
-                    //window.location.href = 'pages/users/user.html';
-                } else if (xhr.status === 401) {
-                    window.location.href = '/tieuluanltm/';
-                } else {
-                    $('#loginStatus').text('Login failed. Please check your credentials.');
-                    console.log('Login failed. Status code:', xhr.status);
-                }
-                setTimeout(function () {
-                    $('#loginStatus').hide();
-                }, 5000);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                $('#loginStatus').text('An error occurred during login. Please try again later.');
-                console.error('An error occurred during login. Status code:', xhr.status);
-                setTimeout(function () {
-                    $('#loginStatus').hide();
-                }, 5000);
-
-                localStorage.setItem("isLogged", 0);
-            }
-        });
-    });
-
 
     $(document).on("click", ".delete-button", function () {
         var userId = $(this).data("userId");
@@ -390,6 +302,7 @@ $(document).ready(function () {
                 updatePaginationButtons(response.totalPages);
             },
             error: function (jqXHR, textStatus, errorThrown) {
+                window.location.href = "../404.html";
                 console.error("API request failed:", textStatus, errorThrown);
             }
         });
@@ -398,36 +311,3 @@ $(document).ready(function () {
     fetchDataAndUpdateTable();
 
 });
-
-function handleRedirect(response) {
-
-    console.log(response);
-    if (response != null){
-
-        var apiUrl = "https://localhost:44303/api/User/GetListRoleName";
-
-        $.ajax({
-            url: apiUrl,
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer " + response.access_token
-            },
-            success: function (data) {
-                if(data.length > 0){
-                    var isAdmin = data.indexOf("Admin") !== -1 ? 1 : 0; 
-
-                    if(isAdmin == 1){
-                        window.location.href = "../pages/users/user.html"
-                    }else{
-                        window.location.href = "../pages/roboModel/roboModel.html";
-                    }
-                    localStorage.setItem("isAdmin", isAdmin);
-                }               
-                
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error("API request failed:", textStatus, errorThrown);
-            }
-        });
-    }
-}

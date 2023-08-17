@@ -443,6 +443,7 @@
 			
 			function logOut(){
 				localStorage.removeItem('accessToken');
+				localStorage.removeItem('infoUser');
 				localStorage.setItem('isLogged',0);
 				window.location.href = '../../index.html';
 			}
