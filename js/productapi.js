@@ -169,7 +169,7 @@ $(document).ready(function () {
             var row = $("<tr>");
             row.append($("<td scope='row'>").text(product.modelID));
 
-            row.append($("<td>").append('<img src="'+product.imgPath+'alt="" class="productImg>"'));            
+            row.append($("<td>").append('<img class="productImg" src="'+ product.imgPath + 'alt="">'));            
             row.append($("<td>").text(product.name));
             row.append($("<td>").text(product.typeName));
             row.append($("<td>").text(product.userID));

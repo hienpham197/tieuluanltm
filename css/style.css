@@ -43,8 +43,8 @@
 }
 
 #product-table-body .productImg{
-	width: 20rem;
-	height: 15rem;
+	width: 20rem !important;
+	height: 15rem !important;
 }
 
 @-webkit-keyframes shiny {
