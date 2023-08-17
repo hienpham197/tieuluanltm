@@ -2,7 +2,7 @@ $(document).ready(function () {
     var accessToken = localStorage.getItem('accessToken');
     var currentPage = 0;
     var itemsPerPage = 10;
-    $("#regForm").submit(function(event) {
+    $("#regForm").submit(function (event) {
         event.preventDefault();
 
         const userName = $("input[name='userName']").val();
@@ -21,12 +21,12 @@ $(document).ready(function () {
             url: "https://api2.tipslife.site/api/User/Register",
             data: formDataString,
             contentType: "application/json",
-            success: function(response) {
+            success: function (response) {
                 console.log("Registration successful:", response);
                 $(".notice").text("Registration successful! You can now log in.");
                 $(".notice").addClass("success");
             },
-            error: function(error) {
+            error: function (error) {
                 console.error("Registration failed:", error);
                 $(".notice").text("Registration failed. Please try again later.");
                 $(".notice").addClass("error");
@@ -86,8 +86,9 @@ $(document).ready(function () {
         });
     });
 
+
     $(document).on("click", ".delete-button", function () {
-        var userId = $(this).data("user-id");
+        var userId = $(this).data("userId");
         $.confirm({
             title: 'Delete user?',
             content: 'Are you sure you want to delete this user?',
@@ -96,7 +97,7 @@ $(document).ready(function () {
                     text: 'Yes',
                     btnClass: 'btn btn-danger',
                     action: function () {
-                        deleteConfirmed(userId);
+                        deleteUser(userId);
                     }
                 },
                 cancel: function () {
@@ -104,16 +105,17 @@ $(document).ready(function () {
                 }
             }
         });
-    });  
-    function deleteConfirmed(userId) {
+    });
+    
+    function deleteUser(userId) {
         $.ajax({
             url: "https://api2.tipslife.site/api/User/Delete/" + userId,
-            method: "GET",
+            method: "DELETE",
             headers: {
                 "Authorization": "Bearer " + accessToken
             },
             success: function () {
-                fetchDataAndUpdateTable();
+                updateisDelete(userId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error("Delete request failed:", textStatus, errorThrown);
@@ -121,9 +123,42 @@ $(document).ready(function () {
         });
     }
     
-
+    function updateisDelete(userId) {
+        var updatedData = {
+            isDelete: true
+        };
+    
+        $.ajax({
+            url: "https://api2.tipslife.site/api/User/Update/" + userId,
+            method: "PUT",
+            headers: {
+                "Authorization": "Bearer " + accessToken,
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify(updatedData),
+            success: function () {
+                $.alert({
+                    title: 'User Deleted',
+                    content: 'The user has been successfully marked as deleted.',
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn btn-primary',
+                            action: function () {
+                                fetchDataAndUpdateTable();
+                            }
+                        }
+                    }
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Update request failed:", textStatus, errorThrown);
+            }
+        });
+    }
+    
     $(document).on("click", ".edit-button", function () {
-        var userId = $(this).data("user-id");
+        var userId = $(this).data("userId");
         var row = $(this).closest("tr");
 
         var userNameInput = $("<input>").val(row.find("td:eq(0)").text());
@@ -137,11 +172,11 @@ $(document).ready(function () {
         row.find("td:eq(3)").html(emailInput);
 
         var saveButton = $("<button>").text("Save");
-        saveButton.addClass("btn btn-success save-button");
+        saveButton.addClass("btn btn-success save-button fs-5");
         row.find("td:eq(4)").html(saveButton);
 
         var cancelButton = $("<button>").text("Cancel");
-        cancelButton.addClass("btn btn-secondary cancel-button");
+        cancelButton.addClass("btn btn-secondary cancel-button fs-5");
         row.find("td:eq(5)").html(cancelButton);
     });
 
