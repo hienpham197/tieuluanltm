@@ -38,7 +38,7 @@ $(document).ready(function () {
         event.preventDefault();
         const email = $('#email').val();
         const password = $('#password').val();
-        const loginEndpoint = 'https://api.tipslife.site/api/User/Login';
+        const loginEndpoint = 'https://api2.tipslife.site/api/User/Login';
         const loginData = {
             email: email,
             password: password
@@ -88,22 +88,39 @@ $(document).ready(function () {
 
     $(document).on("click", ".delete-button", function () {
         var userId = $(this).data("user-id");
-        if (confirm("Are you sure you want to delete this user?")) {
-            $.ajax({
-                url: "https://api2.tipslife.site/api/User/Delete/" + userId,
-                method: "DELETE",
-                headers: {
-                    "Authorization": "Bearer " + accessToken
+        $.confirm({
+            title: 'Delete user?',
+            content: 'Are you sure you want to delete this user?',
+            buttons: {
+                deleteUser: {
+                    text: 'Yes',
+                    btnClass: 'btn btn-danger',
+                    action: function () {
+                        deleteConfirmed(userId);
+                    }
                 },
-                success: function () {
-                    fetchDataAndUpdateTable();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error("Delete request failed:", textStatus, errorThrown);
+                cancel: function () {
+                    $.alert('Action is canceled');
                 }
-            });
-        }
-    });
+            }
+        });
+    });  
+    function deleteConfirmed(userId) {
+        $.ajax({
+            url: "https://api2.tipslife.site/api/User/Delete/" + userId,
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + accessToken
+            },
+            success: function () {
+                fetchDataAndUpdateTable();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Delete request failed:", textStatus, errorThrown);
+            }
+        });
+    }
+    
 
     $(document).on("click", ".edit-button", function () {
         var userId = $(this).data("user-id");

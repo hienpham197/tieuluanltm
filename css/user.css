@@ -381,6 +381,13 @@ th, td{
     width: 90%;
 }
 
+.jconfirm-title{
+    font-weight: 700;
+}
+.jconfirm-content {
+    font-size: 1.4rem
+}
+
 /* Responsive CSS Here */
 @media screen and (max-width: 950px) {
     .nav-img {
