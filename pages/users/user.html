@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,
 				initial-scale=1.0">
     <title>Tieu luan lap trinh mang</title>
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/aos.css">
+    <link rel="stylesheet" href="../../css/user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <header class="header">
         <div class="logosec">
@@ -23,14 +22,11 @@
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
                 class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-
         <div class="message">
-            <div id="toggleMode"><img src="img/arrow-repeat.svg" class="icn" alt=""></div>
+            <div id="toggleMode"><img src="/img/arrow-repeat.svg" class="icn" alt=""></div>
             <div id="uName"></div>
         </div>
-
     </header>
-
     <div class="main-container">
         <div class="navcontainer">
             <nav class="nav">
@@ -70,9 +66,12 @@
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">User</h1>
+                    <div>
+                    <button id="add-user-button" class="btn btn-primary">Add User</button>
+                    </div>
                 </div>
-
                 <div class="table-responsive">
+                    
                     <table class="table">
                         <thead>
                             <tr>
@@ -85,20 +84,31 @@
                                 <th class="fs16" scope="col">Del</th>
                             </tr>
                         </thead>
+
                         <tbody id="user-table-body">
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-lg justify-content-center">
+                            <li class="page-item" id="previous-page">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item" id="next-page">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>                 
                 </div>
 
             </div>
         </div>
     </div>
-
-    <script src="js/jquery-3.7.0.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/aos.js"></script>
+    <script src="../../js/jquery-3.7.0.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="../../js/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
     <script>
         WebFont.load({
@@ -113,5 +123,4 @@
         AOS.init();
     </script>
 </body>
-
 </html>

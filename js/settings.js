@@ -21,8 +21,8 @@ $(document).ready(function () {
   $('#logoutButton').on('click', function () {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userName');
-    localStorage.setItem('isLogged',0);
-    window.location.href = 'index.html';
+    localStorage.setItem('isLogged', 0);
+    window.location.href = '/index.html';
   });
 
   function toggleMode() {
@@ -32,14 +32,13 @@ $(document).ready(function () {
   }
   $('#toggleMode').on('click', toggleMode);
 
-  var storedUserName = localStorage.getItem("userName");
-  var uNameElement = $("#uName");
-  if (uNameElement.length) {
-    uNameElement.text(storedUserName);
-  } else {
-    console.error("#uName element not found.");
-  }
-
+  // var storedUserName = localStorage.getItem("userName");
+  // var uNameElement = $("#uName");
+  // if (uNameElement.length) {
+  //   uNameElement.text(storedUserName);
+  // } else {
+  //   console.error("#uName element not found.");
+  // }
 });
 
 
