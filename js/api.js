@@ -63,7 +63,11 @@ $(document).ready(function () {
                     console.log('Access Token:', accessToken);
                     localStorage.setItem('accessToken', accessToken);
                     localStorage.setItem("isLogged", 1);
-                    window.location.href = 'pages/users/user.html';
+
+                    //Handle redirect after successful login
+                    handleRedirect(response);
+
+                    //window.location.href = 'pages/users/user.html';
                 } else if (xhr.status === 401) {
                     window.location.href = 'index.html';
                 } else {
@@ -394,3 +398,36 @@ $(document).ready(function () {
     fetchDataAndUpdateTable();
 
 });
+
+function handleRedirect(response) {
+
+    console.log(response);
+    if (response != null){
+
+        var apiUrl = "https://localhost:44303/api/User/GetListRoleName";
+
+        $.ajax({
+            url: apiUrl,
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + response.access_token
+            },
+            success: function (data) {
+                if(data.length > 0){
+                    var isAdmin = data.indexOf("Admin") !== -1 ? 1 : 0; 
+
+                    if(isAdmin == 1){
+                        window.location.href = "../pages/users/user.html"
+                    }else{
+                        window.location.href = "../pages/roboModel/roboModel.html";
+                    }
+                    localStorage.setItem("isAdmin", isAdmin);
+                }               
+                
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("API request failed:", textStatus, errorThrown);
+            }
+        });
+    }
+}

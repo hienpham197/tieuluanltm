@@ -67,8 +67,14 @@
     <script>
         AOS.init();
         var isLogged = localStorage.getItem('isLogged');
+        var isAdmin = localStorage.getItem('isAdmin');
         if(isLogged == 1){
-            window.location.href = 'user.html';
+
+            if(isAdmin){
+                window.location.href = './pages/users/user.html';
+            }else{
+                window.location.href = './pages/roboModel/roboModel.html';
+            }
         }
     </script>
 </body>
