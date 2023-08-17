@@ -198,6 +198,7 @@ $(document).ready(function () {
             row.append($("<td>").text(user.lastName));
             row.append($("<td>").text(user.email));
             row.append($("<td>").text(user.password));
+            row.append($("<td>").text(user.isDelete));
 
             var editButton = $("<button>").text("+");
             editButton.addClass("btn btn-primary edit-button");
@@ -283,22 +284,17 @@ $(document).ready(function () {
         var apiUrl = "https://api2.tipslife.site/api/User/GetListUser";
         var pageNumber = currentPage;
         var pageSize = itemsPerPage;
-    
-        var queryParams = "?PageSize=" + pageSize + "&PageNumber=" + pageNumber + "&isDelete=false";
-    
+
         $.ajax({
-            url: apiUrl + queryParams,
+            url: apiUrl + "?PageSize=" + pageSize + "&PageNumber=" + pageNumber,
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + accessToken
             },
             success: function (response) {
-                var activeUsers = response.filter(function(user) {
-                    return user.isDelete === false;
-                });
-    
-                console.log("lst", activeUsers);
-                displayUsersOnPage(activeUsers);
+                var users = response;
+                console.log("lst",users);
+                displayUsersOnPage(users);
                 updatePaginationButtons(response.totalPages);
             },
             error: function (jqXHR, textStatus, errorThrown) {
