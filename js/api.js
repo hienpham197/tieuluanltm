@@ -222,7 +222,8 @@ $(document).ready(function () {
             userName: "",
             firstName: "",
             lastName: "",
-            email: ""
+            email: "",
+            password: "",
         };
 
         var row = $("<tr>");
@@ -231,6 +232,7 @@ $(document).ready(function () {
         row.append($("<td>").append($("<input>").val(newUser.firstName).addClass("new-user-input")));
         row.append($("<td>").append($("<input>").val(newUser.lastName).addClass("new-user-input")));
         row.append($("<td>").append($("<input>").val(newUser.email).addClass("new-user-input")));
+        row.append($("<td>").append($("<input>").val(newUser.password).addClass("new-user-input")));
 
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-new-button");
@@ -249,12 +251,14 @@ $(document).ready(function () {
         var firstName = row.find(".new-user-input:eq(1)").val();
         var lastName = row.find(".new-user-input:eq(2)").val();
         var email = row.find(".new-user-input:eq(3)").val();
+        var password = row.find(".new-user-input:eq(4)").val();
 
         var newUser = {
             userName: userName,
             firstName: firstName,
             lastName: lastName,
-            email: email
+            email: email,
+            password: password
         };
 
         $.ajax({
@@ -288,6 +292,7 @@ $(document).ready(function () {
             row.append($("<td>").text(user.firstName));
             row.append($("<td>").text(user.lastName));
             row.append($("<td>").text(user.email));
+            row.append($("<td>").text(user.password));
 
             var editButton = $("<button>").text("+");
             editButton.addClass("btn btn-primary edit-button");
