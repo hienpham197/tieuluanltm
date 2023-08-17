@@ -1,6 +1,5 @@
 $(document).ready(function () {
     var accessToken = localStorage.getItem('accessToken');
-    // var accessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBnbWFpbC5jb20iLCJJZCI6IjIxIiwiZXhwIjoxNjkyMzQ3ODQ1LCJpc3MiOiJhZG1pbkBnbWFpbC5jb20iLCJhdWQiOiJhZG1pbkBnbWFpbC5jb20ifQ.-WsLQ1F2ksQ73laRHuRKP0FhlyiTZN5LBRJkHFI5sZQ";
     var currentPage = 0;
     var itemsPerPage = 10;
     var totalPages = 3;
