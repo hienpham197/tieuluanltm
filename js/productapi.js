@@ -205,7 +205,14 @@ $(document).ready(function () {
             var row = $("<tr>");
             row.append($("<td scope='row'>").text(product.modelID));
     
-            row.append($("<td>").append('<img class="productImg" src="' + product.imgPath + '" alt="">'));
+            if(product.imgPath!=null)
+            {
+                row.append($("<td>").append('<img class="productImg" src="' + product.imgPath + '" alt="">'));
+            }else
+            {
+                row.append($("<td>").append('<img class="productImg" src="/img/image-not-found.png" alt="">'));
+            } 
+
             row.append($("<td>").text(product.name));
             row.append($("<td>").text(product.typeName));
             row.append($("<td>").text(product.userID));
@@ -214,6 +221,7 @@ $(document).ready(function () {
                                (createdDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
                                createdDate.getFullYear();
             row.append($("<td>").text(formattedDate));
+            row.append($("<td>").text(product.isDelete));
     
             var editButton = $("<button>").text("+");
             editButton.addClass("btn btn-success edit-button fs-5");
