@@ -4,39 +4,75 @@ $(document).ready(function () {
     var itemsPerPage = 10;
     var totalPages = 3;
 
-    // $.ajax({
-    //     url: 'https://api2.tipslife.site/api/RoboModel/GetListModel',
-    //     type: 'GET',
-    //     dataType: 'json',
-    //         headers: {
-    //             "Authorization": "Bearer " + accessToken
-    //         },
-    //     success: function(data) {
-    //         // Log the API response to the console
-    //         console.log(data);
-    //     },
-    //     error: function(xhr, status, error) {
-    //         console.error(error);
-    //     }
-    // });
     $(document).on("click", ".delete-button", function () {
-        var productId = $(this).data("product-id");
-        if (confirm("Are you sure you want to delete this product?")) {
-            $.ajax({
-                url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
-                method: "DELETE",
-                headers: {
-                    "Authorization": "Bearer " + accessToken
+        var productId = $(this).data("productId");
+        $.confirm({
+            title: 'Delete product?',
+            content: 'Are you sure you want to delete this product?',
+            buttons: {
+                deleteProduct: {
+                    text: 'Yes',
+                    btnClass: 'btn btn-danger',
+                    action: function () {
+                        deleteProduct(productId);
+                    }
                 },
-                success: function () {
-                    fetchDataAndUpdateTable();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error("Delete request failed:", textStatus, errorThrown);
+                cancel: function () {
+                    $.alert('Action is canceled');
                 }
-            });
-        }
+            }
+        });
     });
+    
+    function deleteProduct(productId) {
+        $.ajax({
+            url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + accessToken
+            },
+            success: function () {
+                updateisDelete(productId);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Delete request failed:", textStatus, errorThrown);
+            }
+        });
+    }
+
+    function updateisDelete(productId) {
+        var updatedData = {
+            isDelete: true
+        };
+    
+        $.ajax({
+            url: "https://api2.tipslife.site/api/Product/Update/" + productId,
+            method: "PUT",
+            headers: {
+                "Authorization": "Bearer " + accessToken,
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify(updatedData),
+            success: function () {
+                $.alert({
+                    title: 'Product Deleted',
+                    content: 'The product has been successfully marked as deleted.',
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn btn-primary',
+                            action: function () {
+                                fetchDataAndUpdateTable();
+                            }
+                        }
+                    }
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Update request failed:", textStatus, errorThrown);
+            }
+        });
+    }
     
     $(document).on("click", ".edit-button", function () {
         var productId = $(this).data("product-id");
@@ -164,31 +200,35 @@ $(document).ready(function () {
     function displayProductsOnPage(products) {
         var productTableBody = $("#product-table-body");
         productTableBody.empty();
-        //var t=1;
+    
         $.each(products, function (index, product) {
             var row = $("<tr>");
             row.append($("<td scope='row'>").text(product.modelID));
-
-            row.append($("<td>").append('<img class="productImg" src="'+ product.imgPath + 'alt="">'));            
+    
+            row.append($("<td>").append('<img class="productImg" src="' + product.imgPath + '" alt="">'));
             row.append($("<td>").text(product.name));
             row.append($("<td>").text(product.typeName));
             row.append($("<td>").text(product.userID));
-            row.append($("<td>").text(product.createdDate));
-            
+            var createdDate = new Date(product.createdDate);
+            var formattedDate = createdDate.getDate().toString().padStart(2, '0') + '/' +
+                               (createdDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                               createdDate.getFullYear();
+            row.append($("<td>").text(formattedDate));
+    
             var editButton = $("<button>").text("+");
-            editButton.addClass("btn btn-success edit-button");
-            editButton.data("product-id",product.modelID);
+            editButton.addClass("btn btn-success edit-button fs-5");
+            editButton.data("product-id", product.modelID);
             row.append($("<td>").append(editButton));
-
+    
             var deleteButton = $("<button>").text("-");
-            deleteButton.addClass("btn btn-danger delete-button");
-            deleteButton.data("product-id",product.modelID);
+            deleteButton.addClass("btn btn-danger delete-button fs-5");
+            deleteButton.data("product-id", product.modelID);
             row.append($("<td>").append(deleteButton));
-
+    
             productTableBody.append(row);
-           
         });
     }
+    
 
     function updatePaginationButtons(totalPages) {
         var paginationContainer = $(".pagination");
