@@ -65,7 +65,7 @@ $(document).ready(function () {
                     localStorage.setItem("isLogged", 1);
                     window.location.href = '/tieuluanltm/pages/users/user.html';
                 } else if (xhr.status === 401) {
-                    window.location.href = '/tieuluanltm/index.html';
+                    window.location.href = '/tieuluanltm/';
                 } else {
                     $('#loginStatus').text('Login failed. Please check your credentials.');
                     console.log('Login failed. Status code:', xhr.status);
