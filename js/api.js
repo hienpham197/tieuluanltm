@@ -63,7 +63,7 @@ $(document).ready(function () {
                     console.log('Access Token:', accessToken);
                     localStorage.setItem('accessToken', accessToken);
                     localStorage.setItem("isLogged", 1);
-                    window.location.href = '/pages/users/user.html';
+                    window.location.href = '/tieuluanltm/pages/users/user.html';
                 } else if (xhr.status === 401) {
                     window.location.href = 'index.html';
                 } else {
