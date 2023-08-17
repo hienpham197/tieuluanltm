@@ -5,6 +5,7 @@ $(document).ready(function () {
 
     $(document).on("click", ".delete-button", function () {
         var userId = $(this).data("userId");
+        console.log("usid choice: ", userId);
         $.confirm({
             title: 'Delete user?',
             content: 'Are you sure you want to delete this user?',
@@ -17,12 +18,11 @@ $(document).ready(function () {
                     }
                 },
                 cancel: function () {
-                    $.alert('Action is canceled');
                 }
             }
         });
     });
-    
+
     function deleteUser(userId) {
         $.ajax({
             url: "https://api2.tipslife.site/api/User/Delete/" + userId,
@@ -31,48 +31,37 @@ $(document).ready(function () {
                 "Authorization": "Bearer " + accessToken
             },
             success: function () {
-                updateisDelete(userId);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Delete request failed:", textStatus, errorThrown);
-            }
-        });
-    }
-    
-    function updateisDelete(userId) {
-        var updatedData = {
-            isDelete: true
-        };
-    
-        $.ajax({
-            url: "https://api2.tipslife.site/api/User/Update/" + userId,
-            method: "PUT",
-            headers: {
-                "Authorization": "Bearer " + accessToken,
-                "Content-Type": "application/json"
-            },
-            data: JSON.stringify(updatedData),
-            success: function () {
                 $.alert({
                     title: 'User Deleted',
-                    content: 'The user has been successfully marked as deleted.',
+                    content: 'The user has been successfully deleted.',
                     buttons: {
                         ok: {
                             text: 'OK',
                             btnClass: 'btn btn-primary',
                             action: function () {
-                                fetchDataAndUpdateTable();
+                                location.reload();
                             }
                         }
                     }
                 });
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Update request failed:", textStatus, errorThrown);
+                console.error("Delete request failed:", textStatus, errorThrown);
+                $.alert({
+                    title: 'Error',
+                    content: 'An error occurred while deleting the user.',
+                    type: 'red',
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn btn-primary'
+                        }
+                    }
+                });
             }
         });
     }
-    
+
     $(document).on("click", ".edit-button", function () {
         var userId = $(this).data("userId");
         var row = $(this).closest("tr");
@@ -294,16 +283,22 @@ $(document).ready(function () {
         var apiUrl = "https://api2.tipslife.site/api/User/GetListUser";
         var pageNumber = currentPage;
         var pageSize = itemsPerPage;
-
+    
+        var queryParams = "?PageSize=" + pageSize + "&PageNumber=" + pageNumber + "&isDelete=false";
+    
         $.ajax({
-            url: apiUrl + "?PageSize=" + pageSize + "&PageNumber=" + pageNumber,
+            url: apiUrl + queryParams,
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + accessToken
             },
             success: function (response) {
-                var users = response;
-                displayUsersOnPage(users);
+                var activeUsers = response.filter(function(user) {
+                    return user.isDelete === false;
+                });
+    
+                console.log("lst", activeUsers);
+                displayUsersOnPage(activeUsers);
                 updatePaginationButtons(response.totalPages);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -312,7 +307,5 @@ $(document).ready(function () {
             }
         });
     }
-
     fetchDataAndUpdateTable();
-
 });
