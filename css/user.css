@@ -46,7 +46,7 @@ th, td{
 .logo {
     font-size: 27px;
     font-weight: 600;
-    color: rgb(47, 141, 70);
+    color: #5500cb;
 }
 
 .icn {
@@ -386,6 +386,10 @@ th, td{
 }
 .jconfirm-content {
     font-size: 1.4rem
+}
+
+#user-table-body input{
+    width: 95%;
 }
 
 /* Responsive CSS Here */
