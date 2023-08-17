@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,24 +12,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
-
 <body class="d-flex flex-column h-100">
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form id="regForm">
                 <div class="loginTtl">Create Account</div>
                 <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="email" placeholder="Email" name="email" required />
+                <input type="password" placeholder="Password" name="password" required />
+                <div class="notice"></div>
                 <input class="btnSubmit" type="submit" value="Register">
             </form>
         </div>
         <div class="form-container sign-in-container">
             <form id="loginForm">
                 <div class="loginTtl">Sign in</div>
-                <input type="text" id="email" name="email" placeholder="Email" />
-                <input type="password" id="password" name="password" placeholder="Password" />
+                <input type="text" id="email" name="email" placeholder="Email" required />
+                <input type="password" id="password" name="password" placeholder="Password" required />
                 <div id="loginStatus"></div>
                 <a href="#">Forgot your password?</a>
                 <input class="btnSubmit btnshine" type="submit" value="Login">
@@ -68,7 +66,10 @@
     </script>
     <script>
         AOS.init();
+        var isLogged = localStorage.getItem('isLogged');
+        if(isLogged == 1){
+            window.location.href = 'user.html';
+        }
     </script>
 </body>
-
 </html>
