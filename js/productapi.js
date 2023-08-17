@@ -4,6 +4,40 @@ $(document).ready(function () {
     var itemsPerPage = 10;
     var totalPages = 3;
 
+    $("#searchInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#product-table-body tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#searchInput").on("keyup", function() {
+        var searchValue = $(this).val().toLowerCase();
+        $("#product-table-body tr").filter(function() {
+            var rowText = $(this).text().toLowerCase();
+            $(this).toggle(rowText.indexOf(searchValue) > -1);
+        });
+    });
+
+    $("#sortAscButton").on("click", function() {
+        var rows = $("#product-table-body tr").get();
+        rows.sort(function(a, b) {
+            var aValue = $(a).text().toLowerCase();
+            var bValue = $(b).text().toLowerCase();
+            return aValue.localeCompare(bValue);
+        });
+        $("#product-table-body").empty().append(rows);
+    });
+
+    $("#sortDescButton").on("click", function() {
+        var rows = $("#product-table-body tr").get();
+        rows.sort(function(a, b) {
+            var aValue = $(a).text().toLowerCase();
+            var bValue = $(b).text().toLowerCase();
+            return bValue.localeCompare(aValue);
+        });
+        $("#product-table-body").empty().append(rows);
+    });
+
     $(document).on("click", ".delete-button", function () {
         var productId = $(this).data("productId");
         $.confirm({
@@ -83,18 +117,18 @@ $(document).ready(function () {
         var nameInput = $("<input>").val(row.find("td:eq(2)").text());
         var typenameInput = $("<input>").val(row.find("td:eq(3)").text());
 
-        row.find("th:eq(0)").html(modelidInput);
+        row.find("td:eq(0)").html(modelidInput);
         row.find("td:eq(1)").html(imageInput);
         row.find("td:eq(2)").html(nameInput);
         row.find("td:eq(3)").html(typenameInput);
 
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-button");
-        row.find("td:eq(6)").html(saveButton);
+        row.find("td:eq(7)").html(saveButton);
 
         var cancelButton = $("<button>").text("Cancel");
         cancelButton.addClass("btn btn-secondary cancel-button");
-        row.find("td:eq(7)").html(cancelButton);
+        row.find("td:eq(8)").html(cancelButton);
     });
 
     $(document).on("click", ".save-button", function () {
