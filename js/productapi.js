@@ -42,7 +42,7 @@ $(document).ready(function () {
         var productId = $(this).data("productId");
         $.confirm({
             title: 'Delete product?',
-            content: 'Are you sure you want to delete this product?',
+            content: 'Are you sure you want to delete this product?'+productId,
             buttons: {
                 deleteProduct: {
                     text: 'Yes',
@@ -146,7 +146,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "https://api2.tipslife.site/api/RoboModel/Update",
+            url: "https://api2.tipslife.site/api/RoboModel/Update/" + modelID,
             method: "PUT",
             data: JSON.stringify(productData),
             contentType: "application/json",
@@ -173,7 +173,7 @@ $(document).ready(function () {
             imgPath: "",
             typeName: "",
             userID: "",
-            createdDate: ""
+            //createdDate: ""
         };
 
         var row = $("<tr>");
@@ -182,7 +182,7 @@ $(document).ready(function () {
         row.append($("<td>").append($("<input>").val(newProduct.name).addClass("new-product-input")));
         row.append($("<td>").append($("<input>").val(newProduct.typeName).addClass("new-product-input")));
         row.append($("<td>").append($("<input>").val(newProduct.userID).addClass("new-product-input")));
-        row.append($("<td>").append($("<input>").val(newProduct.createdDate).addClass("new-product-input")));
+        //row.append($("<td>").append($("<input>").val(newProduct.createdDate).addClass("new-product-input")));
 
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-new-button");
