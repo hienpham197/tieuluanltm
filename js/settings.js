@@ -22,7 +22,7 @@ $(document).ready(function () {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userName');
     localStorage.setItem('isLogged', 0);
-    window.location.href = '/tieuluanltm/index.html';
+    window.location.href = '/tieuluanltm';
   });
 
   function toggleMode() {
