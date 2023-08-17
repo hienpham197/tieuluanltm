@@ -386,12 +386,18 @@
 				<div class="sidebar-menu">
 					<ul id="accordion-menu">
 						<li class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle no-arrow">
-								<span class="micon bi bi-house"></span
-								><span class="mtext">My Model</span>
-							</a>
-						</li>						
-					</ul>
+						  <a href="../../pages/roboModel/roboModel.html" class="dropdown-toggle no-arrow">
+							<span class="micon bi bi-house"></span
+							><span class="mtext">My Model</span>
+						  </a>
+						</li>
+						<li>
+						  <a href="#" class="dropdown-toggle no-arrow">
+							<span class="micon bi bi-person"></span>
+							<span class="mtext">Profile</span>
+						  </a>
+						</li>
+					  </ul>
 				</div>
 			</div>
 		</div>
@@ -420,7 +426,7 @@
 										class="form-control"
 										type="text"
 										placeholder="Model xxx"
-                                        
+                                        required
 									/>
                                     <div class="invalid-feedback">
                                         Please enter value
@@ -436,7 +442,7 @@
 										class="form-control"
 										placeholder="Model Type"
 										type="text"
-                                        
+                                        required
 									/>
                                     <div class="invalid-feedback">
                                         Please enter value
@@ -540,6 +546,9 @@
                                             window.location.href = "../../pages/RoboModel/RoboModel.html";
                                            
                                         }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown){
+                                        console.log(errorThrown );
                                     }
                                 });
 

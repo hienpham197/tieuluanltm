@@ -1,4 +1,4 @@
-import {URL_SERVER_LOCAL, PAGE_SIZE_DEFAULT, PAGE_NUMBER_DEFAULT } from '../../js/const.js';
+import {URL_SERVER_LOCAL, PAGE_SIZE_DEFAULT, PAGE_NUMBER_DEFAULT, URL_CLIENT_LOCAL } from '../../js/const.js';
 export {
     getListModel,
     getDetail,
@@ -187,11 +187,15 @@ window.Pagination = function (totalPages,page){
 function renderModel(response){
     if(response.length > 0){
         var html= response.map((data) => {
+            var imgSrc = URL_CLIENT_LOCAL + "/img/image-not-found.png";
+            if(data.imgPath!==null){
+                imgSrc = data.imgPath;
+            }
             return `
             <li class="col-lg-4 col-md-6 col-sm-12">
                 <div class="product-box">
                     <div class="producct-img">
-                        <img src="${data.imgPath}" alt="" />
+                        <img src="${imgSrc}" alt="" />
                     </div>
                     <div class="product-caption">
                         <h4><a href="#">${data.name}</a></h4>
