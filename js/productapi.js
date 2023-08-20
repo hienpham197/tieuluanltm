@@ -40,11 +40,12 @@ $(document).ready(function () {
 
     $(document).on("click", ".delete-button", function () {
         var productId = $(this).data("productId");
+        console.log("usid choice: ", productId);
         $.confirm({
             title: 'Delete product?',
-            content: 'Are you sure you want to delete this product?'+productId,
+            content: 'Are you sure you want to delete this product?',
             buttons: {
-                deleteProduct: {
+                deleteUser: {
                     text: 'Yes',
                     btnClass: 'btn btn-danger',
                     action: function () {
@@ -52,12 +53,11 @@ $(document).ready(function () {
                     }
                 },
                 cancel: function () {
-                    $.alert('Action is canceled');
                 }
             }
         });
     });
-    
+
     function deleteProduct(productId) {
         $.ajax({
             url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
@@ -67,12 +67,72 @@ $(document).ready(function () {
             },
             success: function () {
                 updateisDelete(productId);
+                $.alert({
+                    title: 'Prodcut Deleted',
+                    content: 'The product has been successfully deleted.',
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn btn-primary',
+                            action: function () {
+                                location.reload();
+                            }
+                        }
+                    }
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error("Delete request failed:", textStatus, errorThrown);
+                $.alert({
+                    title: 'Error',
+                    content: 'An error occurred while deleting the user.',
+                    type: 'red',
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn btn-primary'
+                        }
+                    }
+                });
             }
         });
     }
+
+    // $(document).on("click", ".delete-button", function () {
+    //     var productId = $(this).data("productId");
+    //     $.confirm({
+    //         title: 'Delete product?',
+    //         content: 'Are you sure you want to delete this product?',
+    //         buttons: {
+    //             deleteProduct: {
+    //                 text: 'Yes',
+    //                 btnClass: 'btn btn-danger',
+    //                 action: function () {
+    //                     deleteProduct(productId);
+    //                 }
+    //             },
+    //             cancel: function () {
+    //                 $.alert('Action is canceled');
+    //             }
+    //         }
+    //     });
+    // });
+    
+    // function deleteProduct(productId) {
+    //     $.ajax({
+    //         url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
+    //         method: "DELETE",
+    //         headers: {
+    //             "Authorization": "Bearer " + accessToken
+    //         },
+    //         success: function () {
+    //             updateisDelete(productId);
+    //         },
+    //         error: function (jqXHR, textStatus, errorThrown) {
+    //             console.error("Delete request failed:", textStatus, errorThrown);
+    //         }
+    //     });
+    // }
 
     function updateisDelete(productId) {
         var updatedData = {
@@ -222,7 +282,7 @@ $(document).ready(function () {
                 fetchDataAndUpdateTable();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Add new user request failed:", textStatus, errorThrown);
+                console.error("Add new product request failed:", textStatus, errorThrown);
             }
         });
     });
