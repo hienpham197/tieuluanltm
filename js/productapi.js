@@ -304,7 +304,7 @@ $(document).ready(function () {
                 row.append($("<td>").append('<img class="productImg" src="' + product.imgPath + '" alt="">'));
             }else
             {
-                row.append($("<td>").append('<img class="productImg" src="/tieuluanltm/img/image-not-found.png" alt="">'));
+                row.append($("<td>").append('<img class="productImg" src="https://photos.app.goo.gl/i4n1CptKXxyx4p8z7" alt="">'));
             } 
 
             row.append($("<td>").text(product.name));
