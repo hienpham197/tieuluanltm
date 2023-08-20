@@ -28,7 +28,7 @@ $(document).ready(function () {
   function toggleMode() {
     const isDarkMode = $('body').hasClass('dark-mode');
     $('body').toggleClass('dark-mode', !isDarkMode);
-    $('.header').toggleClass('dark-mode', !isDarkMode);
+    $('#header').toggleClass('dark-mode', !isDarkMode);
   }
   $('#toggleMode').on('click', toggleMode);
 });

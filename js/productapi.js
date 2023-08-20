@@ -304,7 +304,7 @@ $(document).ready(function () {
                 row.append($("<td>").append('<img class="productImg" src="' + product.imgPath + '" alt="">'));
             }else
             {
-                row.append($("<td>").append('<img class="productImg" src="/img/image-not-found.png" alt="">'));
+                row.append($("<td>").append('<img class="productImg" src="../../img/image-not-found.png" alt="">'));
             } 
 
             row.append($("<td>").text(product.name));
