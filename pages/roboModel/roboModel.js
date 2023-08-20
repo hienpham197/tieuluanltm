@@ -9,6 +9,8 @@ var accessToken = localStorage.getItem("accessToken");
 var totalPages = 0;
 var pageSize =PAGE_SIZE_DEFAULT;
 var pageNumber =PAGE_NUMBER_DEFAULT;
+var inputSearch = $("#input_search");
+var btnSearch = $("#btn-search");
 
 function getListModel(){ 
     $.ajax({
@@ -229,3 +231,36 @@ function getInfoUser(){
     });
 }
 
+inputSearch.on('keyup', function (e) {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        // Do something
+        searchModel();
+    }
+});
+
+btnSearch.on('click', searchModel);
+
+function searchModel(){
+    var value = inputSearch.val();
+    $.ajax({
+        url: URL_SERVER_LOCAL +`/api/RoboModel/GetListModelByUser?pageSize=${pageSize}&KeySearch=name&ValueSearch=${value}`,
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer "+ accessToken
+        },
+        success: function(response){
+            if(response.data.length > 0){
+                totalPages = Math.ceil(response.totalRecord / pageSize);
+                renderModel(response.data);         
+                renderNavigationPaging(totalPages,pageNumber)
+            }
+
+        },
+        error: function(httpObj, textStatus) {       
+            if(httpObj.status==401)
+                console.log("Access deny");
+                window.location.href = "../404.html"
+        }
+
+    });
+}
