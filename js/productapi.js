@@ -4,13 +4,48 @@ $(document).ready(function () {
     var itemsPerPage = 10;
     var totalPages = 3;
 
+    $("#searchInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#product-table-body tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#searchInput").on("keyup", function() {
+        var searchValue = $(this).val().toLowerCase();
+        $("#product-table-body tr").filter(function() {
+            var rowText = $(this).text().toLowerCase();
+            $(this).toggle(rowText.indexOf(searchValue) > -1);
+        });
+    });
+
+    $("#sortAscButton").on("click", function() {
+        var rows = $("#product-table-body tr").get();
+        rows.sort(function(a, b) {
+            var aValue = $(a).text().toLowerCase();
+            var bValue = $(b).text().toLowerCase();
+            return aValue.localeCompare(bValue);
+        });
+        $("#product-table-body").empty().append(rows);
+    });
+
+    $("#sortDescButton").on("click", function() {
+        var rows = $("#product-table-body tr").get();
+        rows.sort(function(a, b) {
+            var aValue = $(a).text().toLowerCase();
+            var bValue = $(b).text().toLowerCase();
+            return bValue.localeCompare(aValue);
+        });
+        $("#product-table-body").empty().append(rows);
+    });
+
     $(document).on("click", ".delete-button", function () {
         var productId = $(this).data("productId");
+        console.log("usid choice: ", productId);
         $.confirm({
             title: 'Delete product?',
             content: 'Are you sure you want to delete this product?',
             buttons: {
-                deleteProduct: {
+                deleteUser: {
                     text: 'Yes',
                     btnClass: 'btn btn-danger',
                     action: function () {
@@ -18,12 +53,11 @@ $(document).ready(function () {
                     }
                 },
                 cancel: function () {
-                    $.alert('Action is canceled');
                 }
             }
         });
     });
-    
+
     function deleteProduct(productId) {
         $.ajax({
             url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
@@ -33,12 +67,72 @@ $(document).ready(function () {
             },
             success: function () {
                 updateisDelete(productId);
+                $.alert({
+                    title: 'Prodcut Deleted',
+                    content: 'The product has been successfully deleted.',
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn btn-primary',
+                            action: function () {
+                                location.reload();
+                            }
+                        }
+                    }
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error("Delete request failed:", textStatus, errorThrown);
+                $.alert({
+                    title: 'Error',
+                    content: 'An error occurred while deleting the user.',
+                    type: 'red',
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn btn-primary'
+                        }
+                    }
+                });
             }
         });
     }
+
+    // $(document).on("click", ".delete-button", function () {
+    //     var productId = $(this).data("productId");
+    //     $.confirm({
+    //         title: 'Delete product?',
+    //         content: 'Are you sure you want to delete this product?',
+    //         buttons: {
+    //             deleteProduct: {
+    //                 text: 'Yes',
+    //                 btnClass: 'btn btn-danger',
+    //                 action: function () {
+    //                     deleteProduct(productId);
+    //                 }
+    //             },
+    //             cancel: function () {
+    //                 $.alert('Action is canceled');
+    //             }
+    //         }
+    //     });
+    // });
+    
+    // function deleteProduct(productId) {
+    //     $.ajax({
+    //         url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
+    //         method: "DELETE",
+    //         headers: {
+    //             "Authorization": "Bearer " + accessToken
+    //         },
+    //         success: function () {
+    //             updateisDelete(productId);
+    //         },
+    //         error: function (jqXHR, textStatus, errorThrown) {
+    //             console.error("Delete request failed:", textStatus, errorThrown);
+    //         }
+    //     });
+    // }
 
     function updateisDelete(productId) {
         var updatedData = {
@@ -83,18 +177,18 @@ $(document).ready(function () {
         var nameInput = $("<input>").val(row.find("td:eq(2)").text());
         var typenameInput = $("<input>").val(row.find("td:eq(3)").text());
 
-        row.find("th:eq(0)").html(modelidInput);
+        row.find("td:eq(0)").html(modelidInput);
         row.find("td:eq(1)").html(imageInput);
         row.find("td:eq(2)").html(nameInput);
         row.find("td:eq(3)").html(typenameInput);
 
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-button");
-        row.find("td:eq(6)").html(saveButton);
+        row.find("td:eq(7)").html(saveButton);
 
         var cancelButton = $("<button>").text("Cancel");
         cancelButton.addClass("btn btn-secondary cancel-button");
-        row.find("td:eq(7)").html(cancelButton);
+        row.find("td:eq(8)").html(cancelButton);
     });
 
     $(document).on("click", ".save-button", function () {
@@ -112,7 +206,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "https://api2.tipslife.site/api/RoboModel/Update",
+            url: "https://api2.tipslife.site/api/RoboModel/Update/" + modelID,
             method: "PUT",
             data: JSON.stringify(productData),
             contentType: "application/json",
@@ -139,7 +233,7 @@ $(document).ready(function () {
             imgPath: "",
             typeName: "",
             userID: "",
-            createdDate: ""
+            //createdDate: ""
         };
 
         var row = $("<tr>");
@@ -148,7 +242,7 @@ $(document).ready(function () {
         row.append($("<td>").append($("<input>").val(newProduct.name).addClass("new-product-input")));
         row.append($("<td>").append($("<input>").val(newProduct.typeName).addClass("new-product-input")));
         row.append($("<td>").append($("<input>").val(newProduct.userID).addClass("new-product-input")));
-        row.append($("<td>").append($("<input>").val(newProduct.createdDate).addClass("new-product-input")));
+        //row.append($("<td>").append($("<input>").val(newProduct.createdDate).addClass("new-product-input")));
 
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-new-button");
@@ -188,7 +282,7 @@ $(document).ready(function () {
                 fetchDataAndUpdateTable();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Add new user request failed:", textStatus, errorThrown);
+                console.error("Add new product request failed:", textStatus, errorThrown);
             }
         });
     });
@@ -205,7 +299,14 @@ $(document).ready(function () {
             var row = $("<tr>");
             row.append($("<td scope='row'>").text(product.modelID));
     
-            row.append($("<td>").append('<img class="productImg" src="' + product.imgPath + '" alt="">'));
+            if(product.imgPath!=null)
+            {
+                row.append($("<td>").append('<img class="productImg" src="' + product.imgPath + '" alt="">'));
+            }else
+            {
+                row.append($("<td>").append('<img class="productImg" src="/img/image-not-found.png" alt="">'));
+            } 
+
             row.append($("<td>").text(product.name));
             row.append($("<td>").text(product.typeName));
             row.append($("<td>").text(product.userID));
@@ -214,6 +315,7 @@ $(document).ready(function () {
                                (createdDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
                                createdDate.getFullYear();
             row.append($("<td>").text(formattedDate));
+            row.append($("<td>").text(product.isDelete));
     
             var editButton = $("<button>").text("+");
             editButton.addClass("btn btn-success edit-button fs-5");
