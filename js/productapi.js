@@ -304,7 +304,7 @@ $(document).ready(function () {
                 row.append($("<td>").append('<img class="productImg" src="' + product.imgPath + '" alt="">'));
             }else
             {
-                row.append($("<td>").append('<img class="productImg" src="https://photos.app.goo.gl/i4n1CptKXxyx4p8z7" alt="">'));
+                row.append($("<td>").append('<img class="productImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/800px-Image_not_available.png?20210219185637" alt="">'));
             } 
 
             row.append($("<td>").text(product.name));
