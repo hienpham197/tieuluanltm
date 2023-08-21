@@ -112,9 +112,9 @@ function handleRedirect(response) {
                     var isAdmin = data.indexOf("Admin") !== -1 ? 1 : 0; 
 
                     if(isAdmin == 1){
-                        window.location.href = "../pages/users/user.html"
+                        window.location.href = "../tieuluanltm/pages/users/user.html"
                     }else{
-                        window.location.href = "../pages/roboModel/roboModel.html";
+                        window.location.href = "../tieuluanltm/pages/roboModel/roboModel.html";
                     }
                     localStorage.setItem("isAdmin", isAdmin);
                 }               

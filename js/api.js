@@ -3,8 +3,43 @@ $(document).ready(function () {
     var currentPage = 0;
     var itemsPerPage = 10;
 
+    $("#searchInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#user-table-body tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#searchInput").on("keyup", function() {
+        var searchValue = $(this).val().toLowerCase();
+        $("#user-table-body tr").filter(function() {
+            var rowText = $(this).text().toLowerCase();
+            $(this).toggle(rowText.indexOf(searchValue) > -1);
+        });
+    });
+
+    $("#sortAscButton").on("click", function() {
+        var rows = $("#user-table-body tr").get();
+        rows.sort(function(a, b) {
+            var aValue = $(a).text().toLowerCase();
+            var bValue = $(b).text().toLowerCase();
+            return aValue.localeCompare(bValue);
+        });
+        $("#user-table-body").empty().append(rows);
+    });
+
+    $("#sortDescButton").on("click", function() {
+        var rows = $("#user-table-body tr").get();
+        rows.sort(function(a, b) {
+            var aValue = $(a).text().toLowerCase();
+            var bValue = $(b).text().toLowerCase();
+            return bValue.localeCompare(aValue);
+        });
+        $("#user-table-body").empty().append(rows);
+    });
+
     $(document).on("click", ".delete-button", function () {
         var userId = $(this).data("userId");
+        console.log("usid choice: ", userId);
         $.confirm({
             title: 'Delete user?',
             content: 'Are you sure you want to delete this user?',
@@ -17,12 +52,11 @@ $(document).ready(function () {
                     }
                 },
                 cancel: function () {
-                    $.alert('Action is canceled');
                 }
             }
         });
     });
-    
+
     function deleteUser(userId) {
         $.ajax({
             url: "https://api2.tipslife.site/api/User/Delete/" + userId,
@@ -31,48 +65,37 @@ $(document).ready(function () {
                 "Authorization": "Bearer " + accessToken
             },
             success: function () {
-                updateisDelete(userId);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Delete request failed:", textStatus, errorThrown);
-            }
-        });
-    }
-    
-    function updateisDelete(userId) {
-        var updatedData = {
-            isDelete: true
-        };
-    
-        $.ajax({
-            url: "https://api2.tipslife.site/api/User/Update/" + userId,
-            method: "PUT",
-            headers: {
-                "Authorization": "Bearer " + accessToken,
-                "Content-Type": "application/json"
-            },
-            data: JSON.stringify(updatedData),
-            success: function () {
                 $.alert({
                     title: 'User Deleted',
-                    content: 'The user has been successfully marked as deleted.',
+                    content: 'The user has been successfully deleted.',
                     buttons: {
                         ok: {
                             text: 'OK',
                             btnClass: 'btn btn-primary',
                             action: function () {
-                                fetchDataAndUpdateTable();
+                                location.reload();
                             }
                         }
                     }
                 });
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Update request failed:", textStatus, errorThrown);
+                console.error("Delete request failed:", textStatus, errorThrown);
+                $.alert({
+                    title: 'Error',
+                    content: 'An error occurred while deleting the user.',
+                    type: 'red',
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn btn-primary'
+                        }
+                    }
+                });
             }
         });
     }
-    
+
     $(document).on("click", ".edit-button", function () {
         var userId = $(this).data("userId");
         var row = $(this).closest("tr");
@@ -138,7 +161,8 @@ $(document).ready(function () {
             userName: "",
             firstName: "",
             lastName: "",
-            email: ""
+            email: "",
+            password: "",
         };
 
         var row = $("<tr>");
@@ -147,6 +171,7 @@ $(document).ready(function () {
         row.append($("<td>").append($("<input>").val(newUser.firstName).addClass("new-user-input")));
         row.append($("<td>").append($("<input>").val(newUser.lastName).addClass("new-user-input")));
         row.append($("<td>").append($("<input>").val(newUser.email).addClass("new-user-input")));
+        row.append($("<td>").append($("<input>").val(newUser.password).addClass("new-user-input")));
 
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-new-button");
@@ -165,12 +190,14 @@ $(document).ready(function () {
         var firstName = row.find(".new-user-input:eq(1)").val();
         var lastName = row.find(".new-user-input:eq(2)").val();
         var email = row.find(".new-user-input:eq(3)").val();
+        var password = row.find(".new-user-input:eq(4)").val();
 
         var newUser = {
             userName: userName,
             firstName: firstName,
             lastName: lastName,
-            email: email
+            email: email,
+            password: password
         };
 
         $.ajax({
@@ -204,12 +231,12 @@ $(document).ready(function () {
             row.append($("<td>").text(user.firstName));
             row.append($("<td>").text(user.lastName));
             row.append($("<td>").text(user.email));
-
+            row.append($("<td>").text(user.password));
+            row.append($("<td>").text(user.isDelete));
             var editButton = $("<button>").text("+");
             editButton.addClass("btn btn-primary edit-button");
             editButton.data("user-id", user.userID);
             row.append($("<td>").append(editButton));
-
             var deleteButton = $("<button>").text("-");
             deleteButton.addClass("btn btn-danger delete-button");
             deleteButton.data("user-id", user.userID);
@@ -298,6 +325,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 var users = response;
+                console.log("lst", users);
                 displayUsersOnPage(users);
                 updatePaginationButtons(response.totalPages);
             },
@@ -307,7 +335,5 @@ $(document).ready(function () {
             }
         });
     }
-
     fetchDataAndUpdateTable();
-
 });

@@ -392,6 +392,20 @@ th, td{
     width: 95%;
 }
 
+#searchInput{
+    height: 4rem;
+}
+
+#searchInput::placeholder{
+    font-size: 1.4rem;
+}
+
+#sortAscButton,
+#sortDescButton{
+    cursor: pointer;
+    width: 5rem;
+}
+
 /* Responsive CSS Here */
 @media screen and (max-width: 950px) {
     .nav-img {

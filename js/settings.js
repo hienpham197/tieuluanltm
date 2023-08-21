@@ -28,17 +28,9 @@ $(document).ready(function () {
   function toggleMode() {
     const isDarkMode = $('body').hasClass('dark-mode');
     $('body').toggleClass('dark-mode', !isDarkMode);
-    $('.header').toggleClass('dark-mode', !isDarkMode);
+    $('#header').toggleClass('dark-mode', !isDarkMode);
   }
   $('#toggleMode').on('click', toggleMode);
-
-  // var storedUserName = localStorage.getItem("userName");
-  // var uNameElement = $("#uName");
-  // if (uNameElement.length) {
-  //   uNameElement.text(storedUserName);
-  // } else {
-  //   console.error("#uName element not found.");
-  // }
 });
 
 
