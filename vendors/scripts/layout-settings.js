@@ -8,6 +8,7 @@
 			menuDropdownIcon: "icon-style-1",
 			menuListIcon: "icon-list-style-1",
 			welcomemodal: "show",
+			isDark: false
 		};
 
 		/**
@@ -63,73 +64,73 @@
 		var body = jQuery("body");
 		var left_sidebar = jQuery(".left-side-bar");
 
-		// Header Background
-		var header_dark = jQuery(".header-dark");
-		var header_light = jQuery(".header-white");
+		// // Header Background
+		// var header_dark = jQuery(".header-dark");
+		// var header_light = jQuery(".header-white");
 
-		header_dark.click(function () {
-			"use strict";
-			jQuery(this).addClass("active");
-			header_light.removeClass("active");
-			body.removeClass("header-white").addClass("header-dark");
+		// header_dark.click(function () {
+		// 	"use strict";
+		// 	jQuery(this).addClass("active");
+		// 	header_light.removeClass("active");
+		// 	body.removeClass("header-white").addClass("header-dark");
 
-			//Store in local storage
-			setOptions("headerBackground", "header-dark");
-		});
+		// 	//Store in local storage
+		// 	setOptions("headerBackground", "header-dark");
+		// });
 
-		//Click for current options
-		if (currentOptions.headerBackground === "header-dark") {
-			header_dark.trigger("click");
-		}
+		// //Click for current options
+		// if (currentOptions.headerBackground === "header-dark") {
+		// 	header_dark.trigger("click");
+		// }
 
-		header_light.click(function () {
-			"use strict";
-			jQuery(this).addClass("active");
-			header_dark.removeClass("active");
-			body.removeClass("header-dark").addClass("header-white");
+		// header_light.click(function () {
+		// 	"use strict";
+		// 	jQuery(this).addClass("active");
+		// 	header_dark.removeClass("active");
+		// 	body.removeClass("header-dark").addClass("header-white");
 
-			//Store in local storage
-			setOptions("headerBackground", "header-white");
-		});
+		// 	//Store in local storage
+		// 	setOptions("headerBackground", "header-white");
+		// });
 
-		//Click for current options
-		if (currentOptions.headerBackground === "header-white") {
-			header_light.trigger("click");
-		}
+		// //Click for current options
+		// if (currentOptions.headerBackground === "header-white") {
+		// 	header_light.trigger("click");
+		// }
 
-		// Sidebar Background
-		var sidebar_dark = jQuery(".sidebar-dark");
-		var sidebar_light = jQuery(".sidebar-light");
+		// // Sidebar Background
+		// var sidebar_dark = jQuery(".sidebar-dark");
+		// var sidebar_light = jQuery(".sidebar-light");
 
-		sidebar_dark.click(function () {
-			"use strict";
-			jQuery(this).addClass("active");
-			sidebar_light.removeClass("active");
-			body.removeClass("sidebar-light").addClass("sidebar-dark");
+		// sidebar_dark.click(function () {
+		// 	"use strict";
+		// 	jQuery(this).addClass("active");
+		// 	sidebar_light.removeClass("active");
+		// 	body.removeClass("sidebar-light").addClass("sidebar-dark");
 
-			//Store in local storage
-			setOptions("navigationBackground", "sidebar-dark");
-		});
+		// 	//Store in local storage
+		// 	setOptions("navigationBackground", "sidebar-dark");
+		// });
 
-		//Click for current options
-		if (currentOptions.navigationBackground === "sidebar-dark") {
-			sidebar_dark.trigger("click");
-		}
+		// //Click for current options
+		// if (currentOptions.navigationBackground === "sidebar-dark") {
+		// 	sidebar_dark.trigger("click");
+		// }
 
-		sidebar_light.click(function () {
-			"use strict";
-			jQuery(this).addClass("active");
-			sidebar_dark.removeClass("active");
-			body.removeClass("sidebar-dark").addClass("sidebar-light");
+		// sidebar_light.click(function () {
+		// 	"use strict";
+		// 	jQuery(this).addClass("active");
+		// 	sidebar_dark.removeClass("active");
+		// 	body.removeClass("sidebar-dark").addClass("sidebar-light");
 
-			//Store in local storage
-			setOptions("navigationBackground", "sidebar-light");
-		});
+		// 	//Store in local storage
+		// 	setOptions("navigationBackground", "sidebar-light");
+		// });
 
-		//Click for current options
-		if (currentOptions.navigationBackground === "sidebar-light") {
-			sidebar_light.trigger("click");
-		}
+		// //Click for current options
+		// if (currentOptions.navigationBackground === "sidebar-light") {
+		// 	sidebar_light.trigger("click");
+		// }
 
 		// Menu Dropdown Icon
 		$("input:radio[name=menu-dropdown-icon]").change(function () {
@@ -225,5 +226,40 @@
 			jQuery(".welcome-modal-close").trigger("click");
 			jQuery(".welcome-modal-btn").removeClass("active");
 		}
+
+		//Dark Light Mode
+		var classDarkLight = currentOptions.headerBackground + " " + currentOptions.navigationBackground;
+		$("body").addClass(classDarkLight);
+
+		var checkDarkLight = $("#chk_lightDark");
+
+		if(currentOptions.isDark){
+			checkDarkLight.prop("checked", true);
+			
+		}else{
+			checkDarkLight.prop("checked", false);		
+		}
+		
+		var elems = document.querySelector('.switch-btn');
+		var switchery = new Switchery(elems, { color: '#e5e9ed', secondaryColor: '#e5e9ed', jackColor: '#162127', jackSecondaryColor: '#ffffff' });
+
+		$("#chk_lightDark").on('change', function() {
+			if ($(this).is(':checked')) {
+			  $("body").removeClass("header-white sidebar-light").addClass("header-dark sidebar-dark");   
+			
+				currentOptions.headerBackground = "header-dark"
+				currentOptions.navigationBackground= "sidebar-dark"
+				currentOptions.isDark = true
+				localStorage.setItem('optionsObject', JSON.stringify(currentOptions));
+			}
+			else {
+			  $("body").removeClass("header-dark sidebar-dark").addClass("header-white sidebar-light");     
+				currentOptions.headerBackground = "header-white"
+				currentOptions.navigationBackground= "sidebar-light"
+				currentOptions.isDark = false;
+				localStorage.setItem('optionsObject', JSON.stringify(currentOptions));
+			}
+		});
+	 
 	});
 })();

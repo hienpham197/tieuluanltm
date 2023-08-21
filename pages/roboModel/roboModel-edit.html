@@ -45,7 +45,19 @@
 		/>
 		<link rel="stylesheet" type="text/css" href="../../vendors/styles/style.css" />
         <link rel="stylesheet" type="text/css" href="../../vendors/styles/dropzone.css" />
-
+		<!-- switchery css -->
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="../../vendors/styles/switchery.min.css"
+		/>
+		<style type="text/css">
+			.main-container {
+			display: block !important;
+			width: 100vw;
+			top: 0px;
+		}
+	  </style>
 	</head>
 	<body>
 		<div class="pre-loader">
@@ -72,13 +84,11 @@
 			<div class="header-right">
 				<div class="dashboard-setting user-notification">
 					<div class="dropdown">
-						<a
-							class="dropdown-toggle no-arrow"
-							href="javascript:;"
-							data-toggle="right-sidebar"
-						>
-							<i class="dw dw-settings2"></i>
-						</a>
+						<input
+						type="checkbox"
+						class="switch-btn"
+						id="chk_lightDark"
+					  />
 					</div>
 				</div>
 				<div class="user-info-dropdown">
@@ -97,64 +107,13 @@
 						<div
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 						>
-							<a class="dropdown-item" href="profile.html"
+							<a class="dropdown-item" href="../users/profile.html"
 								><i class="dw dw-user1"></i> Profile</a
 							>
 							<a class="dropdown-item" onclick="logOut()" href="#"
 								><i class="dw dw-logout"></i> Log Out</a
 							>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="right-sidebar">
-			<div class="sidebar-title">
-				<h3 class="weight-600 font-16 text-blue">
-					Layout Settings
-					<span class="btn-block font-weight-400 font-12"
-						>User Interface Settings</span
-					>
-				</h3>
-				<div class="close-sidebar" data-toggle="right-sidebar-close">
-					<i class="icon-copy ion-close-round"></i>
-				</div>
-			</div>
-			<div class="right-sidebar-body customscroll">
-				<div class="right-sidebar-body-content">
-					<h4 class="weight-600 font-18 pb-10">Header Background</h4>
-					<div class="sidebar-btn-group pb-30 mb-10">
-						<a
-							href="javascript:void(0);"
-							class="btn btn-outline-primary header-white active"
-							>White</a
-						>
-						<a
-							href="javascript:void(0);"
-							class="btn btn-outline-primary header-dark"
-							>Dark</a
-						>
-					</div>
-
-					<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
-					<div class="sidebar-btn-group pb-30 mb-10">
-						<a
-							href="javascript:void(0);"
-							class="btn btn-outline-primary sidebar-light"
-							>White</a
-						>
-						<a
-							href="javascript:void(0);"
-							class="btn btn-outline-primary sidebar-dark active"
-							>Dark</a
-						>
-					</div>
-
-					<div class="reset-options pt-30 text-center">
-						<button class="btn btn-danger" id="reset-settings">
-							Reset Settings
-						</button>
 					</div>
 				</div>
 			</div>
@@ -177,7 +136,7 @@
 						  </a>
 						</li>
 						<li>
-						  <a href="#" class="dropdown-toggle no-arrow">
+						  <a href="../users/profile.html" class="dropdown-toggle no-arrow">
 							<span class="micon bi bi-person"></span>
 							<span class="mtext">Profile</span>
 						  </a>
@@ -263,6 +222,8 @@
 		<script src="../../vendors/scripts/core.js"></script>
 		<script src="../../vendors/scripts/script.min.js"></script>
 		<script src="../../vendors/scripts/process.js"></script>
+		<!-- switchery js -->
+		<script src="../../vendors/scripts/switchery.min.js"></script>
 		<script src="../../vendors/scripts/layout-settings.js"></script>
 		<script src="../../vendors/scripts/dropzone.js"></script>
         <script type="module" src="./model-edit.js"></script>
