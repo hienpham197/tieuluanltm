@@ -4,7 +4,6 @@
     <!-- Basic Page Info -->
     <meta charset="utf-8" />
     <title>Tieu Luan Lap Trinh Mang</title>
-    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <!-- Site favicon -->
     <link
       rel="apple-touch-icon"
@@ -52,11 +51,11 @@
       href="../../vendors/styles/style.css"
     />
     <!-- switchery css -->
-    <link
+		<link
     rel="stylesheet"
     type="text/css"
     href="../../vendors/styles/switchery.min.css"
-    />
+  />
   </head>
   <body>
     <div class="pre-loader">
@@ -84,10 +83,10 @@
         <div class="dashboard-setting user-notification">
           <div class="dropdown">
             <input
-						type="checkbox"
-						class="switch-btn"
-						id="chk_lightDark"
-					  />
+            type="checkbox"
+            class="switch-btn"
+            id="chk_lightDark"
+          />
           </div>
         </div>
         <div class="user-info-dropdown">
@@ -106,7 +105,7 @@
             <div
               class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
             >
-              <a class="dropdown-item" href="../users/profile.html"
+              <a class="dropdown-item" href="profile.html"
                 ><i class="dw dw-user1"></i> Profile</a
               >
               <a class="dropdown-item" onclick="logOut()" href="#"
@@ -138,42 +137,48 @@
       </div>
       <div class="menu-block customscroll">
         <div class="sidebar-menu">
-			<ul id="accordion-menu">
-				<li class="dropdown">
-				  <a href="../../pages/roboModel/roboModel.html" class="dropdown-toggle no-arrow">
-					<span class="micon bi bi-house"></span
-					><span class="mtext">My Model</span>
-				  </a>
-				</li>
-				<li>
-				  <a href="../users/profile.html" class="dropdown-toggle no-arrow">
-					<span class="micon bi bi-person"></span>
-					<span class="mtext">Profile</span>
-				  </a>
-				</li>
-			  </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="left-side-bar">
-		<div class="brand-logo" style="display: flex;">
-			<div class="logo" style="margin: auto;">LTM</div>
-			<div class="close-sidebar" data-toggle="left-sidebar-close">
-				<i class="ion-close-round"></i>
-			</div>
-		</div>
-      <div class="menu-block customscroll">
-        <div class="sidebar-menu">
           <ul id="accordion-menu">
             <li class="dropdown">
-              <a href="../../pages/roboModel/roboModel.html" class="dropdown-toggle no-arrow">
+              <a
+                href="../../pages/roboModel/roboModel.html"
+                class="dropdown-toggle no-arrow"
+              >
                 <span class="micon bi bi-house"></span
                 ><span class="mtext">My Model</span>
               </a>
             </li>
             <li>
-              <a href="../users/profile.html" class="dropdown-toggle no-arrow">
+              <a href="#" class="dropdown-toggle no-arrow">
+                <span class="micon bi bi-person"></span>
+                <span class="mtext">Profile</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-side-bar">
+      <div class="brand-logo" style="display: flex">
+        <div class="logo" style="margin: auto">LTM</div>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+          <i class="ion-close-round"></i>
+        </div>
+      </div>
+      <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+          <ul id="accordion-menu">
+            <li class="dropdown">
+              <a
+                href="../../pages/roboModel/roboModel.html"
+                class="dropdown-toggle no-arrow"
+              >
+                <span class="micon bi bi-house"></span
+                ><span class="mtext">My Model</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon bi bi-person"></span>
                 <span class="mtext">Profile</span>
               </a>
@@ -192,7 +197,7 @@
             <div class="row">
               <div class="col-md-12 col-sm-12">
                 <div class="title">
-					<h4>Detail Model</h4>
+                  <h4>Your profile</h4>
                 </div>
               </div>
             </div>
@@ -201,97 +206,86 @@
             <div class="product-detail-wrap mb-30">
               <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                  <div class="product-slider slider-arrow">
-                    <div class="product-slide">
-                      <img
-                        class="model-detail-image"
-                        src="https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg"
-                        alt=""
-                      />
+                  <div class="card-box pd-20">
+                    <form>
+                      <input id="userID" type="text" value="" hidden />
+                      <div class="form-group">
+                        <label for="userName">UserName</label>
+                        <input
+                          name="userName"
+                          class="form-control"
+                          type="text"
+                          disabled
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input
+                          name="firstName"
+                          class="form-control"
+                          value=""
+                          type="text"
+                          disabled
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input
+                          name="lastName"
+                          class="form-control"
+                          type="text"
+                          disabled
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                          name="email"
+                          class="form-control"
+                          value=""
+                          type="email"
+                          disabled
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="password">Password</label>
+                        <input
+                          name="password"
+                          class="form-control"
+                          value=""
+                          type="password"
+                          disabled
+                          required
+                        />
+                      </div>
+                      <div class="custom-control custom-checkbox mb-5">
+                        <input type="checkbox" class="custom-control-input" id="chkPW">
+                        <label class="custom-control-label" for="chkPW">Show password</label>
                     </div>
+                    </form>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12">
                   <div class="product-detail-desc pd-20 card-box height-100-p">
-                    <h4 class="mb-20 pt-20 model-detail-name">
-                      Gufram Bounce Black
-                    </h4>
-                    <p class="model-detail-typename">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
                     <div class="row">
                       <div class="col-md-6 col-6">
                         <button
-                          id="model_detail-edit"
+                          id="user_btn-edit"
                           class="btn btn-outline-warning btn-block"
                         >
                           Edit
                         </button>
+                        <button id="user_btn-save" class="btn btn-primary">
+                          Save
+                        </button>
+                        <button id="user_btn-cancel" class="btn btn btn-secondary">
+                            Cancel
+                        </button>
                       </div>
-                      <div class="col-md-6 col-6">
-                        <a
-                          href="#"
-                          class="btn btn-outline-danger btn-block"
-                          data-toggle="modal"
-                          data-target="#confirmation-modal"
-                          type="button"
-                        >
-                          Delete
-                        </a>
-                      </div>
-                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modal Confirm delete -->
-      <div
-        class="modal fade"
-        id="confirmation-modal"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500">
-                Are you sure you want to Delete?
-              </h4>
-              <div
-                class="padding-bottom-30 row"
-                style="max-width: 170px; margin: 0 auto"
-              >
-                <div class="col-6">
-                  <button
-                    type="button"
-                    class="btn btn-secondary border-radius-100 btn-block confirmation-btn"
-                    data-dismiss="modal"
-                  >
-                    <i class="fa fa-times"></i>
-                  </button>
-                  NO
-                </div>
-                <div class="col-6">
-                  <button
-                    type="button"
-                    class="btn btn-primary border-radius-100 btn-block confirmation-btn"
-                    data-dismiss="modal"
-                    id="model_detail-delete"
-                  >
-                    <i class="fa fa-check"></i>
-                  </button>
-                  YES
                 </div>
               </div>
             </div>
@@ -305,20 +299,15 @@
     <script src="../../vendors/scripts/core.js"></script>
     <script src="../../vendors/scripts/script.min.js"></script>
     <script src="../../vendors/scripts/process.js"></script>
+    <script type="module" src="./profile.js"></script>
     <!-- switchery js -->
-		<script src="../../vendors/scripts/switchery.min.js"></script>
-		<script src="../../vendors/scripts/layout-settings.js"></script>
-    <script type="module" src="./model-detail.js"></script>
+    <script src="../../vendors/scripts/switchery.min.js"></script>
+    <script src="../../vendors/scripts/layout-settings.js"></script>
     <script type="text/javascript">
-      var infoUser = localStorage.getItem("infoUser");
-      if (infoUser != null) {
-        var user = JSON.parse(infoUser);
-        $(".user-name").text(user.userName);
-      }
 
       function logOut() {
         localStorage.removeItem("accessToken");
-		localStorage.removeItem('infoUser');
+        localStorage.removeItem("infoUser");
         localStorage.setItem("isLogged", 0);
         window.location.href = "../../index.html";
       }
