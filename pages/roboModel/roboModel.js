@@ -11,6 +11,8 @@ var pageSize =PAGE_SIZE_DEFAULT;
 var pageNumber =PAGE_NUMBER_DEFAULT;
 var inputSearch = $("#input_search");
 var btnSearch = $("#btn-search");
+var selectSort = $("#selectSort");
+var selectOrderBy = $("#selectOrderBy");
 
 function getListModel(){ 
     $.ajax({
@@ -240,10 +242,26 @@ inputSearch.on('keyup', function (e) {
 
 btnSearch.on('click', searchModel);
 
-function searchModel(){
+function searchModel(valSort,valOrder){
     var value = inputSearch.val();
+    var query = `pageSize=${pageSize}&KeySearch=name&ValueSearch=${value}`;
+
+    if(valSort == 1){
+        query += `&SortBy=name`;
+    }
+    else if(valSort == 2){
+        query += `&SortBy=typename`;
+    }
+    else if(valSort == 3){
+        query += `&SortBy=createddate`;
+    }
+
+    if(valOrder == 1){
+        query += `&Desc=true`;
+    }
+
     $.ajax({
-        url: URL_SERVER_LOCAL +`/api/RoboModel/GetListModelByUser?pageSize=${pageSize}&KeySearch=name&ValueSearch=${value}`,
+        url: URL_SERVER_LOCAL +`/api/RoboModel/GetListModelByUser?${query}`,
         method: "GET",
         headers: {
             "Authorization": "Bearer "+ accessToken
@@ -263,4 +281,16 @@ function searchModel(){
         }
 
     });
+}
+
+selectSort.on("change", sortList);
+
+selectOrderBy.on("change", sortList)
+
+function sortList(){
+    var valSort = selectSort.val().trim();
+    var valOrder = selectOrderBy.val();
+    if(valSort != -1){
+        searchModel(valSort,valOrder)
+    }
 }
