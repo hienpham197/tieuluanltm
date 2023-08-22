@@ -1,5 +1,5 @@
 
-const URL_SERVER_LOCAL = "https://api.tipslife.site/";
+const URL_SERVER_LOCAL = "https://api2.tipslife.site/";
 
 
 //Hande submit form login
@@ -37,7 +37,7 @@ $('#loginForm').submit(function (event) {
                 handleRedirect(response);
 
             } else if (xhr.status === 401) {
-                window.location.href = '/tieuluanltm/';
+                window.location.href = 'tieuluanltm/';
             } else {
                 $('#loginStatus').text('Login failed. Please check your credentials.');
                 console.log('Login failed. Status code:', xhr.status);

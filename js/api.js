@@ -1,3 +1,4 @@
+const URL_SERVER_LOCAL = "https://api2.tipslife.site/";
 $(document).ready(function () {
     var accessToken = localStorage.getItem('accessToken');
     var currentPage = 0;
@@ -59,7 +60,7 @@ $(document).ready(function () {
 
     function deleteUser(userId) {
         $.ajax({
-            url: "https://api2.tipslife.site/api/User/Delete/" + userId,
+            url: URL_SERVER_LOCAL + 'api/User/Delete/' + userId,
             method: "DELETE",
             headers: {
                 "Authorization": "Bearer " + accessToken
@@ -97,36 +98,48 @@ $(document).ready(function () {
     }
 
     $(document).on("click", ".edit-button", function () {
-        var userId = $(this).data("userId");
+        var userId = $(this).data("userID");
         var row = $(this).closest("tr");
-
-        var userNameInput = $("<input>").val(row.find("td:eq(0)").text());
-        var firstNameInput = $("<input>").val(row.find("td:eq(1)").text());
-        var lastNameInput = $("<input>").val(row.find("td:eq(2)").text());
-        var emailInput = $("<input>").val(row.find("td:eq(3)").text());
-
+    
+        var userNameInput = $("<input>").val(row.find("td:eq(0)").text()).addClass("user-update-input");
+        var firstNameInput = $("<input>").val(row.find("td:eq(1)").text()).addClass("user-update-input");
+        var lastNameInput = $("<input>").val(row.find("td:eq(2)").text()).addClass("user-update-input");
+        var emailInput = $("<input>").val(row.find("td:eq(3)").text()).addClass("user-update-input");
+        var passwordInput = $("<input>").val(row.find("td:eq(4)").text()).addClass("user-update-input");
+    
         row.find("td:eq(0)").html(userNameInput);
         row.find("td:eq(1)").html(firstNameInput);
         row.find("td:eq(2)").html(lastNameInput);
         row.find("td:eq(3)").html(emailInput);
-
+        row.find("td:eq(4)").html(passwordInput);
+    
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-button fs-5");
-        row.find("td:eq(4)").html(saveButton);
-
+        row.find("td:eq(5)").html(saveButton);
+    
         var cancelButton = $("<button>").text("Cancel");
         cancelButton.addClass("btn btn-secondary cancel-button fs-5");
-        row.find("td:eq(5)").html(cancelButton);
+        row.find("td:eq(6)").html(cancelButton);
     });
+    
 
     $(document).on("click", ".save-button", function () {
-        var userId = $(this).closest("tr").find(".edit-button").data("user-id");
-        var userName = $(this).closest("tr").find("input:eq(0)").val();
-        var firstName = $(this).closest("tr").find("input:eq(1)").val();
-        var lastName = $(this).closest("tr").find("input:eq(2)").val();
-        var email = $(this).closest("tr").find("input:eq(3)").val();
+        var userId = $(this).closest("tr").data("id");
+        var row = $(this).closest("tr");
+        var userName = row.find(".user-update-input:eq(0)").val();
+        var firstName = row.find(".user-update-input:eq(1)").val();
+        var lastName = row.find(".user-update-input:eq(2)").val();
+        var email = row.find(".user-update-input:eq(3)").val();
+        var password = row.find(".user-update-input:eq(4)").val();
 
-        var userData = {
+        console.log("id", userId);
+        console.log("uname", userName);
+        console.log("fname", firstName);
+        console.log("lname", lastName);
+        console.log("email", email);
+        console.log("password", password);
+
+        var userUpdate = {
             userID: userId,
             userName: userName,
             firstName: firstName,
@@ -134,10 +147,12 @@ $(document).ready(function () {
             email: email
         };
 
+        console.log(JSON.stringify(userUpdate));
+
         $.ajax({
-            url: "https://api2.tipslife.site/api/User/Update/" + userId,
+            url: URL_SERVER_LOCAL + 'api/User/Update/',
             method: "PUT",
-            data: JSON.stringify(userData),
+            data: JSON.stringify(userUpdate),
             contentType: "application/json",
             headers: {
                 "Authorization": "Bearer " + accessToken
@@ -150,6 +165,8 @@ $(document).ready(function () {
             }
         });
     });
+    
+    
 
     $(document).on("click", ".cancel-button", function () {
         fetchDataAndUpdateTable();
@@ -201,7 +218,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "https://api2.tipslife.site/api/User/Register",
+            url: URL_SERVER_LOCAL + 'api/User/Register',
             method: "POST",
             data: JSON.stringify(newUser),
             contentType: "application/json",
@@ -225,8 +242,8 @@ $(document).ready(function () {
         var userTableBody = $("#user-table-body");
         userTableBody.empty();
         $.each(users, function (index, user) {
-            var row = $("<tr>");
-            row.append($("<th scope='row'>").text(user.userID));
+            var row = $("<tr data-id='" + user.userID + "'>");
+            row.append($("<th scope='row'>").text(index+1));
             row.append($("<td>").text(user.userName));
             row.append($("<td>").text(user.firstName));
             row.append($("<td>").text(user.lastName));
@@ -313,12 +330,11 @@ $(document).ready(function () {
     }
 
     function fetchDataAndUpdateTable() {
-        var apiUrl = "https://api2.tipslife.site/api/User/GetListUser";
         var pageNumber = currentPage;
         var pageSize = itemsPerPage;
 
         $.ajax({
-            url: apiUrl + "?PageSize=" + pageSize + "&PageNumber=" + pageNumber,
+            url: URL_SERVER_LOCAL + 'api/User/GetListUser' + "?PageSize=" + pageSize + "&PageNumber=" + pageNumber,
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + accessToken
