@@ -1,3 +1,4 @@
+const URL_SERVER_LOCAL = "https://api2.tipslife.site/";
 $(document).ready(function () {
     var accessToken = localStorage.getItem('accessToken');
     var currentPage = 0;
@@ -60,7 +61,7 @@ $(document).ready(function () {
 
     function deleteProduct(productId) {
         $.ajax({
-            url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
+            url: URL_SERVER_LOCAL + `api/RoboModel/Delete/` + productId,
             method: "DELETE",
             headers: {
                 "Authorization": "Bearer " + accessToken
@@ -97,90 +98,14 @@ $(document).ready(function () {
             }
         });
     }
-
-    // $(document).on("click", ".delete-button", function () {
-    //     var productId = $(this).data("productId");
-    //     $.confirm({
-    //         title: 'Delete product?',
-    //         content: 'Are you sure you want to delete this product?',
-    //         buttons: {
-    //             deleteProduct: {
-    //                 text: 'Yes',
-    //                 btnClass: 'btn btn-danger',
-    //                 action: function () {
-    //                     deleteProduct(productId);
-    //                 }
-    //             },
-    //             cancel: function () {
-    //                 $.alert('Action is canceled');
-    //             }
-    //         }
-    //     });
-    // });
-    
-    // function deleteProduct(productId) {
-    //     $.ajax({
-    //         url: "https://api2.tipslife.site/api/RoboModel/Delete/" + productId,
-    //         method: "DELETE",
-    //         headers: {
-    //             "Authorization": "Bearer " + accessToken
-    //         },
-    //         success: function () {
-    //             updateisDelete(productId);
-    //         },
-    //         error: function (jqXHR, textStatus, errorThrown) {
-    //             console.error("Delete request failed:", textStatus, errorThrown);
-    //         }
-    //     });
-    // }
-
-    function updateisDelete(productId) {
-        var updatedData = {
-            isDelete: true
-        };
-    
-        $.ajax({
-            url: "https://api2.tipslife.site/api/Product/Update/" + productId,
-            method: "PUT",
-            headers: {
-                "Authorization": "Bearer " + accessToken,
-                "Content-Type": "application/json"
-            },
-            data: JSON.stringify(updatedData),
-            success: function () {
-                $.alert({
-                    title: 'Product Deleted',
-                    content: 'The product has been successfully marked as deleted.',
-                    buttons: {
-                        ok: {
-                            text: 'OK',
-                            btnClass: 'btn btn-primary',
-                            action: function () {
-                                fetchDataAndUpdateTable();
-                            }
-                        }
-                    }
-                });
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Update request failed:", textStatus, errorThrown);
-            }
-        });
-    }
     
     $(document).on("click", ".edit-button", function () {
-        var productId = $(this).data("product-id");
         var row = $(this).closest("tr");
+        var nameInput = $("<input>").val(row.find("td:eq(2)").text()).addClass("model-update-input");
+        var typeNameInput = $("<input>").val(row.find("td:eq(3)").text()).addClass("model-update-input");
 
-        var modelidInput = $("<input>").val(row.find("td:eq(0)").text()); 
-        var imageInput = $("<input>").val(row.find("td:eq(1)").text());
-        var nameInput = $("<input>").val(row.find("td:eq(2)").text());
-        var typenameInput = $("<input>").val(row.find("td:eq(3)").text());
-
-        row.find("td:eq(0)").html(modelidInput);
-        row.find("td:eq(1)").html(imageInput);
         row.find("td:eq(2)").html(nameInput);
-        row.find("td:eq(3)").html(typenameInput);
+        row.find("td:eq(3)").html(typeNameInput);
 
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-button");
@@ -192,21 +117,21 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".save-button", function () {
-        var modelID = $(this).closest("tr").find(".edit-button").data("product-id");
-        var image = $(this).closest("tr").find("input:eq(1)").val();
-        var name = $(this).closest("tr").find("input:eq(2)").val();
-        var typename = $(this).closest("tr").find("input:eq(3)").val();
+        var modelID = $(this).closest("tr").data("id");
+        var row = $(this).closest("tr");
+        var modelName = row.find(".model-update-input:eq(0)").val(); 
+        var typeName = row.find(".model-update-input:eq(1)").val();
         
-
         var productData = {
-            modelID: modelID,
-            image: image,
-            name: name,
-            typename: typename,
+            ModelID: modelID,
+            Name: modelName,
+            TypeName: typeName,
         };
 
+        console.log(JSON.stringify(productData));
+
         $.ajax({
-            url: "https://api2.tipslife.site/api/RoboModel/Update/" + modelID,
+            url: URL_SERVER_LOCAL + 'api/RoboModel/Update/',
             method: "PUT",
             data: JSON.stringify(productData),
             contentType: "application/json",
@@ -228,12 +153,10 @@ $(document).ready(function () {
 
     $("#add-product-button").on("click", function () {
         var newProduct = {
-            // userID: null,
             name: "",
             imgPath: "",
             typeName: "",
             userID: "",
-            //createdDate: ""
         };
 
         var row = $("<tr>");
@@ -242,7 +165,6 @@ $(document).ready(function () {
         row.append($("<td>").append($("<input>").val(newProduct.name).addClass("new-product-input")));
         row.append($("<td>").append($("<input>").val(newProduct.typeName).addClass("new-product-input")));
         row.append($("<td>").append($("<input>").val(newProduct.userID).addClass("new-product-input")));
-        //row.append($("<td>").append($("<input>").val(newProduct.createdDate).addClass("new-product-input")));
 
         var saveButton = $("<button>").text("Save");
         saveButton.addClass("btn btn-success save-new-button");
@@ -296,8 +218,8 @@ $(document).ready(function () {
         productTableBody.empty();
     
         $.each(products, function (index, product) {
-            var row = $("<tr>");
-            row.append($("<td scope='row'>").text(product.modelID));
+            var row = $("<tr data-id='" + product.modelID + "'>");
+            row.append($("<td scope='row'>").text(index + 1));
     
             if(product.imgPath!=null)
             {

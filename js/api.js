@@ -98,9 +98,8 @@ $(document).ready(function () {
     }
 
     $(document).on("click", ".edit-button", function () {
-        var userId = $(this).data("userID");
         var row = $(this).closest("tr");
-    
+        
         var userNameInput = $("<input>").val(row.find("td:eq(0)").text()).addClass("user-update-input");
         var firstNameInput = $("<input>").val(row.find("td:eq(1)").text()).addClass("user-update-input");
         var lastNameInput = $("<input>").val(row.find("td:eq(2)").text()).addClass("user-update-input");
@@ -121,8 +120,7 @@ $(document).ready(function () {
         cancelButton.addClass("btn btn-secondary cancel-button fs-5");
         row.find("td:eq(6)").html(cancelButton);
     });
-    
-
+   
     $(document).on("click", ".save-button", function () {
         var userId = $(this).closest("tr").data("id");
         var row = $(this).closest("tr");
@@ -132,19 +130,13 @@ $(document).ready(function () {
         var email = row.find(".user-update-input:eq(3)").val();
         var password = row.find(".user-update-input:eq(4)").val();
 
-        console.log("id", userId);
-        console.log("uname", userName);
-        console.log("fname", firstName);
-        console.log("lname", lastName);
-        console.log("email", email);
-        console.log("password", password);
-
         var userUpdate = {
             userID: userId,
             userName: userName,
             firstName: firstName,
             lastName: lastName,
-            email: email
+            email: email,
+            password: password
         };
 
         console.log(JSON.stringify(userUpdate));
@@ -165,9 +157,7 @@ $(document).ready(function () {
             }
         });
     });
-    
-    
-
+   
     $(document).on("click", ".cancel-button", function () {
         fetchDataAndUpdateTable();
     });
@@ -243,7 +233,7 @@ $(document).ready(function () {
         userTableBody.empty();
         $.each(users, function (index, user) {
             var row = $("<tr data-id='" + user.userID + "'>");
-            row.append($("<th scope='row'>").text(index+1));
+            row.append($("<th scope='row'>").text(index + 1));
             row.append($("<td>").text(user.userName));
             row.append($("<td>").text(user.firstName));
             row.append($("<td>").text(user.lastName));
@@ -306,6 +296,7 @@ $(document).ready(function () {
 
         paginationContainer.append(nextButton);
     }
+
     $("#next-page").on("click", function () {
         currentPage++;
         updatePageState();
@@ -341,7 +332,6 @@ $(document).ready(function () {
             },
             success: function (response) {
                 var users = response;
-                console.log("lst", users);
                 displayUsersOnPage(users);
                 updatePaginationButtons(response.totalPages);
             },
@@ -351,5 +341,6 @@ $(document).ready(function () {
             }
         });
     }
+
     fetchDataAndUpdateTable();
 });
