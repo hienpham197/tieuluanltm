@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+				initial-scale=1.0"
+    />
+    <title>Tieu luan lap trinh mang</title>
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/aos.css" />
+    <link rel="stylesheet" href="../../css/user.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header id="header" class="header">
+      <div class="logosec">
+        <div class="logo">LTM</div>
+        <img
+          src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+          class="icn menuicn"
+          id="menuicn"
+          alt="menu-icon"
+        />
+      </div>
+      <div class="message">
+        <div id="uName"></div>
+      </div>
+    </header>
+    <div class="main-container">
+      <div class="navcontainer">
+        <nav class="nav">
+          <div class="nav-upper-options">
+            <div class="nav-option option1">
+              <img
+                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+                class="nav-img"
+                alt="dashboard"
+              />
+              <a href="../users/user.html">
+                <h3>User</h3>
+              </a>
+            </div>
+
+            <div class="option2 nav-option">
+              <img
+                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+                class="nav-img"
+                alt="articles"
+              />
+              <a href="../products/product.html">
+                <h3>Products</h3>
+              </a>
+            </div>
+
+            <div class="nav-option option3">
+              <img
+                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
+                class="nav-img"
+                alt="report"
+              />
+              <a href="../report/highchart.html">
+                <h3>Report</h3>
+              </a>
+            </div>
+
+            <div class="nav-option logout" id="logoutButton">
+              <img
+                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                class="nav-img"
+                alt="logout"
+              />
+              <h3>Logout</h3>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="main">
+        <div class="report-container">
+          <div class="bg-white pd-20 card-box mb-30">
+            <div id="chart1"></div>
+          </div>
+        </div>
+        <div class="report-container">
+            <div class="bg-white pd-20 card-box mb-30">
+              <div id="chart2"></div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <script src="../../js/jquery-3.7.0.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: ["Roboto:300,400,500,600,700,900"],
+        },
+      });
+    </script>
+    <script>
+      var isLogged = localStorage.getItem("isLogged");
+      var isAdmin = localStorage.getItem("isAdmin");
+      if (isLogged == 1) {
+          if (isAdmin == 0) {
+              window.location.href = '../roboModel/roboModel.html';
+          }
+      }
+    </script>
+    <script src="../../vendors/scripts/highstock.js"></script>
+    <script src="../../vendors/scripts/series-label.js"></script>
+    <script src="../../vendors/scripts/exporting.js"></script>
+    <script src="../../vendors/scripts/export-data.js"></script>
+    <script src="../../vendors/scripts/accessibility.js"></script>
+    <script type="module" src="./hightchart.js"></script>
+  </body>
+</html>
