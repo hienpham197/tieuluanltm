@@ -191,7 +191,7 @@ window.Pagination = function (totalPages,page){
 function renderModel(response){
     if(response.length > 0){
         var html= response.map((data) => {
-            var imgSrc = URL_CLIENT_LOCAL + "/img/image-not-found.png";
+            var imgSrc = "/img/image-not-found.png";
             if(data.imgPath!==null){
                 imgSrc = data.imgPath;
             }
