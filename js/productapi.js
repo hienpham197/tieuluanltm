@@ -122,19 +122,17 @@ $(document).ready(function () {
         var modelName = row.find(".model-update-input:eq(0)").val(); 
         var typeName = row.find(".model-update-input:eq(1)").val();
         
-        var productUpdate = {
-            modelID: modelID,
-            name: modelName,
-            typeName: typeName,
-        };
-
-        console.log(JSON.stringify(productUpdate));
-
+        var formData = new FormData();
+        formData.append("modelID", modelID);
+        formData.append("name", modelName);
+        formData.append("typeName", typeName);
+    
         $.ajax({
             url: URL_SERVER_LOCAL + 'api/RoboModel/Update/',
             method: "PUT",
-            data: JSON.stringify(productUpdate),
-            contentType: "application/json",
+            data: formData,
+            processData: false, 
+            contentType: false,
             headers: {
                 "Authorization": "Bearer " + accessToken
             },
@@ -146,6 +144,7 @@ $(document).ready(function () {
             }
         });
     });
+    
     
     $(document).on("click", ".cancel-button", function () {
         fetchDataAndUpdateTable();
