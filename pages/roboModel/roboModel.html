@@ -243,12 +243,14 @@
       getInfoUser();
     </script>
     <script type="text/javascript">
-      var infoUser = localStorage.getItem("infoUser");
-      if (infoUser != null) {
-        var user = JSON.parse(infoUser);
-        $(".user-name").text(user.userName);
-      }
-
+      setTimeout(() =>{
+        var infoUser = localStorage.getItem("infoUser");
+        if (infoUser != null) {
+          var user = JSON.parse(infoUser);
+          $(".user-name").text(user.userName);
+        }
+      },1000);
+     
       function logOut() {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("infoUser");

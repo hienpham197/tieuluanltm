@@ -39,7 +39,7 @@ function loadDataUser() {
 function resolveData(data, callback) {
   var groupedData = data.reduce(function (acc, obj) {
     var date = new Date(obj.createdDate);
-    date.setHours(0, 0, 0, 0); // Reset time to midnight
+    date.setHours(23, 59, 59, 0); // Reset time to midnight
     var timestamp = date.getTime(); // Convert to milliseconds
     if (!acc[timestamp]) {
       acc[timestamp] = { timestamp: timestamp, count: 0 };
@@ -237,7 +237,7 @@ function setUserChartData(dataUser) {
   
         series: [
           {
-            name: "Uploaded",
+            name: "Register",
             data: data1,
             marker: {
               enabled: null, // auto
