@@ -10,24 +10,42 @@
 ## Front End:
 - HTML5
 - CSS3
+- Bootstrap Template
 - Javascript(Jquery)
 ## Back End:
 - C#
 - ASP.NET core 3.1
-## Features
+# Features
+## User page:
+- Dark/Light mode.
+- Add/Edit/Delete model.
+- Edit User info.
+## Dashboard
 ### Users:
 - Signup
 - Login
 - Create.
 - Edit/Update
 - Delete
-### Models
+- Search
+- Sort ASC/DESC
+### Models:
 - Create.
 - Edit/Update
 - Delete
 - Upload
-## Development
+- Search
+- Sort ASC/DESC
+### Reports
+- Info report with Charts.
+- Register Growth chart.
+- Upload Growth chart.
+- Analyze for Day/Month/Year.
+## Deployment
 ### Front End:
-
+- https://hienpham197.github.io/tieuluanltm
 ### API:
+## Main API
+- https://api.tipslife.site/swagger/index.html
+## Secondary API
 - https://api2.tipslife.site/swagger/index.html
