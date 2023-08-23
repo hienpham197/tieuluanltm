@@ -122,18 +122,18 @@ $(document).ready(function () {
         var modelName = row.find(".model-update-input:eq(0)").val(); 
         var typeName = row.find(".model-update-input:eq(1)").val();
         
-        var productData = {
-            ModelID: modelID,
-            Name: modelName,
-            TypeName: typeName,
+        var productUpdate = {
+            modelID: modelID,
+            name: modelName,
+            typeName: typeName,
         };
 
-        console.log(JSON.stringify(productData));
+        console.log(JSON.stringify(productUpdate));
 
         $.ajax({
             url: URL_SERVER_LOCAL + 'api/RoboModel/Update/',
             method: "PUT",
-            data: JSON.stringify(productData),
+            data: JSON.stringify(productUpdate),
             contentType: "application/json",
             headers: {
                 "Authorization": "Bearer " + accessToken
@@ -311,7 +311,7 @@ $(document).ready(function () {
     }
     
     function fetchDataAndUpdateTable() {
-        var apiUrl = "https://api2.tipslife.site/api/RoboModel/GetListModel";        
+        var apiUrl = URL_SERVER_LOCAL + 'api/RoboModel/GetListModel';        
         var pageNumber = currentPage;
         var pageSize = itemsPerPage;
 
@@ -323,6 +323,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 var products = response.data;
+                console.log("pr", products);
                 displayProductsOnPage(products);
                 updatePaginationButtons(response.totalPages);
             },
