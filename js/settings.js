@@ -31,6 +31,17 @@ $(document).ready(function () {
     $('#header').toggleClass('dark-mode', !isDarkMode);
   }
   $('#toggleMode').on('click', toggleMode);
+
+  const passwordField = $('#password');
+  const showPasswordCheckbox = $('#showPasswordCheckbox');
+
+  showPasswordCheckbox.change(function () {
+      if (showPasswordCheckbox.is(':checked')) {
+          passwordField.attr('type', 'text');
+      } else {
+          passwordField.attr('type', 'password');
+      }
+  });
 });
 
 

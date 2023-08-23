@@ -31,9 +31,13 @@
                 <input type="text" id="email" name="email" placeholder="Email" required />
                 <input type="password" id="password" name="password" placeholder="Password" required />
                 <div id="loginStatus"></div>
-                <a href="#">Forgot your password?</a>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="showPasswordCheckbox">
+                    <p class="form-check-label plr10 pt5" for="showPasswordCheckbox">Show/Hide Password</p>
+                </div>
+                
                 <input class="btnSubmit btnshine" type="submit" value="Login">
-            </form>
+            </form>            
         </div>
         <div class="overlay-container">
             <div class="overlay">
