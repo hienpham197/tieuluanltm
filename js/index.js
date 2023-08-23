@@ -76,7 +76,7 @@ $("#regForm").submit(function (event) {
     const formDataString = JSON.stringify(formData);
     $.ajax({
         type: "POST",
-        url: URL_SERVER_LOCAL + "/api/User/Register",
+        url: URL_SERVER_LOCAL + 'api/User/Register',
         data: formDataString,
         contentType: "application/json",
         success: function (response) {
