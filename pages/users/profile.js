@@ -91,7 +91,6 @@ function updateProfile(){
 chkPW.click(()=>showPassword());
 
 function showPassword(){
-    console.log('s');
     if (inputPW.attr("type") === "password") {
         inputPW.attr("type","text")
     } else {

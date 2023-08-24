@@ -1,4 +1,7 @@
 var translations  = {
+    "menu_language":"Ngôn ngữ",
+    "menu_en":"Tiếng Anh",
+    "menu_vn":"Tiếng Việt",
     "menu_user": "Danh sách người đăng ký",
     "menu_product": "Danh sách sản phẩm",
     "menu_report": "Báo cáo",
