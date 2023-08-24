@@ -83,6 +83,13 @@
 			</div>
 			<div class="header-right">
 				<div class="dashboard-setting user-notification">
+					<span class="menu_lang">Language: </span>
+					<select id="selectLang">
+					  <option selected value="1">English</option>
+					  <option value="2">Vietnamese</option>
+					</select>
+				  </div>
+				<div class="dashboard-setting user-notification">
 					<div class="dropdown">
 						<input
 						type="checkbox"
@@ -108,10 +115,17 @@
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 						>
 							<a class="dropdown-item" href="../users/profile.html"
-								><i class="dw dw-user1"></i> Profile</a
+								><i class="dw dw-user1"></i> <span
+								class="translate"
+								data-translation-key="menu_profile"
+								>Profile</span
+							  ></a
 							>
 							<a class="dropdown-item" onclick="logOut()" href="#"
-								><i class="dw dw-logout"></i> Log Out</a
+								><i class="dw dw-logout"></i> <span
+								class="translate"
+								data-translation-key="menu_logout"
+								>LogOut</span></a
 							>
 						</div>
 					</div>
@@ -132,13 +146,21 @@
 						<li class="dropdown">
 						  <a href="../../pages/roboModel/roboModel.html" class="dropdown-toggle no-arrow">
 							<span class="micon bi bi-house"></span
-							><span class="mtext">My Model</span>
+							><span
+							class="mtext translate"
+							data-translation-key="menu_my_model"
+							>My Model</span
+						  >
 						  </a>
 						</li>
 						<li>
 						  <a href="../users/profile.html" class="dropdown-toggle no-arrow">
 							<span class="micon bi bi-person"></span>
-							<span class="mtext">Profile</span>
+							<span
+							class="mtext translate"
+							data-translation-key="menu_profile"
+							>Profile</span
+							>
 						  </a>
 						</li>
 					</ul>
@@ -154,7 +176,7 @@
 						<div class="row">
 							<div class="col-md-12 col-sm-12">
 								<div class="title">
-									<h4>Edit Model</h4>
+									<h4 class="translate" data-translation-key="my_model_edit">Edit Model</h4>
 								</div>
 							</div>
 						</div>
@@ -164,7 +186,7 @@
 						<form id="formEditModel" class="needs-validation" novalidate>
                             <input name="modelID" type="text" class="model_edit-modelID" hidden>
 							<div class="form-group row">
-								<label class="col-sm-12 col-md-2 col-form-label">Name model</label>
+								<label class="col-sm-12 col-md-2 col-form-label translate" data-translation-key="my_model_name">Name model</label>
 								<div class="col-sm-12 col-md-10">
 									<input
                                         name="name"
@@ -173,14 +195,14 @@
 										placeholder="Model xxx"
                                         required
 									/>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback translate" data-translation-key="my_model_required">
                                         Please enter value
                                     </div>
 								</div>
                                
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-12 col-md-2 col-form-label">Type Name</label>
+								<label class="col-sm-12 col-md-2 col-form-label translate" data-translation-key="my_model_type">Type Name</label>
 								<div class="col-sm-12 col-md-10">
 									<input
                                         name="typeName"
@@ -190,29 +212,29 @@
 										required
                                         
 									/>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback translate" data-translation-key="my_model_required">
                                         Please enter value
                                     </div>
 								</div>
 							</div>
                             <div class="form-group row">
-								<label class="col-sm-12 col-md-2 col-form-label">Image</label>
+								<label class="col-sm-12 col-md-2 col-form-label translate" data-translation-key="my_model_img">Image</label>
 								<div class="col-sm-12 col-md-10 border">
 									<img  class="model_edit-image" src="../../img/image-not-found.png"/>
 								</div>
 							</div>
                             <div class="form-group row">
-								<label class="col-sm-12 col-md-2 col-form-label">Upload new image</label>
+								<label class="col-sm-12 col-md-2 col-form-label translate" data-translation-key="my_model_new_img">Upload new image</label>
 								<div class="dropzone" action="#" id="my-awesome-dropzone">
                                     <div class="fallback">
                                         <input type="file" name="file"  required/>
                                     </div>
                                 </div>
-                                <div class="invalid-feedback invalid-file" >
+                                <div class="invalid-feedback invalid-file translate" data-translation-key="my_model_required_img" >
                                     Please upload a image
                                 </div>
 							</div>
-                            <button type="button" class="btn btn-primary mt-2" id="model_btn-update" >Update</button>
+                            <button type="button" class="btn btn-primary mt-2 translate" data-translation-key="my_model_update" id="model_btn-update" >Update</button>
                         </form>				    
 					</div>
 				</div>
@@ -229,7 +251,7 @@
         <script type="module" src="./model-edit.js"></script>
 		<script type="text/javascript">
 
-            var URL_SERVER_LOCAL  = "https://api.tipslife.site"
+            var URL_SERVER_LOCAL  = "https://localhost:44303"
             var accessToken = localStorage.getItem("accessToken");
 
             Dropzone.autoDiscover = false;

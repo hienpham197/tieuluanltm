@@ -7,3 +7,6 @@ body,html{-webkit-font-smoothing:antialiased;width:100%;height:100%}html{-webkit
 .header-dark .logo {
     color: #fff;
 }
+.header-dark .menu_lang {
+    color: #fff;
+},

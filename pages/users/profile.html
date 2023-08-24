@@ -81,6 +81,13 @@
       </div>
       <div class="header-right">
         <div class="dashboard-setting user-notification">
+          <span class="menu_lang">Language: </span>
+          <select id="selectLang">
+            <option selected value="1">English</option>
+            <option value="2">Vietnamese</option>
+          </select>
+        </div>
+        <div class="dashboard-setting user-notification">
           <div class="dropdown">
             <input
             type="checkbox"
@@ -106,10 +113,16 @@
               class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
             >
               <a class="dropdown-item" href="profile.html"
-                ><i class="dw dw-user1"></i> Profile</a
+                ><i class="dw dw-user1"></i> <span
+                class="translate"
+                data-translation-key="menu_profile"
+              ></span</a
               >
               <a class="dropdown-item" onclick="logOut()" href="#"
-                ><i class="dw dw-logout"></i> Log Out</a
+                ><i class="dw dw-logout"></i> <span
+                class="translate"
+                data-translation-key="menu_logout"
+              ></span></a
               >
             </div>
           </div>
@@ -144,13 +157,21 @@
                 class="dropdown-toggle no-arrow"
               >
                 <span class="micon bi bi-house"></span
-                ><span class="mtext">My Model</span>
+                ><span
+                class="mtext translate"
+                data-translation-key="menu_my_model"
+                >My Model</span
+              >
               </a>
             </li>
             <li>
               <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon bi bi-person"></span>
-                <span class="mtext">Profile</span>
+                <span
+                  class="mtext translate"
+                  data-translation-key="menu_profile"
+                  >Profile</span
+                >
               </a>
             </li>
           </ul>
@@ -174,13 +195,21 @@
                 class="dropdown-toggle no-arrow"
               >
                 <span class="micon bi bi-house"></span
-                ><span class="mtext">My Model</span>
+                ><span
+                class="mtext translate"
+                data-translation-key="menu_my_model"
+                >My Model</span
+              >
               </a>
             </li>
             <li>
               <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon bi bi-person"></span>
-                <span class="mtext">Profile</span>
+                <span
+                  class="mtext translate"
+                  data-translation-key="menu_profile"
+                  >Profile</span
+                >
               </a>
             </li>
           </ul>
@@ -197,7 +226,8 @@
             <div class="row">
               <div class="col-md-12 col-sm-12">
                 <div class="title">
-                  <h4>Your profile</h4>
+                  <h4 class="translate"
+                  data-translation-key="profile_header_title">Your profile</h4>
                 </div>
               </div>
             </div>
@@ -210,7 +240,10 @@
                     <form>
                       <input id="userID" type="text" value="" hidden />
                       <div class="form-group">
-                        <label for="userName">UserName</label>
+                        <label for="userName">
+                          <span class="translate"
+                          data-translation-key="profile_uname"></span>
+                        </label>
                         <input
                           name="userName"
                           class="form-control"
@@ -220,7 +253,8 @@
                         />
                       </div>
                       <div class="form-group">
-                        <label for="firstName">First Name</label>
+                        <label for="firstName"><span class="translate"
+                        data-translation-key="profile_fname"></span></label>
                         <input
                           name="firstName"
                           class="form-control"
@@ -231,7 +265,8 @@
                         />
                       </div>
                       <div class="form-group">
-                        <label for="lastName">Last Name</label>
+                        <label for="lastName"><span class="translate"
+                          data-translation-key="profile_lname"></span></label>
                         <input
                           name="lastName"
                           class="form-control"
@@ -241,7 +276,8 @@
                         />
                       </div>
                       <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email"><span class="translate"
+                          data-translation-key="profile_email"></span></label>
                         <input
                           name="email"
                           class="form-control"
@@ -251,7 +287,8 @@
                         />
                       </div>
                       <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password"><span class="translate"
+                        data-translation-key="profile_pw"></span></label>
                         <input
                           name="password"
                           class="form-control"
@@ -263,7 +300,8 @@
                       </div>
                       <div class="custom-control custom-checkbox mb-5">
                         <input type="checkbox" class="custom-control-input" id="chkPW">
-                        <label class="custom-control-label" for="chkPW">Show password</label>
+                        <label class="custom-control-label translate"
+                        data-translation-key="profile_show_pw" for="chkPW">Show password</label>
                     </div>
                     </form>
                   </div>
@@ -274,14 +312,17 @@
                       <div class="col-md-6 col-6">
                         <button
                           id="user_btn-edit"
-                          class="btn btn-outline-warning btn-block"
+                          class="btn btn-outline-warning btn-block translate"
+                          data-translation-key="profile_edit"
                         >
                           Edit
                         </button>
-                        <button id="user_btn-save" class="btn btn-primary">
+                        <button id="user_btn-save" class="btn btn-primary translate"
+                        data-translation-key="profile_save">
                           Save
                         </button>
-                        <button id="user_btn-cancel" class="btn btn btn-secondary">
+                        <button id="user_btn-cancel" class="btn btn btn-secondary translate"
+                        data-translation-key="profile_cancel">
                             Cancel
                         </button>
                       </div>
