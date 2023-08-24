@@ -4,7 +4,7 @@
     <!-- Basic Page Info -->
     <meta charset="utf-8" />
     <title>Tieu Luan Lap Trinh Mang</title>
-    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico" />
     <!-- Site favicon -->
     <link
       rel="apple-touch-icon"
@@ -53,9 +53,9 @@
     />
     <!-- switchery css -->
     <link
-    rel="stylesheet"
-    type="text/css"
-    href="../../vendors/styles/switchery.min.css"
+      rel="stylesheet"
+      type="text/css"
+      href="../../vendors/styles/switchery.min.css"
     />
   </head>
   <body>
@@ -82,12 +82,15 @@
       </div>
       <div class="header-right">
         <div class="dashboard-setting user-notification">
+          <span class="menu_lang">Language: </span>
+          <select id="selectLang">
+            <option selected value="1">English</option>
+            <option value="2">Vietnamese</option>
+          </select>
+        </div>
+        <div class="dashboard-setting user-notification">
           <div class="dropdown">
-            <input
-						type="checkbox"
-						class="switch-btn"
-						id="chk_lightDark"
-					  />
+            <input type="checkbox" class="switch-btn" id="chk_lightDark" />
           </div>
         </div>
         <div class="user-info-dropdown">
@@ -107,11 +110,20 @@
               class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
             >
               <a class="dropdown-item" href="../users/profile.html"
-                ><i class="dw dw-user1"></i> Profile</a
+                ><i class="dw dw-user1"></i>
+                <span
+                  class="translate"
+                  data-translation-key="menu_profile"
+                ></span
+                >Profile</a
               >
               <a class="dropdown-item" onclick="logOut()" href="#"
-                ><i class="dw dw-logout"></i> Log Out</a
-              >
+                ><i class="dw dw-logout"></i>
+                <span
+                  class="translate"
+                  data-translation-key="menu_logout"
+                ></span
+              ></a>
             </div>
           </div>
         </div>
@@ -138,36 +150,12 @@
       </div>
       <div class="menu-block customscroll">
         <div class="sidebar-menu">
-			<ul id="accordion-menu">
-				<li class="dropdown">
-				  <a href="../../pages/roboModel/roboModel.html" class="dropdown-toggle no-arrow">
-					<span class="micon bi bi-house"></span
-					><span class="mtext">My Model</span>
-				  </a>
-				</li>
-				<li>
-				  <a href="../users/profile.html" class="dropdown-toggle no-arrow">
-					<span class="micon bi bi-person"></span>
-					<span class="mtext">Profile</span>
-				  </a>
-				</li>
-			  </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="left-side-bar">
-		<div class="brand-logo" style="display: flex;">
-			<div class="logo" style="margin: auto;">LTM</div>
-			<div class="close-sidebar" data-toggle="left-sidebar-close">
-				<i class="ion-close-round"></i>
-			</div>
-		</div>
-      <div class="menu-block customscroll">
-        <div class="sidebar-menu">
           <ul id="accordion-menu">
             <li class="dropdown">
-              <a href="../../pages/roboModel/roboModel.html" class="dropdown-toggle no-arrow">
+              <a
+                href="../../pages/roboModel/roboModel.html"
+                class="dropdown-toggle no-arrow"
+              >
                 <span class="micon bi bi-house"></span
                 ><span class="mtext">My Model</span>
               </a>
@@ -176,6 +164,44 @@
               <a href="../users/profile.html" class="dropdown-toggle no-arrow">
                 <span class="micon bi bi-person"></span>
                 <span class="mtext">Profile</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-side-bar">
+      <div class="brand-logo" style="display: flex">
+        <div class="logo" style="margin: auto">LTM</div>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+          <i class="ion-close-round"></i>
+        </div>
+      </div>
+      <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+          <ul id="accordion-menu">
+            <li class="dropdown">
+              <a
+                href="../../pages/roboModel/roboModel.html"
+                class="dropdown-toggle no-arrow"
+              >
+                <span class="micon bi bi-house"></span
+                ><span
+                  class="mtext translate"
+                  data-translation-key="menu_my_model"
+                  >My Model</span
+                >
+              </a>
+            </li>
+            <li>
+              <a href="../users/profile.html" class="dropdown-toggle no-arrow">
+                <span class="micon bi bi-person"></span>
+                <span
+                  class="mtext translate"
+                  data-translation-key="menu_profile"
+                  >Profile</span
+                >
               </a>
             </li>
           </ul>
@@ -192,7 +218,9 @@
             <div class="row">
               <div class="col-md-12 col-sm-12">
                 <div class="title">
-					<h4>Detail Model</h4>
+                  <h4 class="translate" data-translation-key="my_model_detail">
+                    Detail Model
+                  </h4>
                 </div>
               </div>
             </div>
@@ -230,7 +258,8 @@
                       <div class="col-md-6 col-6">
                         <button
                           id="model_detail-edit"
-                          class="btn btn-outline-warning btn-block"
+                          class="btn btn-outline-warning btn-block translate"
+                          data-translation-key="my_model_edit"
                         >
                           Edit
                         </button>
@@ -238,10 +267,11 @@
                       <div class="col-md-6 col-6">
                         <a
                           href="#"
-                          class="btn btn-outline-danger btn-block"
+                          class="btn btn-outline-danger btn-block translate"
                           data-toggle="modal"
                           data-target="#confirmation-modal"
                           type="button"
+                          data-translation-key="my_model_delete"
                         >
                           Delete
                         </a>
@@ -265,7 +295,10 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500">
+              <h4
+                class="padding-top-30 mb-30 weight-500 translate"
+                data-translation-key="my_model_text_confirmDel"
+              >
                 Are you sure you want to Delete?
               </h4>
               <div
@@ -275,12 +308,12 @@
                 <div class="col-6">
                   <button
                     type="button"
-                    class="btn btn-secondary border-radius-100 btn-block confirmation-btn"
+                    class="btn btn-secondary border-radius-100 btn-block confirmation-bt"
                     data-dismiss="modal"
                   >
                     <i class="fa fa-times"></i>
                   </button>
-                  NO
+                  <span class="translate" data-translation-key="my_model_no">NO</span>
                 </div>
                 <div class="col-6">
                   <button
@@ -291,7 +324,7 @@
                   >
                     <i class="fa fa-check"></i>
                   </button>
-                  YES
+                  <span class="translate"data-translation-key="my_model_yes">NO</span>
                 </div>
               </div>
             </div>
@@ -306,8 +339,8 @@
     <script src="../../vendors/scripts/script.min.js"></script>
     <script src="../../vendors/scripts/process.js"></script>
     <!-- switchery js -->
-		<script src="../../vendors/scripts/switchery.min.js"></script>
-		<script src="../../vendors/scripts/layout-settings.js"></script>
+    <script src="../../vendors/scripts/switchery.min.js"></script>
+    <script src="../../vendors/scripts/layout-settings.js"></script>
     <script type="module" src="./model-detail.js"></script>
     <script type="text/javascript">
       var infoUser = localStorage.getItem("infoUser");
@@ -318,10 +351,14 @@
 
       function logOut() {
         localStorage.removeItem("accessToken");
-		localStorage.removeItem('infoUser');
+        localStorage.removeItem("infoUser");
         localStorage.setItem("isLogged", 0);
         window.location.href = "../../index.html";
       }
+    </script>
+    <script type="module">
+      import { getInfoModel } from "./model-detail.js";
+      getInfoModel();
     </script>
   </body>
 </html>

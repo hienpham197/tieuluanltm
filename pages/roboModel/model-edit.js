@@ -24,7 +24,7 @@ function getInfoModel(){
         method: "GET",
         headers: {"Authorization" : "Bearer " + accessToken},
         success: function(data){
-            //console.log(data);
+            console.log(data);
             if(data != null){
 
                 if(data.pathImage != null){

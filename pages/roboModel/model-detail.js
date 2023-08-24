@@ -16,7 +16,6 @@ function Start(){
         window.location.href = "../404.html"
     }
 
-    getInfoModel();
 }
 
 function getInfoModel(){

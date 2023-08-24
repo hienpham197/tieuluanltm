@@ -8,7 +8,8 @@
 			menuDropdownIcon: "icon-style-1",
 			menuListIcon: "icon-list-style-1",
 			welcomemodal: "show",
-			isDark: false
+			isDark: false,
+			language: "en"
 		};
 
 		/**
@@ -261,5 +262,48 @@
 			}
 		});
 	 
+		//Multiple languages
+
+		var selectLang = $("#selectLang");
+		var lang = "../../lang/en";
+		if (currentOptions.language == "vn") {
+			selectLang.val(2).change();
+			lang = "../../lang/vn";
+			localStorage.setItem('optionsObject', JSON.stringify(currentOptions));
+		}
+
+		selectLang.on('change', function() {		
+			if (this.value == 1){
+				lang = "en";
+			}
+
+			if (this.value == 2){
+				lang = "vn";
+			}
+
+			currentOptions.language = lang;
+			localStorage.setItem('optionsObject', JSON.stringify(currentOptions));
+
+			$.getScript(`../../lang/${lang}.js`, function() {
+				updateContent();
+			});
+
+		});
+
+		$.getScript(lang + ".js", function() {
+			updateContent();
+		});
 	});
+	
 })();
+
+function updateContent() {
+    $(".translate").each(function() {
+        var translationKey = $(this).data("translation-key");
+        $(this).text(translate(translationKey));
+    });
+}
+
+function translate(key) {
+    return translations[key] || key; 
+}
