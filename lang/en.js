@@ -1,4 +1,7 @@
 var translations  = {
+    "menu_language":"Language",
+    "menu_en":"English",
+    "menu_vn":"Vietnamese",
     "menu_user": "Users",
     "menu_product": "Products",
     "menu_report": "Reports",
