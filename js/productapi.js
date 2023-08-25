@@ -44,7 +44,7 @@ $(document).ready(function () {
         console.log("usid choice: ", productId);
         $.confirm({
             title: 'Delete product?',
-            content: 'Are you sure you want to delete this product?',
+            content: '<span class="translate" data-translation-key="product_text_confirmDel" >The user has been successfully deleted.</span>',
             buttons: {
                 deleteUser: {
                     text: 'Yes',
@@ -57,6 +57,7 @@ $(document).ready(function () {
                 }
             }
         });
+        $("#selectLang").trigger("change");
     });
 
     function deleteProduct(productId) {
@@ -70,7 +71,7 @@ $(document).ready(function () {
                 updateisDelete(productId);
                 $.alert({
                     title: 'Prodcut Deleted',
-                    content: 'The product has been successfully deleted.',
+                    content: '<span class="translate" data-translation-key="product_text_successDel" >The user has been successfully deleted.</span> ',
                     buttons: {
                         ok: {
                             text: 'OK',
@@ -81,6 +82,7 @@ $(document).ready(function () {
                         }
                     }
                 });
+                $("#selectLang").trigger("change");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error("Delete request failed:", textStatus, errorThrown);

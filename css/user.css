@@ -601,3 +601,31 @@ th, td{
         width: 180px;
     }
 }
+
+.header-dark .nav {
+    background-color: #142127;
+}
+.header-dark .nav h3 {
+    color: #fff;
+}
+.header-dark .header {
+    background-color: #142127;
+}
+
+.header-dark .logo {
+    color: #fff;
+}
+.header-dark .menu_lang {
+    color: #fff;
+}
+
+.menu_lang {
+    font-size: #fff;
+}
+.header_setting {
+    display: flex;
+    align-items: center;
+}
+.menu_active {
+    border-left: 5px solid #a2a2a2;
+}

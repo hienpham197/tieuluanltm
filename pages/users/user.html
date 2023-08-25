@@ -16,6 +16,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- switchery css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../vendors/styles/switchery.min.css"
+    />
 </head>
 
 <body>
@@ -25,19 +31,34 @@
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
                 class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-        <div class="message">
-            <div id="uName"></div>
-        </div>
+        <div class="header_setting">
+            <div class="m-3">
+                <span class="menu_lang fs16 translate" data-translation-key="menu_language"></span>
+                <select id="selectLang">
+                  <option selected value="1" class="fs16 translate" data-translation-key="menu_en">English</option>
+                  <option value="2" class="fs16 translate" data-translation-key="menu_vn">Vietnamese</option>
+                </select>
+              </div>
+              <div>
+                <div class="dropdown">
+                  <input type="checkbox" class="switch-btn" id="chk_lightDark" />
+                </div>
+              </div>
+            <div class="message">
+                <div id="uName"></div>
+            </div>
+        </div>     
     </header>
     <div class="main-container">
         <div class="navcontainer">
             <nav class="nav">
                 <div class="nav-upper-options">
-                    <div class="nav-option option1">
+                    <div class="nav-option option1 menu_active">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
                             class="nav-img" alt="dashboard">
                         <a href="user.html">
-                            <h3> User</h3>
+                            <h3 class="translate"
+                            data-translation-key="menu_user"> User</h3>
                         </a>
                     </div>
 
@@ -45,7 +66,8 @@
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
                             class="nav-img" alt="articles">
                         <a href="../products/product.html">
-                            <h3> Products</h3>
+                            <h3 class="translate"
+                            data-translation-key="menu_product"> Products</h3>
                         </a>
                     </div>
 
@@ -53,14 +75,16 @@
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
                             class="nav-img" alt="report">
                         <a href="../report/highchart.html">
-                            <h3>Report</h3>
+                            <h3 class="translate"
+                            data-translation-key="menu_report">Report</h3>
                             </a>
                     </div>
 
                     <div class="nav-option logout" id="logoutButton">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
                             class="nav-img" alt="logout">
-                        <h3>Logout</h3>
+                        <h3 class="translate"
+                        data-translation-key="menu_logout">Logout</h3>
                     </div>
 
                 </div>
@@ -69,7 +93,8 @@
         <div class="main">
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">User</h1>
+                    <h1 class="recent-Articles translate"
+                    data-translation-key="menu_user">User</h1>
                     <div class="d-flex">
                         <div class="row pl20">
                             <img id="sortAscButton" class="btn" src="../../img/sort-alpha-down.svg" alt="">
@@ -83,7 +108,7 @@
                             </div>
                         </div>
                         <div class="row pl20">
-                            <button id="add-user-button" class="btn btn-primary">Add User</button>
+                            <button id="add-user-button" class="btn btn-primary translate" data-translation-key="user_add_user">Add User</button>
                         </div>
                     </div>
                 </div>
@@ -92,14 +117,14 @@
                         <thead>
                             <tr>
                                 <th class="fs16" scope="col">#</th>
-                                <th class="fs16" scope="col">Username</th>
-                                <th class="fs16" scope="col">First Name</th>
-                                <th class="fs16" scope="col">Last Name</th>
-                                <th class="fs16" scope="col">Email</th>
-                                <th class="fs16" scope="col">Password</th>
-                                <th class="fs16" scope="col">Deleted</th>
-                                <th class="fs16" scope="col">Edit</th>
-                                <th class="fs16" scope="col">Del</th>
+                                <th class="fs16 translate" data-translation-key="user_nav_user" scope="col">Username</th>
+                                <th class="fs16 translate" data-translation-key="user_first_name" scope="col">First Name</th>
+                                <th class="fs16 translate" data-translation-key="user_last_name" scope="col">Last Name</th>
+                                <th class="fs16 translate" data-translation-key="user_email" scope="col">Email</th>
+                                <th class="fs16 translate" data-translation-key="user_password" scope="col">Password</th>
+                                <th class="fs16 translate" data-translation-key="user_deleted" scope="col">Deleted</th>
+                                <th class="fs16 translate" data-translation-key="user_edit" scope="col">Edit</th>
+                                <th class="fs16 translate" data-translation-key="user_del" scope="col">Del</th>
                             </tr>
                         </thead>
 
@@ -109,10 +134,10 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-lg justify-content-center">
                             <li class="page-item" id="previous-page">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                <a class="page-link translate" data-translation-key="user_previous" href="#" tabindex="-1">Previous</a>
                             </li>
                             <li class="page-item" id="next-page">
-                                <a class="page-link" href="#">Next</a>
+                                <a class="page-link translate" data-translation-key="user_next" href="#">Next</a>
                             </li>
                         </ul>
                     </nav>
@@ -147,6 +172,9 @@
             }
         }
     </script>
+    <!-- switchery js -->
+    <script src="../../vendors/scripts/switchery.min.js"></script>
+    <script src="../../vendors/scripts/layout-settings.js"></script>
 </body>
 
 </html>

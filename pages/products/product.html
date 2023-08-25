@@ -16,6 +16,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+      <!-- switchery css -->
+      <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../vendors/styles/switchery.min.css"
+    />
 </head>
 <body>
     <header class="header">
@@ -24,12 +30,23 @@
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
                 class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-
-        <div class="message">
-            <div id="toggleMode"><img  src="/img/arrow-repeat.svg" class="icn" alt=""></div>
-            <div id="uName"></div>
-        </div>
-
+        <div class="header_setting">
+            <div class="m-3">
+                <span class="menu_lang fs16 translate" data-translation-key="menu_language"></span>
+                <select id="selectLang">
+                  <option selected value="1" class="fs16 translate" data-translation-key="menu_en">English</option>
+                  <option value="2" class="fs16 translate" data-translation-key="menu_vn">Vietnamese</option>
+                </select>
+              </div>
+              <div>
+                <div class="dropdown">
+                  <input type="checkbox" class="switch-btn" id="chk_lightDark" />
+                </div>
+              </div>
+            <div class="message">
+                <div id="uName"></div>
+            </div>
+        </div>     
     </header>
 
     <div class="main-container">
@@ -40,29 +57,33 @@
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
                             class="nav-img" alt="dashboard">
                         <a href="../users/user.html">
-                            <h3> User</h3>
+                            <h3 class="translate"
+                            data-translation-key="menu_user"> User</h3>
                         </a>
                     </div>
 
-                    <div class="option2 nav-option">
+                    <div class="option2 nav-option menu_active">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
                             class="nav-img" alt="articles">
                         <a href="product.html">
-                            <h3> Products</h3>
+                            <h3 class="translate"
+                            data-translation-key="menu_product"> Products</h3>
                         </a>
                     </div>
                     <div class="nav-option option3">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
                             class="nav-img" alt="report">
                             <a href="../report/highchart.html">
-                                <h3>Report</h3>
+                                <h3 class="translate"
+                                data-translation-key="menu_report">Report</h3>
                             </a>
                     </div>
 
                     <div class="nav-option logout" id="logoutButton">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
                             class="nav-img" alt="logout">
-                        <h3>Logout</h3>
+                            <h3 class="translate"
+                            data-translation-key="menu_logout">Logout</h3>
                     </div>
                     
                 </div>
@@ -71,7 +92,7 @@
         <div class="main">
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">Products</h1>
+                    <h1 class="recent-Articles translate" data-translation-key="menu_product">Products</h1>
                     <div class="d-flex">
                         <div class="row pl20">
                             <img id="sortAscButton" class="btn" src="../../img/sort-alpha-down.svg" alt="">
@@ -85,7 +106,7 @@
                             </div>
                         </div>
                         <div class="row pl20">
-                            <button id="add-product-button" class="btn btn-primary">Add Product</button>
+                            <button id="add-product-button" class="btn btn-primary translate" data-translation-key="product_add_product">Add Product</button>
                         </div>
                     </div>                    
                 </div>
@@ -94,15 +115,15 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="fs16" scope="col">#</th>
-                                <th class="fs16" scope="col">Image</th>
-                                <th class="fs16" scope="col">Poduct Name</th>
-                                <th class="fs16" scope="col">Type Name</th>
-                                <th class="fs16" scope="col">User ID</th>
-                                <th class="fs16" scope="col">Created Day</th>
-                                <th class="fs16" scope="col">Deleted</th>
-                                <th class="fs16" scope="col">Edit</th>
-                                <th class="fs16" scope="col">Del</th>
+                                <th class="fs16 translate" scope="col">#</th>
+                                <th class="fs16 translate" data-translation-key="product_image" scope="col">Image</th>
+                                <th class="fs16 translate" data-translation-key="product_name" scope="col">Poduct Name</th>
+                                <th class="fs16 translate" data-translation-key="product_type_name" scope="col">Type Name</th>
+                                <th class="fs16 translate" data-translation-key="product_user_id" scope="col">User ID</th>
+                                <th class="fs16 translate" data-translation-key="product_createdDate" scope="col">Created Day</th>
+                                <th class="fs16 translate" data-translation-key="product_deleted" scope="col">Deleted</th>
+                                <th class="fs16 translate" data-translation-key="product_edit" scope="col">Edit</th>
+                                <th class="fs16 translate" data-translation-key="product_del" scope="col">Del</th>
                             </tr>
                         </thead>
                         <tbody id="product-table-body">
@@ -141,5 +162,8 @@
     <script>
         AOS.init();
     </script>
+     <!-- switchery js -->
+     <script src="../../vendors/scripts/switchery.min.js"></script>
+     <script src="../../vendors/scripts/layout-settings.js"></script>
 </body>
 </html>
