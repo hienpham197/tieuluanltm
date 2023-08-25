@@ -333,7 +333,7 @@ $(document).ready(function () {
                 updatePaginationButtons(response.totalPages);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                //window.location.href = "../404.html";
+                window.location.href = "../404.html";
                 console.error("API request failed:", textStatus, errorThrown);
             }
         });
