@@ -42,7 +42,7 @@ $(document).ready(function () {
         console.log("usid choice: ", userId);
         $.confirm({
             title: 'Delete user?',
-            content: 'Are you sure you want to delete this user?',
+            content: '<span class="translate" data-translation-key="user_text_confirmDel"> Are you sure you want to delete this user?</span>',
             buttons: {
                 deleteUser: {
                     text: 'Yes',
@@ -55,6 +55,8 @@ $(document).ready(function () {
                 }
             }
         });
+
+        $("#selectLang").trigger("change");
     });
 
     function deleteUser(userId) {
@@ -67,7 +69,7 @@ $(document).ready(function () {
             success: function () {
                 $.alert({
                     title: 'User Deleted',
-                    content: 'The user has been successfully deleted.',
+                    content: '<span class="translate" data-translation-key="user_text_successDel" >The user has been successfully deleted.</span> ',
                     buttons: {
                         ok: {
                             text: 'OK',
@@ -78,6 +80,7 @@ $(document).ready(function () {
                         }
                     }
                 });
+                $("#selectLang").trigger("change");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error("Delete request failed:", textStatus, errorThrown);
@@ -325,12 +328,12 @@ $(document).ready(function () {
             },
             success: function (response) {
                 var users = response;
-                console.log("lst", users);
+                
                 displayUsersOnPage(users);
                 updatePaginationButtons(response.totalPages);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                window.location.href = "../404.html";
+                //window.location.href = "../404.html";
                 console.error("API request failed:", textStatus, errorThrown);
             }
         });

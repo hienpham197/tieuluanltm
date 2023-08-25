@@ -24,6 +24,12 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
+      <!-- switchery css -->
+      <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../vendors/styles/switchery.min.css"
+    />
   </head>
 
   <body>
@@ -37,9 +43,23 @@
           alt="menu-icon"
         />
       </div>
-      <div class="message">
-        <div id="uName"></div>
-      </div>
+      <div class="header_setting">
+        <div class="m-3">
+            <span class="menu_lang fs16 translate" data-translation-key="menu_language"></span>
+            <select id="selectLang">
+              <option selected value="1" class="fs16 translate" data-translation-key="menu_en">English</option>
+              <option value="2" class="fs16 translate" data-translation-key="menu_vn">Vietnamese</option>
+            </select>
+          </div>
+          <div>
+            <div class="dropdown">
+              <input type="checkbox" class="switch-btn" id="chk_lightDark" />
+            </div>
+          </div>
+        <div class="message">
+            <div id="uName"></div>
+        </div>
+    </div>   
     </header>
     <div class="main-container">
       <div class="navcontainer">
@@ -52,7 +72,8 @@
                 alt="dashboard"
               />
               <a href="../users/user.html">
-                <h3>User</h3>
+                <h3 class="translate"
+                            data-translation-key="menu_user"> User</h3>
               </a>
             </div>
 
@@ -63,18 +84,20 @@
                 alt="articles"
               />
               <a href="../products/product.html">
-                <h3>Products</h3>
+                <h3 class="translate"
+                data-translation-key="menu_product"> Products</h3>
               </a>
             </div>
 
-            <div class="nav-option option3">
+            <div class="nav-option option3 menu_active">
               <img
                 src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
                 class="nav-img"
                 alt="report"
               />
               <a href="../report/highchart.html">
-                <h3>Report</h3>
+                <h3 class="translate"
+                data-translation-key="menu_report">Report</h3>
               </a>
             </div>
 
@@ -84,7 +107,8 @@
                 class="nav-img"
                 alt="logout"
               />
-              <h3>Logout</h3>
+              <h3 class="translate"
+              data-translation-key="menu_logout">Logout</h3>
             </div>
           </div>
         </nav>
@@ -128,5 +152,8 @@
     <script src="../../vendors/scripts/export-data.js"></script>
     <script src="../../vendors/scripts/accessibility.js"></script>
     <script type="module" src="./hightchart.js"></script>
+     <!-- switchery js -->
+     <script src="../../vendors/scripts/switchery.min.js"></script>
+     <script src="../../vendors/scripts/layout-settings.js"></script>
   </body>
 </html>
