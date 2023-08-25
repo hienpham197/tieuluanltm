@@ -339,7 +339,7 @@ $(document).ready(function () {
         paginationContainer.empty();
 
         var previousButton = $("<li class='page-item' id='previous-page'>")
-            .append($("<a class='page-link' href='#' tabindex='-1'>").text("Previous"));
+            .append($("<a class='page-link translate' data-translation-key='product_previous' href='#' tabindex='-1'>").text("Previous"));
 
         if (currentPage === 0) {
             previousButton.addClass("disabled");
@@ -371,7 +371,7 @@ $(document).ready(function () {
         }
 
         var nextButton = $("<li class='page-item' id='next-page'>")
-            .append($("<a class='page-link' href='#'>").text("Next"));
+            .append($("<a class='page-link translate' data-translation-key='product_next' href='#'>").text("Next"));
 
         if (currentPage === totalPages - 1) {
             nextButton.addClass("disabled");
@@ -384,6 +384,7 @@ $(document).ready(function () {
         }
 
         paginationContainer.append(nextButton);
+        $("#selectLang").trigger("change");
     }
 
     function updatePageState() {
