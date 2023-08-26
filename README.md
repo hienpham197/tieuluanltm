@@ -18,6 +18,7 @@
 # Features
 ## User page:
 - Dark/Light mode.
+- Multi Language.
 - Add/Edit/Delete model.
 - Edit User info.
 ## Dashboard
@@ -29,6 +30,8 @@
 - Delete
 - Search
 - Sort ASC/DESC
+- Dark/Light mode.
+- Multi Language.
 ### Models:
 - Create.
 - Edit/Update
@@ -36,11 +39,15 @@
 - Upload
 - Search
 - Sort ASC/DESC
+- Dark/Light mode.
+- Multi Language.
 ### Reports
 - Info report with Charts.
 - Register Growth chart.
 - Upload Growth chart.
 - Analyze for Day/Month/Year.
+- Dark/Light mode.
+- Multi Language.
 ## Deployment
 ### Front End:
 - https://hienpham197.github.io/tieuluanltm
