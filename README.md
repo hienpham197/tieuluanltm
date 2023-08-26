@@ -18,7 +18,7 @@
 # Features
 ## User page:
 - Dark/Light mode.
-- Multipleple Language.
+- Multiple Language.
 - Add/Edit/Delete model.
 - View/Edit User info.
 ## Dashboard
