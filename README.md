@@ -51,8 +51,8 @@
 ## Deployment
 ### Front End:
 - https://hienpham197.github.io/tieuluanltm
-### API:
-## Main API
+## API:
+### Main API
 - https://api.tipslife.site/swagger/index.html
-## Secondary API
+### Secondary API
 - https://api2.tipslife.site/swagger/index.html
