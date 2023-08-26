@@ -9,4 +9,9 @@ body,html{-webkit-font-smoothing:antialiased;width:100%;height:100%}html{-webkit
 }
 .header-dark .menu_lang {
     color: #fff;
-},
+}
+.brand-logo .logo {
+    font-size: 27px;
+    font-weight: 600;
+    color: #5500cb;
+}
